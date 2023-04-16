@@ -12,7 +12,7 @@ enum TemplateType {
 }
 
 class TemplateTheme {
-  // templateType
+  /// templateType
   final TemplateType type;
   // template themeData
   final ThemeData themeData;

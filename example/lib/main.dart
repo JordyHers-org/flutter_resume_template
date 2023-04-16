@@ -1,4 +1,5 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter_resume_template_example/data/data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
         child: Scaffold(
           body: FlutterResumeTemplate(
             templateTheme: TemplateTheme.business,
+            data: data,
           ),
         ),
       ),
