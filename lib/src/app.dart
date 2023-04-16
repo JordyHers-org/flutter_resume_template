@@ -123,7 +123,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
           ),
           Positioned(
             top: 470,
-            right: 110,
+            right: 130,
             child: DisplayText(
               text: 'Creative Director',
               style: Theme.of(context).textTheme.displayLarge,
@@ -131,7 +131,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
           ),
           Positioned(
             top: 490,
-            right: 180,
+            right: 190,
             child: DisplayText(
               text: 'at Uber',
               style: Theme.of(context).textTheme.displayLarge,
@@ -139,7 +139,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
           ),
           Positioned(
             top: 510,
-            right: 90,
+            right: 110,
             child: DisplayText(
               text: 'Sep 2018 - Jan 2020',
               style: Theme.of(context).textTheme.bodySmall,
@@ -147,7 +147,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
           ),
           Positioned(
             top: 530,
-            right: 135,
+            right: 145,
             child: DisplayText(
               text: 'New York City',
               style: Theme.of(context).textTheme.bodySmall,

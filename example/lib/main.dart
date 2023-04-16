@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: TemplateTheme.technical.themeData,
+      theme: TemplateTheme.business.themeData,
       home: SafeArea(
         child: Scaffold(
           body: FlutterResumeTemplate(
