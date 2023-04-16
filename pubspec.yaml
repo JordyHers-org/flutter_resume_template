@@ -13,6 +13,10 @@ dependencies:
   google_fonts: ^4.0.3
   auto_size_text: ^3.0.0
 
+  #logic package
+  pdf: ^3.10.1
+  path_provider: ^2.0.14
+
   flutter:
     sdk: flutter
 

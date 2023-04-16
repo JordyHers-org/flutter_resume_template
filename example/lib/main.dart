@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
       home: SafeArea(
         child: Scaffold(
           body: FlutterResumeTemplate(
-            templateTheme: TemplateTheme.classic,
+            templateTheme: TemplateTheme.business,
           ),
         ),
       ),

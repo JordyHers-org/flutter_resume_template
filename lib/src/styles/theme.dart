@@ -1,8 +1,6 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-typedef BuildTheme<T> = Future<T> Function();
-
 enum TemplateType {
   modernResume,
 
@@ -24,7 +22,7 @@ class TemplateTheme {
 
   // factory setter
   factory TemplateTheme(TemplateType type, ThemeData themeData) {
-    _instance ??= TemplateTheme._internal(type, themeData);
+    _instance = TemplateTheme._internal(type, themeData);
     return _instance!;
   }
 
