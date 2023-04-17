@@ -12,6 +12,7 @@ dependencies:
   #Ui dependencies:
   google_fonts: ^4.0.3
   auto_size_text: ^3.0.0
+  flutter_shake_animated: ^0.0.5
 
   #logic package
   pdf: ^3.10.1
