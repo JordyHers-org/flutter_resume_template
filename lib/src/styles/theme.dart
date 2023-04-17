@@ -9,6 +9,8 @@ enum TemplateType {
   technicalResume,
 
   businessResume,
+
+  none,
 }
 
 class TemplateTheme {
@@ -20,7 +22,6 @@ class TemplateTheme {
   //singleton instance
   static TemplateTheme? _instance;
 
-  // factory setter
   factory TemplateTheme(TemplateType type, ThemeData themeData) {
     _instance = TemplateTheme._internal(type, themeData);
     return _instance!;
@@ -99,6 +100,12 @@ class TemplateTheme {
         dividerColor: Colors.grey.shade300,
         textTheme: globalTextTheme,
       ));
+
+  // No custom Theme Applied
+  static TemplateTheme none = TemplateTheme(
+    TemplateType.none,
+    ThemeData(primarySwatch: Colors.blue),
+  );
 
   @override
   String toString() => ' Type: $type, ThemeData: $themeData';
