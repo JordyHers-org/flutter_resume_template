@@ -1,8 +1,6 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-typedef BuildTheme<T> = Future<T> Function();
-
 enum TemplateType {
   modernResume,
 
@@ -11,10 +9,12 @@ enum TemplateType {
   technicalResume,
 
   businessResume,
+
+  none,
 }
 
 class TemplateTheme {
-  // templateType
+  /// templateType
   final TemplateType type;
   // template themeData
   final ThemeData themeData;
@@ -22,9 +22,8 @@ class TemplateTheme {
   //singleton instance
   static TemplateTheme? _instance;
 
-  // factory setter
   factory TemplateTheme(TemplateType type, ThemeData themeData) {
-    _instance ??= TemplateTheme._internal(type, themeData);
+    _instance = TemplateTheme._internal(type, themeData);
     return _instance!;
   }
 
@@ -101,6 +100,12 @@ class TemplateTheme {
         dividerColor: Colors.grey.shade300,
         textTheme: globalTextTheme,
       ));
+
+  // No custom Theme Applied
+  static TemplateTheme none = TemplateTheme(
+    TemplateType.none,
+    ThemeData(primarySwatch: Colors.blue),
+  );
 
   @override
   String toString() => ' Type: $type, ThemeData: $themeData';

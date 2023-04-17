@@ -6,13 +6,17 @@ class Config {
   static dynamicWidth(BuildContext context) =>
       MediaQuery.of(context).size.width;
 
+  static Padding padding = Padding(padding: EdgeInsets.all(tenPx));
+
+  static EdgeInsetsGeometry margin = EdgeInsets.all(tenPx);
+
   static double smallHeight = 250.0;
   static double mediumHeight = 500.0;
   static double largeHeight = 800.0;
 
-  static double smallWidth = 250.0;
-  static double mediumWidth = 500.0;
-  static double largeWidth = 800.0;
+  static double smallWidth = 150.0;
+  static double mediumWidth = 250.0;
+  static double largeWidth = 400.0;
 
   static double tenPx = 10.0;
   static double heightPx = 8.0;
@@ -21,12 +25,13 @@ class Config {
   static double threePx = 3.0;
   static double twoPx = 2.0;
   static double onePx = 1.0;
+  static double oneHalfPx = 0.5;
   static double oPx = 0.0;
 
-  static Padding padding = Padding(padding: EdgeInsets.all(tenPx));
-
-  static EdgeInsetsGeometry margin = EdgeInsets.all(tenPx);
-
+  static Decoration shakingBox() => BoxDecoration(
+        color: Colors.grey.shade300,
+        border: Border.all(width: 0.2, color: Colors.grey.shade400),
+      );
   static Decoration decoration(BuildContext context) => BoxDecoration(
       color: Colors.white,
       boxShadow: [
