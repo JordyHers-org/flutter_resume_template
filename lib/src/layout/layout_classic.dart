@@ -110,7 +110,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                     maxHeight: double.maxFinite,
                     maxWidth: double.maxFinite,
                   ),
-                  decoration: Config.decoration(context),
+                  decoration: Config.decoration(context, color: Colors.white),
                   child: RepaintBoundary(
                     key: globalKey,
                     child: Stack(

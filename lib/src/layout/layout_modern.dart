@@ -110,7 +110,9 @@ class _LayoutModernState extends State<LayoutModern> {
                     maxHeight: double.maxFinite,
                     maxWidth: double.maxFinite,
                   ),
-                  decoration: Config.decoration(context),
+                  decoration: Config.decoration(
+                    context,
+                  ),
                   child: RepaintBoundary(
                       key: globalKey,
                       child: Column(
