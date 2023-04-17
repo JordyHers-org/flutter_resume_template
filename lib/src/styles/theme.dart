@@ -61,9 +61,9 @@ class TemplateTheme {
   static TemplateTheme modern = TemplateTheme(
     TemplateType.modernResume,
     ThemeData(
-      shadowColor: Colors.indigo,
-      primarySwatch: Colors.indigo,
-      fontFamily: GoogleFonts.inter().fontFamily,
+      shadowColor: Colors.teal,
+      primarySwatch: Colors.teal,
+      fontFamily: GoogleFonts.bebasNeue().fontFamily,
       dividerColor: Colors.grey.shade300,
       textTheme: globalTextTheme,
     ),

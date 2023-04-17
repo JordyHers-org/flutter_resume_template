@@ -1,7 +1,7 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
-import 'package:flutter_resume_template/src/components/section_bio_container.dart';
 import 'package:flutter_resume_template/src/repository/pdf_saver.dart';
+import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 
 class LayoutModern extends StatefulWidget {
@@ -112,318 +112,65 @@ class _LayoutModernState extends State<LayoutModern> {
                   ),
                   decoration: Config.decoration(context),
                   child: RepaintBoundary(
-                    key: globalKey,
-                    child: Stack(
-                      children: [
-                        //Header top left
-                        Positioned(
-                          top: 30,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.fullName,
-                              controller: _fullNameController,
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 50,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _currentPositionController,
-                              text: widget.data.currentPosition,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ),
-
-                        Positioned(
-                          top: 10,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _streetController,
-                              text: widget.data.street,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 30,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _addressController,
-                              text: widget.data.address,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 50,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _countryController,
-                              text: widget.data.country,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 80,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _phoneNumberController,
-                              text: widget.data.phoneNumber,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 100,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              controller: _emailController,
-                              text: widget.data.email,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 130,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-
-                        Positioned(
-                          top: 150,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Short bio',
-                                controller: _bioTitleController,
-                                style: Theme.of(context).textTheme.displayLarge,
+                      key: globalKey,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  margin: Config.margin,
+                                  height: widget.h,
+                                  decoration: Config.decoration(context),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: Config.heightPx),
+                                      ShakeWidget(
+                                        shakeConstant: shakingConstant,
+                                        autoPlay: isDragged,
+                                        child: DisplayText(
+                                          text: 'ABOUT ME',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayLarge
+                                              ?.copyWith(fontSize: 23),
+                                        ),
+                                      ),
+                                      SizedBox(height: Config.heightPx),
+                                      ShakeWidget(
+                                        shakeConstant: shakingConstant,
+                                        autoPlay: isDragged,
+                                        child: DisplayText(
+                                          text: Str.bioText,
+                                          maxLines: 25,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall
+                                              ?.copyWith(
+                                                  fontSize: 17,
+                                                  color: Colors.white),
+                                        ),
+                                      ),
+                                      SizedBox(height: Config.heightPx),
+                                      Padding(
+                                          padding: Config.padding.padding,
+                                          child: const SHDivider()),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-
-                        Positioned(
-                          top: 150,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _bioController,
-                                text: widget.data.bio,
-                                maxLines: 20,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(height: 1.2),
+                              Expanded(
+                                flex: 6,
+                                child: Container(
+                                  height: widget.h,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 350,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-                        Positioned(
-                          top: 370,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: 'Work Experience',
-                              controller: _workExperienceTitleController,
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 370,
-                          right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _experienceTitleController,
-                                text: widget.data.experienceTitle,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 390,
-                          right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _experienceLocationController,
-                                text: widget.data.experienceLocation,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 410,
-                          right: 120,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _experiencePeriodController,
-                                text: widget.data.experiencePeriod,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 430,
-                          right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _experienceLocationController,
-                                text: widget.data.experienceLocation,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 460,
-                          right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _experienceDescriptionController,
-                                text: widget.data.experienceDescription,
-                                maxLines: 15,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(height: 1.2),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 560,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-                        Positioned(
-                          top: 570,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: 'Education',
-                              controller: _educationTitleController,
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 570,
-                          right: 110,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                controller: _educationController,
-                                text: widget.data.education,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 590,
-                          right: 120,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Bachelor Degree',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 620,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-
-                        Positioned(
-                          top: 640,
-                          left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Social Media',
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                            ],
+                          )
+                        ],
+                      )),
                 ),
               ),
             ),

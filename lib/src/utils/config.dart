@@ -32,8 +32,9 @@ class Config {
         color: Colors.grey.shade300,
         border: Border.all(width: 0.2, color: Colors.grey.shade400),
       );
+
   static Decoration decoration(BuildContext context) => BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).primaryColor,
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).primaryColor.withOpacity(twoPx / 10),
