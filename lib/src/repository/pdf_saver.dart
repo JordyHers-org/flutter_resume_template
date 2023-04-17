@@ -29,17 +29,28 @@ class PdfHandler implements PdfHandlerInterface {
 
   @override
   Future<void> _createPDF(GlobalKey key) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final path = '${directory.path}/resume_${key.hashCode}.pdf';
-    final pdf = pw.Document();
-    final image = pw.MemoryImage(await _capturePng(key));
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Center(child: pw.Image(image)),
-      ),
-    );
-    print(path);
-    final file = File(path);
-    await file.writeAsBytes(await pdf.save());
+    final directory;
+    try {
+      if (Platform.isAndroid) {
+        directory = await getApplicationDocumentsDirectory();
+      } else {
+        directory = (await getDownloadsDirectory()) ??
+            getApplicationDocumentsDirectory();
+      }
+
+      final path = '${directory.path}/resume_${key.hashCode}.pdf';
+      final pdf = pw.Document();
+      final image = pw.MemoryImage(await _capturePng(key));
+      pdf.addPage(
+        pw.Page(
+          build: (pw.Context context) => pw.Center(child: pw.Image(image)),
+        ),
+      );
+
+      final file = File(path);
+      await file.writeAsBytes(await pdf.save());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
