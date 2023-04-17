@@ -32,17 +32,43 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
     final double h = Config.dynamicHeight(context);
     final double w = Config.dynamicWidth(context);
 
-    return LayoutBuilder(builder: (context, _) {
-      switch (widget.templateTheme.type) {
-        case TemplateType.modernResume:
-          return LayoutModern(h: h, w: w);
-        case TemplateType.classicResume:
-          return LayoutClassic(h: h, w: w);
-        case TemplateType.technicalResume:
-          return LayoutTechnical(h: h, w: w);
-        case TemplateType.businessResume:
-          return LayoutBusiness(h: h, w: w, data: widget.data ?? Str.mockData);
-      }
-    });
+    return Theme(
+      data: widget.templateTheme.themeData,
+      child: LayoutBuilder(builder: (context, _) {
+        switch (widget.templateTheme.type) {
+          case TemplateType.modernResume:
+            return LayoutModern(
+              h: h,
+              w: w,
+              data: widget.data ?? Str.mockData,
+            );
+          case TemplateType.classicResume:
+            return LayoutClassic(
+              h: h,
+              w: w,
+              data: widget.data ?? Str.mockData,
+            );
+          case TemplateType.technicalResume:
+            return LayoutTechnical(
+              h: h,
+              w: w,
+              data: widget.data ?? Str.mockData,
+            );
+          case TemplateType.businessResume:
+            return LayoutBusiness(
+              h: h,
+              w: w,
+              data: widget.data ?? Str.mockData,
+            );
+          case TemplateType.none:
+            return LayoutBusiness(
+              h: h,
+              w: w,
+              data: widget.data ?? Str.mockData,
+            );
+            break;
+        }
+      }),
+    );
   }
 }
