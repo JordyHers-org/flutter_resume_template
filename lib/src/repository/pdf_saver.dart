@@ -29,7 +29,7 @@ class PdfHandler implements PdfHandlerInterface {
 
   @override
   Future<void> _createPDF(GlobalKey key) async {
-    final directory = await getTemporaryDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     final path = '${directory.path}/resume_${key.hashCode}.pdf';
     final pdf = pw.Document();
     final image = pw.MemoryImage(await _capturePng(key));
