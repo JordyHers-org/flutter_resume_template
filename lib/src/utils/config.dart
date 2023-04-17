@@ -33,15 +33,16 @@ class Config {
         border: Border.all(width: 0.2, color: Colors.grey.shade400),
       );
   static Decoration decoration(BuildContext context) => BoxDecoration(
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Theme.of(context).primaryColor.withOpacity(twoPx / 10),
-          spreadRadius: sixPx,
-          blurRadius: heightPx,
-          offset: Offset(oPx, fourPx), // changes position of shadow
-        ),
-      ],
-      borderRadius: BorderRadius.all(Radius.circular(heightPx)),
-      border: Border.all(style: BorderStyle.none));
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).primaryColor.withOpacity(twoPx / 10),
+            spreadRadius: sixPx,
+            blurRadius: heightPx,
+            offset: Offset(oPx, fourPx), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.all(Radius.circular(heightPx)),
+        border: Border.all(style: BorderStyle.none),
+      );
 }

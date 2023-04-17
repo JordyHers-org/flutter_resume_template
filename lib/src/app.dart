@@ -18,9 +18,11 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final TemplateData? data;
 
-  const FlutterResumeTemplate(
-      {Key? key, required this.templateTheme, this.data})
-      : super(key: key);
+  const FlutterResumeTemplate({
+    Key? key,
+    required this.templateTheme,
+    this.data,
+  }) : super(key: key);
 
   @override
   State<FlutterResumeTemplate> createState() => _FlutterResumeTemplateState();
@@ -66,7 +68,6 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               w: w,
               data: widget.data ?? Str.mockData,
             );
-            break;
         }
       }),
     );
