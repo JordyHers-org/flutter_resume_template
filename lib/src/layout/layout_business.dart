@@ -33,45 +33,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
 
   late TransformationController _controller;
 
-  final TextEditingController _currentPositionController =
-      TextEditingController();
-
-  final TextEditingController _experienceTitleController =
-      TextEditingController();
-
-  final TextEditingController _experienceLocationController =
-      TextEditingController();
-
-  final TextEditingController _experiencePeriodController =
-      TextEditingController();
-
-  final TextEditingController _experienceDescriptionController =
-      TextEditingController();
-
-  final TextEditingController _workExperienceTitleController =
-      TextEditingController();
-
-  final TextEditingController _educationTitleController =
-      TextEditingController();
-
-  final TextEditingController _streetController = TextEditingController();
-
-  final TextEditingController _bioTitleController = TextEditingController();
-
-  final TextEditingController _addressController = TextEditingController();
-
-  final TextEditingController _countryController = TextEditingController();
-
-  final TextEditingController _phoneNumberController = TextEditingController();
-
-  final TextEditingController _emailController = TextEditingController();
-
-  final TextEditingController _bioController = TextEditingController();
-
-  final TextEditingController _fullNameController = TextEditingController();
-
-  final TextEditingController _educationController = TextEditingController();
-
   @override
   void initState() {
     _controller = TransformationController();
@@ -124,7 +85,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.fullName,
-                              controller: _fullNameController,
                               style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ),
@@ -136,7 +96,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _currentPositionController,
                               text: widget.data.currentPosition,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
@@ -150,7 +109,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _streetController,
                               text: widget.data.street,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
@@ -163,7 +121,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _addressController,
                               text: widget.data.address,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
@@ -176,7 +133,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _countryController,
                               text: widget.data.country,
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
@@ -189,7 +145,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _phoneNumberController,
                               text: widget.data.phoneNumber,
                               style: Theme.of(context).textTheme.titleSmall,
                             ),
@@ -202,7 +157,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             shakeConstant: shakingConstant,
                             autoPlay: isDragged,
                             child: DisplayText(
-                              controller: _emailController,
                               text: widget.data.email,
                               style: Theme.of(context).textTheme.titleSmall,
                             ),
@@ -225,7 +179,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             child: SBContainer(
                               child: DisplayText(
                                 text: 'Short bio',
-                                controller: _bioTitleController,
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
                             ),
@@ -240,7 +193,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _bioController,
                                 text: widget.data.bio,
                                 maxLines: 20,
                                 style: Theme.of(context)
@@ -266,7 +218,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: 'Work Experience',
-                              controller: _workExperienceTitleController,
                               style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ),
@@ -279,7 +230,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _experienceTitleController,
                                 text: widget.data.experienceTitle,
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
@@ -294,7 +244,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _experienceLocationController,
                                 text: widget.data.experienceLocation,
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
@@ -309,7 +258,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _experiencePeriodController,
                                 text: widget.data.experiencePeriod,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
@@ -324,7 +272,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _experienceLocationController,
                                 text: widget.data.experienceLocation,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
@@ -339,7 +286,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _experienceDescriptionController,
                                 text: widget.data.experienceDescription,
                                 maxLines: 15,
                                 style: Theme.of(context)
@@ -365,7 +311,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: 'Education',
-                              controller: _educationTitleController,
                               style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ),
@@ -378,7 +323,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
-                                controller: _educationController,
                                 text: widget.data.education,
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),

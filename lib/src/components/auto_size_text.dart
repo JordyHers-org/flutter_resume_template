@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 class DisplayText extends StatefulWidget {
-  final String text;
+  final String? text;
   final int? maxLines;
   final TextStyle? style;
   final double? minFontSize;
@@ -34,10 +34,12 @@ class _DisplayTextState extends State<DisplayText> {
   bool showFirstWidget = true;
   bool isEmptyField = true;
   late String label;
+  late TextEditingController _textEditingController;
 
   @override
   void initState() {
-    label = widget.text;
+    label = widget.text ?? '';
+    _textEditingController = widget.controller ?? TextEditingController();
     super.initState();
   }
 
@@ -61,7 +63,7 @@ class _DisplayTextState extends State<DisplayText> {
             width: 110,
             height: 50,
             child: TextField(
-              controller: widget.controller,
+              controller: _textEditingController,
               focusNode: widget.focusNode,
               cursorColor: Colors.amber,
               onChanged: (value) {
@@ -72,8 +74,7 @@ class _DisplayTextState extends State<DisplayText> {
                 }
               },
               onSubmitted: (value) {
-                if (widget.controller != null &&
-                    widget.controller!.text.isNotEmpty) {
+                if (_textEditingController.text.isNotEmpty) {
                   label = value;
                 }
 

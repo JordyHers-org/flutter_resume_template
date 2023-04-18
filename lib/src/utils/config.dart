@@ -18,6 +18,10 @@ class Config {
   static double mediumWidth = 250.0;
   static double largeWidth = 400.0;
 
+  static double smallSpacer = 15.0;
+  static double mediumSpacer = 25.0;
+  static double largeSpacer = 45.0;
+
   static double tenPx = 10.0;
   static double heightPx = 8.0;
   static double sixPx = 6.0;
