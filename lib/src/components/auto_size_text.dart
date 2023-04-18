@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 class DisplayText extends StatefulWidget {
-  final String text;
+  final String? text;
   final int? maxLines;
   final TextStyle? style;
   final double? minFontSize;
@@ -38,7 +38,7 @@ class _DisplayTextState extends State<DisplayText> {
 
   @override
   void initState() {
-    label = widget.text;
+    label = widget.text ?? '';
     _textEditingController = widget.controller ?? TextEditingController();
     super.initState();
   }

@@ -7,8 +7,8 @@ class TemplateData {
   /// all at the top right corner. Although the location depend on the
   /// template type.
   ///
-  final String fullName,
-      currentPosition,
+  final String fullName;
+  final String? currentPosition,
       street,
       address,
       country,
@@ -20,10 +20,11 @@ class TemplateData {
       experiencePeriod,
       experienceLocation,
       experienceDescription,
-      education;
+      education,
+      image;
 
   TemplateData(
-      this.fullName,
+      {required this.fullName,
       this.currentPosition,
       this.street,
       this.address,
@@ -36,5 +37,6 @@ class TemplateData {
       this.experiencePeriod,
       this.experienceLocation,
       this.experienceDescription,
-      this.education);
+      this.education,
+      this.image});
 }

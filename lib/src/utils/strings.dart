@@ -8,20 +8,20 @@ class Str {
       'My role was to take care of customer related design, improve the quality of the product and be ready to adapt if needed.';
 
   static TemplateData mockData = TemplateData(
-    'Matthew Smith',
-    'Service Designer',
-    '63 Fall Street',
-    'Toronto, ST 12874',
-    'Canada',
-    'matthewsmith@join.com',
-    '+ 1 (246)869 453 00',
-    Str.bioText,
-    'Creative Director',
-    'at Uber',
-    'Sep 2018 - Jan 2020',
-    'New york City',
-    Str.myRoleText,
-    'Yale Gala University',
+    fullName: 'Matthew Smith',
+    currentPosition: 'Service Designer',
+    street: '63 Fall Street',
+    address: 'Toronto, ST 12874',
+    country: 'Canada',
+    email: 'matthewsmith@join.com',
+    phoneNumber: '+ 1 (246)869 453 00',
+    bio: Str.bioText,
+    experienceTitle: 'Creative Director',
+    experiencePlace: 'at Uber',
+    experiencePeriod: 'Sep 2018 - Jan 2020',
+    experienceLocation: 'New york City',
+    experienceDescription: Str.myRoleText,
+    education: 'Yale Gala University',
   );
 
   static String resumeHeader =
