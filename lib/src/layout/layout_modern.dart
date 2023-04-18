@@ -97,7 +97,8 @@ class _LayoutModernState extends State<LayoutModern> {
                                           borderRadius:
                                               BorderRadius.circular(100.0),
                                           child: Image.network(
-                                            Str.resumeHeader,
+                                            widget.data.image ??
+                                                Str.resumeHeader,
                                             height: 100,
                                             width: 90,
                                             fit: BoxFit.fitWidth,
