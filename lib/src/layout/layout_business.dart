@@ -1,12 +1,13 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
 import 'package:flutter_resume_template/src/components/section_bio_container.dart';
+import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/repository/pdf_saver.dart';
-import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 
 class LayoutBusiness extends StatefulWidget {
   const LayoutBusiness({
     super.key,
+    this.withButtons,
     required this.data,
     required this.h,
     required this.w,
@@ -15,6 +16,7 @@ class LayoutBusiness extends StatefulWidget {
   final double h;
   final double w;
   final TemplateData data;
+  final bool? withButtons;
 
   @override
   State<LayoutBusiness> createState() => _LayoutBusinessState();
@@ -22,8 +24,6 @@ class LayoutBusiness extends StatefulWidget {
 
 class _LayoutBusinessState extends State<LayoutBusiness> {
   GlobalKey globalKey = GlobalKey();
-
-  final shakingConstant = ShakeSlowConstant1();
 
   bool enableEditingMode = true;
 
@@ -50,7 +50,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode && !isDragged,
+          absorbing: enableEditingMode,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -80,8 +80,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 30,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.fullName,
@@ -92,8 +91,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 50,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.currentPosition,
@@ -105,8 +103,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 10,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.street,
@@ -117,8 +114,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 30,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.address,
@@ -129,8 +125,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 50,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.country,
@@ -141,8 +136,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 80,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.phoneNumber,
@@ -153,8 +147,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 100,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: widget.data.email,
@@ -173,8 +166,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 150,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -188,8 +180,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 150,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -213,8 +204,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 370,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: 'Work Experience',
@@ -225,8 +215,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 370,
                           right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -239,8 +228,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 390,
                           right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -253,8 +241,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 410,
                           right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -267,8 +254,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 430,
                           right: 130,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -281,8 +267,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 460,
                           right: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -306,8 +291,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 570,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: DisplayText(
                               text: 'Education',
@@ -318,8 +302,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 570,
                           right: 110,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -332,8 +315,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 590,
                           right: 120,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -354,8 +336,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         Positioned(
                           top: 640,
                           left: 30,
-                          child: ShakeWidget(
-                            shakeConstant: shakingConstant,
+                          child: AnimatedShakingBuilder(
                             autoPlay: isDragged,
                             child: SBContainer(
                               child: DisplayText(
@@ -373,74 +354,66 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
             ),
           ),
         ),
-        Visibility(
-          visible: isButtonVisible,
-          child: Positioned(
-            bottom: 20,
-            right: 20,
-            child: Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () => setState(() {
-                    enableEditingMode = !enableEditingMode;
-                    if (enableEditingMode) {
-                      _controller.value = Matrix4.identity();
-                    }
-                  }),
-                  style: !enableEditingMode
-                      ? OutlinedButton.styleFrom(backgroundColor: Colors.grey)
-                      : null,
-                  child: Text(
-                    enableEditingMode ? 'Edit template' : 'Editing ...',
-                    style: enableEditingMode
-                        ? Theme.of(context).textTheme.titleSmall
-                        : Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: Colors.white),
-                  ),
-                ),
-                SizedBox(width: Config.tenPx),
-                enableEditingMode
-                    ? OutlinedButton(
-                        onPressed: () async {
-                          setState(() {
-                            isButtonVisible = false;
-                          });
-                          await Future.delayed(
-                                  const Duration(milliseconds: 300))
-                              .then((value) => PdfHandler()
-                                  .createResume(globalKey)
-                                  .whenComplete(() => setState(() {
-                                        isButtonVisible = true;
-                                      })));
-                        },
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            foregroundColor: Colors.white),
-                        child: Text(
-                          'Download CV ',
-                          style: Theme.of(context)
+        if (widget.withButtons ?? false)
+          Visibility(
+            visible: isButtonVisible,
+            child: Positioned(
+              bottom: 20,
+              right: 20,
+              child: Row(
+                children: [
+                  OutlinedButton(
+                    onPressed: () => setState(() {
+                      isDragged = !isDragged;
+                      enableEditingMode = !enableEditingMode;
+                      if (enableEditingMode) {
+                        _controller.value = Matrix4.identity();
+                      }
+                    }),
+                    style: !enableEditingMode
+                        ? OutlinedButton.styleFrom(backgroundColor: Colors.grey)
+                        : null,
+                    child: Text(
+                      enableEditingMode ? 'Edit template' : 'Editing ...',
+                      style: enableEditingMode
+                          ? Theme.of(context).textTheme.titleSmall
+                          : Theme.of(context)
                               .textTheme
                               .titleSmall
                               ?.copyWith(color: Colors.white),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                enableEditingMode
-                    ? IconButton(
-                        icon: const Icon(Icons.drag_indicator),
-                        onPressed: () async {
-                          setState(() {
-                            isDragged = !isDragged;
-                          });
-                        },
-                      )
-                    : const SizedBox.shrink(),
-              ],
+                    ),
+                  ),
+                  SizedBox(width: Config.tenPx),
+                  enableEditingMode
+                      ? OutlinedButton(
+                          onPressed: () async {
+                            setState(() {
+                              isButtonVisible = false;
+                            });
+                            await Future.delayed(
+                                    const Duration(milliseconds: 300))
+                                .then((value) => PdfHandler()
+                                    .createResume(globalKey)
+                                    .whenComplete(() => setState(() {
+                                          isButtonVisible = true;
+                                        })));
+                          },
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.white),
+                          child: Text(
+                            'Download CV ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }
