@@ -50,7 +50,7 @@ class _LayoutModernState extends State<LayoutModern> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode,
+          absorbing: enableEditingMode && !isDragged,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,

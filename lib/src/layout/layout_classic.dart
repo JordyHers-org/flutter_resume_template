@@ -89,7 +89,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode,
+          absorbing: enableEditingMode && !isDragged,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -496,7 +496,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

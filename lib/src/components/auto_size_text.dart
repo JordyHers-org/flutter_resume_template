@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter_resume_template/src/components/section_bio_container.dart';
 
 class DisplayText extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
@@ -45,19 +46,34 @@ class _DisplayTextState extends State<DisplayText> {
   @override
   Widget build(BuildContext context) {
     return showFirstWidget
-        ? Padding(
-            padding: widget.padding ?? EdgeInsets.zero,
-            child: GestureDetector(
-              onTap: () => setState(() {
-                showFirstWidget = false;
-              }),
-              child: AutoSizeText(
-                label,
-                presetFontSizes: const [14, 15, 16, 17],
-                maxFontSize: widget.maxFontSize ?? 30.0,
-                minFontSize: widget.minFontSize ?? 10.0,
-                maxLines: widget.maxLines ?? 3,
-                style: widget.style,
+        ? LongPressDraggable(
+            dragAnchorStrategy: pointerDragAnchorStrategy,
+            childWhenDragging: Config.spaceBox(Config.tenPx),
+            feedback: Material(
+              child: SBContainer(
+                child: AutoSizeText(
+                  label,
+                  minFontSize: 11,
+                  maxFontSize: 23,
+                  maxLines: 3,
+                  style: widget.style,
+                ),
+              ),
+            ),
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => setState(() {
+                  showFirstWidget = false;
+                }),
+                child: AutoSizeText(
+                  label,
+                  presetFontSizes: const [14, 15, 16, 17],
+                  maxFontSize: widget.maxFontSize ?? 30.0,
+                  minFontSize: widget.minFontSize ?? 10.0,
+                  maxLines: widget.maxLines ?? 3,
+                  style: widget.style,
+                ),
               ),
             ),
           )

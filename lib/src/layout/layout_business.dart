@@ -50,7 +50,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode,
+          absorbing: enableEditingMode && !isDragged,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -440,7 +440,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -89,7 +89,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode,
+          absorbing: enableEditingMode && !isDragged,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -495,7 +495,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
