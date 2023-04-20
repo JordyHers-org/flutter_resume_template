@@ -1,6 +1,5 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
-import 'package:flutter_resume_template/src/components/section_bio_container.dart';
 import 'package:flutter_resume_template/src/repository/pdf_saver.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
@@ -64,118 +63,371 @@ class _LayoutModernState extends State<LayoutModern> {
                 child: Container(
                   alignment: Alignment.centerRight,
                   height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
-                  width: widget.w < 400 ? widget.w : widget.w * 0.2,
+                  width: widget.w < 400 ? widget.w : widget.w * 0.8,
                   margin: Config.margin,
                   constraints: BoxConstraints(
                     minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
-                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.5,
-                    maxHeight: double.maxFinite,
-                    maxWidth: double.maxFinite,
+                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.8,
                   ),
-                  decoration: Config.decoration(
-                    context,
-                  ),
+                  decoration: Config.decoration(context),
                   child: RepaintBoundary(
                       key: globalKey,
-                      child: Column(
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  margin: Config.margin,
-                                  height: widget.h,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: Config.largeSpacer),
-                                      ShakeWidget(
-                                        shakeConstant: shakingConstant,
-                                        autoPlay: isDragged,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100.0),
-                                          child: Image.network(
-                                            widget.data.image ??
-                                                Str.resumeHeader,
-                                            height: 100,
-                                            width: 90,
-                                            fit: BoxFit.fitWidth,
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              margin: Config.margin,
+                              height: widget.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Config.spaceBox(Config.largeSpacer),
+                                  ShakeWidget(
+                                    shakeConstant: shakingConstant,
+                                    autoPlay: isDragged,
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                      child: Image.network(
+                                        widget.data.image ?? Str.resumeHeader,
+                                        height: 100,
+                                        width: 90,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.smallSpacer),
+                                  ShakeWidget(
+                                    shakeConstant: shakingConstant,
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      text: 'ABOUT ME',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge
+                                          ?.copyWith(
+                                            letterSpacing: 1.2,
+                                            color: Colors.deepOrange,
                                           ),
-                                        ),
-                                      ),
-                                      SizedBox(height: Config.smallSpacer),
-                                      ShakeWidget(
-                                        shakeConstant: shakingConstant,
-                                        autoPlay: isDragged,
-                                        child: DisplayText(
-                                          text: 'ABOUT ME',
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.smallSpacer),
+                                  ShakeWidget(
+                                    shakeConstant: shakingConstant,
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      text: widget.data.bio,
+                                      maxLines: 25,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(
+                                              fontSize: 17,
+                                              color: Colors.white),
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.smallSpacer),
+                                  Padding(
+                                    padding: Config.padding.padding,
+                                    child: const SHDivider(),
+                                  ),
+                                  ShakeWidget(
+                                    shakeConstant: shakingConstant,
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      text: 'Hobbies',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge,
+                                    ),
+                                  ),
+                                  ShakeWidget(
+                                    shakeConstant: shakingConstant,
+                                    autoPlay: isDragged,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Config.spaceBox(Config.smallSpacer),
+                                        DisplayText(
+                                          text: 'Running',
+                                          maxLines: 10,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .displayLarge
-                                              ?.copyWith(
-                                                  letterSpacing: 1.2,
-                                                  color: Colors.deepOrange),
+                                              .titleSmall,
                                         ),
-                                      ),
-                                      SizedBox(height: Config.heightPx),
-                                      ShakeWidget(
-                                        shakeConstant: shakingConstant,
-                                        autoPlay: isDragged,
-                                        child: DisplayText(
-                                          text: widget.data.bio,
-                                          maxLines: 25,
+                                        Config.spaceBox(Config.smallSpacer),
+                                        DisplayText(
+                                          text: 'Languages',
+                                          maxLines: 10,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleSmall
-                                              ?.copyWith(
-                                                  fontSize: 17,
-                                                  color: Colors.white),
+                                              .titleSmall,
                                         ),
-                                      ),
-                                      SizedBox(height: Config.heightPx),
-                                      Padding(
-                                          padding: Config.padding.padding,
-                                          child: const SHDivider()),
-                                      ShakeWidget(
-                                        shakeConstant: shakingConstant,
-                                        autoPlay: isDragged,
-                                        child: DisplayText(
-                                          text: 'Hobbies',
+                                        Config.spaceBox(Config.smallSpacer),
+                                        DisplayText(
+                                          text: 'Programming',
+                                          maxLines: 10,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headlineLarge,
+                                              .titleSmall,
                                         ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 6,
+                            child: Container(
+                              height: widget.h,
+                              width: widget.w,
+                              color: Colors.white,
+                              child: Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Config.spaceBox(Config.largeSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.fullName,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge,
                                       ),
-                                      ShakeWidget(
-                                        shakeConstant: shakingConstant,
-                                        autoPlay: isDragged,
+                                    ),
+                                    Config.spaceBox(Config.fourPx),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.currentPosition,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(letterSpacing: 1.2),
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.largeSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: SizedBox(
+                                        width: widget.w,
                                         child: Column(
-                                          mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            SizedBox(
-                                                height: Config.smallSpacer),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                DisplayText(
+                                                  text: 'Email',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge,
+                                                ),
+                                                DisplayText(
+                                                  text: widget.data.email,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displaySmall,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                DisplayText(
+                                                  text: 'Tel:',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                DisplayText(
+                                                  text: widget.data.phoneNumber,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displaySmall,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.smallSpacer),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        SHDivider(),
+                                      ],
+                                    ),
+                                    Config.spaceBox(Config.mediumSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: 'Experience',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.smallSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: SizedBox(
+                                        width: widget.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
                                             DisplayText(
-                                              text: 'Running',
+                                              text: widget.data.experienceTitle,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall
+                                                  ?.copyWith(
+                                                      letterSpacing: 1.2,
+                                                      color: Colors.deepOrange),
+                                            ),
+                                            DisplayText(
+                                                text: widget
+                                                    .data.experiencePeriod,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall
+                                                    ?.copyWith(fontSize: 13)),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.experienceLocation,
+                                        maxLines: 10,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.smallSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.experienceDescription,
+                                        maxLines: 14,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.mediumSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: SizedBox(
+                                        width: widget.w,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            DisplayText(
+                                              text: widget.data.experienceTitle,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall
+                                                  ?.copyWith(
+                                                      letterSpacing: 1.2,
+                                                      color: Colors.deepOrange),
+                                            ),
+                                            DisplayText(
+                                                text: widget
+                                                    .data.experiencePeriod,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.experienceLocation,
+                                        maxLines: 10,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.smallSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.experienceDescription,
+                                        maxLines: 10,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.mediumSpacer),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        SHDivider(),
+                                      ],
+                                    ),
+                                    Config.spaceBox(Config.mediumSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: 'Education',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineLarge,
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.smallSpacer),
+                                    ShakeWidget(
+                                      shakeConstant: shakingConstant,
+                                      autoPlay: isDragged,
+                                      child: SizedBox(
+                                        width: widget.w,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            DisplayText(
+                                              text: widget.data.education,
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall,
                                             ),
-                                            SizedBox(
-                                                height: Config.smallSpacer),
                                             DisplayText(
-                                              text: 'Languages',
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                            SizedBox(
-                                                height: Config.smallSpacer),
-                                            DisplayText(
-                                              text: 'Programming',
+                                              text: 'Bachelor Degree',
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -184,335 +436,12 @@ class _LayoutModernState extends State<LayoutModern> {
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                flex: 6,
-                                child: Container(
-                                  height: widget.h,
-                                  color: Colors.white,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        top: 40,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: DisplayText(
-                                            text: widget.data.fullName,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 60,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: DisplayText(
-                                            text: widget.data.currentPosition,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(letterSpacing: 1.2),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 100,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SizedBox(
-                                            width: Config.mediumWidth,
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    DisplayText(
-                                                      text: 'Email',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineLarge,
-                                                    ),
-                                                    DisplayText(
-                                                      text: widget.data.email,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .displaySmall,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    DisplayText(
-                                                      text: 'Tel:',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleSmall,
-                                                    ),
-                                                    DisplayText(
-                                                      text: widget
-                                                          .data.phoneNumber,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .displaySmall,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 150,
-                                        left: 10,
-                                        child: Padding(
-                                          padding: Config.padding.padding,
-                                          child: const SHDivider(),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 180,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: DisplayText(
-                                            text: 'Experience',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 210,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SizedBox(
-                                            width: Config.mediumWidth,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DisplayText(
-                                                  text: widget
-                                                      .data.experienceTitle,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall
-                                                      ?.copyWith(
-                                                          letterSpacing: 1.2,
-                                                          color: Colors
-                                                              .deepOrange),
-                                                ),
-                                                DisplayText(
-                                                    text: widget
-                                                        .data.experiencePeriod,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall
-                                                        ?.copyWith(
-                                                            fontSize: 13)),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 230,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SBContainer(
-                                            child: DisplayText(
-                                              text: widget
-                                                  .data.experienceLocation,
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 260,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SBContainer(
-                                            child: DisplayText(
-                                              text: widget
-                                                  .data.experienceDescription,
-                                              maxLines: 14,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 340,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SizedBox(
-                                            width: Config.mediumWidth,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DisplayText(
-                                                  text: widget
-                                                      .data.experienceTitle,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall
-                                                      ?.copyWith(
-                                                          letterSpacing: 1.2,
-                                                          color: Colors
-                                                              .deepOrange),
-                                                ),
-                                                DisplayText(
-                                                    text: widget
-                                                        .data.experiencePeriod,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodySmall),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 360,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SBContainer(
-                                            child: DisplayText(
-                                              text: widget
-                                                  .data.experienceLocation,
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 390,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SBContainer(
-                                            child: DisplayText(
-                                              text: widget
-                                                  .data.experienceDescription,
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 470,
-                                        left: 10,
-                                        child: Padding(
-                                          padding: Config.padding.padding,
-                                          child: const SHDivider(),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 500,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: DisplayText(
-                                            text: 'Education',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 520,
-                                        left: 10,
-                                        child: ShakeWidget(
-                                          shakeConstant: shakingConstant,
-                                          autoPlay: isDragged,
-                                          child: SizedBox(
-                                            width: Config.mediumWidth,
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                SBContainer(
-                                                  child: DisplayText(
-                                                    text: widget.data.education,
-                                                    maxLines: 10,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall,
-                                                  ),
-                                                ),
-                                                SBContainer(
-                                                  child: DisplayText(
-                                                    text: 'Bachelor Degree',
-                                                    maxLines: 10,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
+                            ),
+                          ),
                         ],
                       )),
                 ),
@@ -587,7 +516,7 @@ class _LayoutModernState extends State<LayoutModern> {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
