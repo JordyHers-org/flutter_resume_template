@@ -8,6 +8,12 @@ class FlutterResumeTemplate extends StatefulWidget {
   /// TemplateType.
   final TemplateTheme templateTheme;
 
+  /// If  [withButtons] is true the buttons to edit and and
+  /// save the resume will be displayed at the bottom of the page.
+  /// Do not worry the buttons will not be displayed on the final PDF
+  /// version of the resume.
+  final bool? withButtons;
+
   /// The [TemplateData] class holds the general values available on the
   /// on the resume. They are specifically separated to make them quite
   /// modular. the [fullName] and [currentPosition] are on the top left.
@@ -22,6 +28,7 @@ class FlutterResumeTemplate extends StatefulWidget {
     Key? key,
     required this.templateTheme,
     this.data,
+    this.withButtons,
   }) : super(key: key);
 
   @override
@@ -42,30 +49,35 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
             return LayoutModern(
               h: h,
               w: w,
+              withButtons: widget.withButtons,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.classicResume:
             return LayoutClassic(
               h: h,
               w: w,
+              withButtons: widget.withButtons,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.technicalResume:
             return LayoutTechnical(
               h: h,
               w: w,
+              withButtons: widget.withButtons,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.businessResume:
             return LayoutBusiness(
               h: h,
               w: w,
+              withButtons: widget.withButtons,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.none:
             return LayoutBusiness(
               h: h,
               w: w,
+              withButtons: widget.withButtons,
               data: widget.data ?? Str.mockData,
             );
         }
