@@ -21,23 +21,8 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
  
 <br/>
 
-```
-⚠️ Experimental Feature: [Edit Template]
- This plugin package includes an experimental feature that is still in development and may not be stable or fully functional.
- This feature is provided as-is, without any guarantees or warranties of any kind, and is not recommended for use in production environments.
 
- Please note that this experimental feature may be changed, removed, 
- or replaced in future versions of the plugin package, without prior notice. 
- If you choose to use this feature, you do so at your own risk.
 
- We recommend that you only use this experimental feature for testing and evaluation purposes, and not in any critical or sensitive applications.
- If you encounter any issues or problems while using this feature,
- please report them to the plugin developer or community forum, so that they can be addressed in future updates.
-
- Please be aware that the use of this experimental feature may result in unexpected behavior, crashes, data loss, 
- or other issues. Therefore, we strongly advise that you backup your data and test this feature thoroughly before 
- using it in any important or mission-critical projects.
-```
 
 ## Editing Mode Features
 
@@ -123,15 +108,35 @@ Contributions to this plugin are welcome. Please create issues and pull requests
 
 <br/>
 
-## License
+  <h2>⚠️ Warning ⚠️</h2>
 
-This plugin is released under the [MIT License](https://github.com/JordyHers/flutter_resume_template/blob/34704667781ba7b286f4b2c667951a261d1e1763/LICENSE). See the [LICENSE.txt](LICENSE) file for more details.
+Experimental Feature: [Edit Template]
+ This plugin package includes an experimental feature that is still in development and may not be stable or fully functional.
+ This feature is provided as-is, without any guarantees or warranties of any kind, and is not recommended for use in production environments.
+
+ Please note that this experimental feature may be changed, removed, 
+ or replaced in future versions of the plugin package, without prior notice. 
+ If you choose to use this feature, you do so at your own risk.
+
+ We recommend that you only use this experimental feature for testing and evaluation purposes, and not in any critical or sensitive applications.
+ If you encounter any issues or problems while using this feature,
+ please report them to the plugin developer or community forum, so that they can be addressed in future updates.
+
+ Please be aware that the use of this experimental feature may result in unexpected behavior, crashes, data loss, 
+ or other issues. Therefore, we strongly advise that you backup your data and test this feature thoroughly before 
+ using it in any important or mission-critical projects.
+
 
 ## Workflows
 
 - CI/CD for Flutter Release: This workflow builds and tests the app for release, and publishes it to the App Store and Google Play.
 - Flutter CI: This workflow runs tests on the app for each commit and pull request.
 - Publish Flutter Plugin: This workflow publishes the template as a Flutter plugin to the pub.dev package repository.
+
+## License
+
+This plugin is released under the [MIT License](https://github.com/JordyHers/flutter_resume_template/blob/34704667781ba7b286f4b2c667951a261d1e1763/LICENSE). See the [LICENSE.txt](LICENSE) file for more details.
+
 
 
 
