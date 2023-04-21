@@ -10,6 +10,7 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final TemplateTheme templateTheme;
 
+
   /// If  [withButtons] is true the buttons to edit and
   /// save the resume will be displayed at the bottom of the page.
   /// Do not worry the buttons will not be displayed on the final PDF
