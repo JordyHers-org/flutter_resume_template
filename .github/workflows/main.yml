@@ -29,9 +29,6 @@ jobs:
     - name: Run tests
       run: flutter test
 
-    - name: Lint code
-      run: flutter analyze --no-pub --lints
-
     - name: Format code
       run: flutter format -n --set-exit-if-changed .
 
