@@ -1,7 +1,8 @@
 name: flutter_resume_template
-description: A new Flutter project to implement resume or cv
+description: The flutter_resume_template plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a FlutterResumeTemplate widget that takes four parameters, withButtons, TemplateData, OnEmpty(), and style, to customize the template according to your needs.
 version: 0.0.1
-homepage:
+homepage: https://github.com/JordyHers/flutter_resume_template
+license: MIT
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
