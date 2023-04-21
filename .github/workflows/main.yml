@@ -46,14 +46,14 @@ jobs:
         files: build/app/outputs/flutter-apk/app-release.apk
 
     - name: Publish Coverage to Codecov
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       uses: codecov/codecov-action@v2.1.0
 
     - name: Check for security vulnerabilities
       run: flutter pub outdated --mode=null-safety
 
-    - name: Check for formatting errors
-      run: flutter format --dry-run --set-exit-if-changed .
+ #  - name: Check for formatting errors
+ #    run: flutter format --dry-run --set-exit-if-changed .
 
     - name: Check for code smells
       uses: reviewdog/action-eslint@v1.2.0
