@@ -1,0 +1,81 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  analyze_and_test:
+    name: Analyze and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.8.1'  # Change to the version you need
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Analyze code
+      run: flutter analyze
+
+    - name: Run tests
+      run: flutter test
+
+    - name: Lint code
+      run: flutter analyze --no-pub --lints
+
+    - name: Format code
+      run: flutter format -n --set-exit-if-changed .
+
+    - name: Build app for release
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: flutter build apk --release
+
+    - name: Publish APK to GitHub Releases
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ github.repository }}
+        tag: ${{ github.ref }}
+        body: ${{ github.event.head_commit.message }}
+        files: build/app/outputs/flutter-apk/app-release.apk
+
+    - name: Publish Coverage to Codecov
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: codecov/codecov-action@v2.1.0
+
+    - name: Check for security vulnerabilities
+      run: flutter pub outdated --mode=null-safety
+
+    - name: Check for formatting errors
+      run: flutter format --dry-run --set-exit-if-changed .
+
+    - name: Check for code smells
+      uses: reviewdog/action-eslint@v1.2.0
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        eslint_github_checks_enabled: true
+
+    - name: Check for code complexity issues
+      uses: reviewdog/action-rubocop@v1.4.0
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        rubocop_github_checks_enabled: true
+
+    - name: Check for code duplication
+      uses: jacc/codeql-action@v1.10.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        languages: dart
+        query: "languages/dart/codeql-suites/ql/dart/find-duplicated-code.ql"
