@@ -117,7 +117,7 @@ Contributions to this plugin are welcome. Please create issues and pull requests
 
 ## License
 
-This plugin is released under the [MIT License](LICENSE.txt). See the [LICENSE.txt](LICENSE.txt) file for more details.
+This plugin is released under the [MIT License](LICENSE). See the [LICENSE.txt](LICENSE) file for more details.
 
 ## Workflows
 
