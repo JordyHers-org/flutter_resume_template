@@ -1,3 +1,31 @@
+/*
+ * Flutter Resume Template
+ *
+ * © [2023] Jordy Hershel Igondjo. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * All materials and credentials used in this software remain the exclusive
+ * property of Jordy Hershel Igondjo, and may not be used, reproduced, or
+ * distributed without express permission from Jordy Hershel Igondjo.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
@@ -9,7 +37,6 @@ class FlutterResumeTemplate extends StatefulWidget {
   /// TemplateType.
   ///
   final TemplateTheme templateTheme;
-
 
   /// If  [withButtons] is true the buttons to edit and
   /// save the resume will be displayed at the bottom of the page.
