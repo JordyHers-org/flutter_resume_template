@@ -67,7 +67,7 @@ jobs:
           path: flutter_resume_template.tar.gz
 
 
-    publish:
+  publish:
       needs: build
       name: Publish Package
       runs-on: ubuntu-latest
