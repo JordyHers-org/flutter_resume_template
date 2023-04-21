@@ -50,7 +50,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode,
+          absorbing: enableEditingMode && !isDragged,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -364,7 +364,6 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                 children: [
                   OutlinedButton(
                     onPressed: () => setState(() {
-                      isDragged = !isDragged;
                       enableEditingMode = !enableEditingMode;
                       if (enableEditingMode) {
                         _controller.value = Matrix4.identity();
@@ -408,6 +407,16 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                 .titleSmall
                                 ?.copyWith(color: Colors.white),
                           ),
+                        )
+                      : const SizedBox.shrink(),
+                  enableEditingMode
+                      ? IconButton(
+                          onPressed: () async {
+                            setState(() {
+                              isDragged = !isDragged;
+                            });
+                          },
+                          icon: const Icon(Icons.drag_indicator),
                         )
                       : const SizedBox.shrink(),
                 ],
