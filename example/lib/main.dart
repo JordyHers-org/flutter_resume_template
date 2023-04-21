@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template_example/data/data.dart';
 
@@ -13,6 +15,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<TemplateTheme> list = [
+    TemplateTheme.none,
+    TemplateTheme.classic,
+    TemplateTheme.modern,
+    TemplateTheme.technical,
+    TemplateTheme.business,
+  ];
+
+  TemplateTheme getRandomItem() {
+    final random = Random();
+    final index = random.nextInt(5);
+    return list[index];
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       home: SafeArea(
         child: Scaffold(
           body: FlutterResumeTemplate(
-            templateTheme: TemplateTheme.business,
+            templateTheme: getRandomItem(),
             withButtons: true,
             data: data,
           ),
