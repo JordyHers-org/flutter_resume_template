@@ -40,7 +40,7 @@ class MyResumePage extends StatelessWidget {
       ),
       body: FlutterResumeTemplate(
         withButtons: true,
-        templateType: 'minimal',
+        templateTheme: TemplateTheme.modern,
         onEmpty: () {
           return Text('No data found.');
         },
