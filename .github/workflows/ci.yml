@@ -1,5 +1,4 @@
-name: Build And Release
-
+name: CI/CD for Flutter Resume Template
 on:
   push:
     branches:
@@ -9,42 +8,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.7.5'
-          channel: 'stable' # Choose Flutter channel
-      - run: flutter pub get
-      - run: tar -czvf flutter_resume_template.tar.gz build/
-      - uses: actions/upload-artifact@v2
-        with:
-          name: flutter_resume_template
-          path: flutter_resume_template.tar.gz
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-#      - name: Install and configure GitHub CLI
-##        uses: github-cli@0.11.0
-#        with:
-#          version: '0.11.0'
-#        run: |
-#          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
-#          gh release create v${{ env.VERSION }} --title "Flutter Resume Template v${{ env.VERSION }}" flutter_resume_template.tar.gz
-      - name: Increase version
-        uses: dawidd6/action-increaser@v3
-        with:
-          filename: pubspec.yaml
-          version: patch
-      - name: Publish coverage to Codecov
-        uses: codecov/codecov-action@v2.0.0
-        with:
-          flags: unittests
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: true
+
+      - name: Upload APK asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/app/outputs/flutter-apk/app-release.apk
+          asset_name: flutter_resume_template.apk
+          asset_content_type: application/vnd.android.package-archive
