@@ -51,6 +51,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+#screenshots
+screenshots:
+  - description: 'This screenshot shows 2 available templates'
+    path: images/layout_types.png
+
+
 #dev dependencies
 dev_dependencies:
   flutter_test:
