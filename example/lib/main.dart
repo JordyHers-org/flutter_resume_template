@@ -21,7 +21,6 @@ class _MyAppState extends State<MyApp> {
         child: Scaffold(
           body: FlutterResumeTemplate(
             templateTheme: TemplateTheme.modern,
-            withButtons: true,
             data: data,
           ),
         ),

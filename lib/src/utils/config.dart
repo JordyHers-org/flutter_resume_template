@@ -26,7 +26,8 @@ class Config {
   static double oPx = 0.0;
 
   static final shakingConstant = ShakeSlowConstant1();
-  static const shakingDuration = Duration(seconds: 8);
+
+  static const shakingDuration = Duration(seconds: 5);
 
   static spaceBox(double height) => SizedBox(
         height: height,

@@ -70,7 +70,7 @@ class _LayoutModernState extends State<LayoutModern> {
                   margin: Config.margin,
                   constraints: BoxConstraints(
                     minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
-                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.8,
+                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.9,
                   ),
                   decoration: Config.decoration(context),
                   child: RepaintBoundary(
@@ -81,7 +81,9 @@ class _LayoutModernState extends State<LayoutModern> {
                             flex: 3,
                             child: Container(
                               margin: Config.margin,
+                              padding: Config.padding.padding,
                               height: widget.h,
+                              color: Theme.of(context).primaryColor,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -445,7 +447,6 @@ class _LayoutModernState extends State<LayoutModern> {
                 children: [
                   OutlinedButton(
                     onPressed: () => setState(() {
-                      isDragged = !isDragged;
                       enableEditingMode = !enableEditingMode;
                       if (enableEditingMode) {
                         _controller.value = Matrix4.identity();
@@ -489,6 +490,16 @@ class _LayoutModernState extends State<LayoutModern> {
                                 .titleSmall
                                 ?.copyWith(color: Colors.white),
                           ),
+                        )
+                      : const SizedBox.shrink(),
+                  enableEditingMode
+                      ? IconButton(
+                          onPressed: () async {
+                            setState(() {
+                              isDragged = !isDragged;
+                            });
+                          },
+                          icon: const Icon(Icons.drag_indicator),
                         )
                       : const SizedBox.shrink(),
                 ],
