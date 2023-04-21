@@ -8,7 +8,7 @@
 
 <br/>
 
-The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, `OnEmpty()`, and `style`, to customize the template according to your needs.
+The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, `onEmpty()`, and `style`, to customize the template according to your needs.
 
 <br/>
 
