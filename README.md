@@ -1,7 +1,9 @@
 # Flutter Resume Template Plugin
 
-[![Coverage Status](https://coveralls.io/repos/github/jordyhers/flutter_resume_template/badge.svg?branch=master)](https://coveralls.io/github/jordyhers/flutter_resume_template?branch=master)
-![Build and Test](https://github.com/jordyhers/flutter_resume_template/workflows/Build%20and%20Test/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/JordyHers/flutter_resume_template/badge.svg?branch=master)](https://coveralls.io/github/JordyHers/flutter_resume_template?branch=master)
+![CI/CD for Flutter Release](https://github.com/JordyHers/flutter_resume_template/workflows/CI/CD%20for%20Flutter%20Release/badge.svg)
+![Flutter CI](https://github.com/JordyHers/flutter_resume_template/workflows/Flutter%20CI/badge.svg)
+![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/workflows/Publish%20Flutter%20Plugin/badge.svg)
 
 The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, `OnEmpty()`, and `style`, to customize the template according to your needs.
 
@@ -88,4 +90,11 @@ Contributions to this plugin are welcome. Please create issues and pull requests
 ## License
 
 This plugin is released under the [MIT License](LICENSE.txt). See the [LICENSE.txt](LICENSE.txt) file for more details.
+
+
+## Workflows
+
+- CI/CD for Flutter Release: This workflow builds and tests the app for release, and publishes it to the App Store and Google Play.
+- Flutter CI: This workflow runs tests on the app for each commit and pull request.
+- Publish Flutter Plugin: This workflow publishes the template as a Flutter plugin to the pub.dev package repository.
 
