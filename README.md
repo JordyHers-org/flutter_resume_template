@@ -18,18 +18,26 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 - Ability to add or remove buttons based on user needs.
 - Easy to integrate and customize with the existing Flutter application.
 
- Sure, here's an example table for the README file that lists the features available in editing mode:
+ 
 <br/>
 
-## Experimental Feature: EDIT TEMPLATE
+```
+⚠️ Experimental Feature: [Edit Template]
+ This plugin package includes an experimental feature that is still in development and may not be stable or fully functional.
+ This feature is provided as-is, without any guarantees or warranties of any kind, and is not recommended for use in production environments.
 
-This plugin package includes an experimental feature that is still in development and may not be stable or fully functional. This feature is provided as-is, without any guarantees or warranties of any kind, and is not recommended for use in production environments.
+ Please note that this experimental feature may be changed, removed, 
+ or replaced in future versions of the plugin package, without prior notice. 
+ If you choose to use this feature, you do so at your own risk.
 
-Please note that this experimental feature may be changed, removed, or replaced in future versions of the plugin package, without prior notice. If you choose to use this feature, you do so at your own risk.
+ We recommend that you only use this experimental feature for testing and evaluation purposes, and not in any critical or sensitive applications.
+ If you encounter any issues or problems while using this feature,
+ please report them to the plugin developer or community forum, so that they can be addressed in future updates.
 
-We recommend that you only use this experimental feature for testing and evaluation purposes, and not in any critical or sensitive applications. If you encounter any issues or problems while using this feature, please report them to the plugin developer or community forum, so that they can be addressed in future updates.
-
-Please be aware that the use of this experimental feature may result in unexpected behavior, crashes, data loss, or other issues. Therefore, we strongly advise that you backup your data and test this feature thoroughly before using it in any important or mission-critical projects.
+ Please be aware that the use of this experimental feature may result in unexpected behavior, crashes, data loss, 
+ or other issues. Therefore, we strongly advise that you backup your data and test this feature thoroughly before 
+ using it in any important or mission-critical projects.
+```
 
 ## Editing Mode Features
 
