@@ -1,4 +1,4 @@
-name: CI/CD for Flutter Resume Template
+name: CI/CD for Flutter release
 on:
   push:
     branches:
@@ -17,23 +17,4 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: true
 
-#      - name: Upload APK asset
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_path: ./build/app/outputs/flutter-apk/app-release.apk
-#          asset_name: flutter_resume_template.apk
-#          asset_content_type: application/vnd.android.package-archive
