@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter_resume_template/src/components/section_bio_container.dart';
 
 class DisplayText extends StatefulWidget {
-  final String text;
+  final EdgeInsetsGeometry? padding;
+  final String? text;
   final int? maxLines;
   final TextStyle? style;
   final double? minFontSize;
@@ -10,8 +12,6 @@ class DisplayText extends StatefulWidget {
   final double? forceFontSize;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-
-  final Function<bool>()? onSubmitted;
 
   const DisplayText(
       {Key? key,
@@ -22,8 +22,8 @@ class DisplayText extends StatefulWidget {
       this.maxFontSize,
       this.forceFontSize,
       this.controller,
-      this.onSubmitted,
-      this.focusNode})
+      this.focusNode,
+      this.padding})
       : super(key: key);
 
   @override
@@ -34,34 +34,54 @@ class _DisplayTextState extends State<DisplayText> {
   bool showFirstWidget = true;
   bool isEmptyField = true;
   late String label;
+  late TextEditingController _textEditingController;
 
   @override
   void initState() {
-    label = widget.text;
+    label = widget.text ?? '';
+    _textEditingController = widget.controller ?? TextEditingController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return showFirstWidget
-        ? GestureDetector(
-            onTap: () => setState(() {
-              showFirstWidget = false;
-            }),
-            child: AutoSizeText(
-              label,
-              presetFontSizes: const [14, 15, 16, 17],
-              maxFontSize: widget.maxFontSize ?? 30.0,
-              minFontSize: widget.minFontSize ?? 10.0,
-              maxLines: widget.maxLines ?? 3,
-              style: widget.style,
+        ? LongPressDraggable(
+            dragAnchorStrategy: pointerDragAnchorStrategy,
+            childWhenDragging: Config.spaceBox(Config.tenPx),
+            feedback: Material(
+              child: SBContainer(
+                child: AutoSizeText(
+                  label,
+                  minFontSize: 11,
+                  maxFontSize: 23,
+                  maxLines: 3,
+                  style: widget.style,
+                ),
+              ),
+            ),
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => setState(() {
+                  showFirstWidget = false;
+                }),
+                child: AutoSizeText(
+                  label,
+                  presetFontSizes: const [14, 15, 16, 17],
+                  maxFontSize: widget.maxFontSize ?? 30.0,
+                  minFontSize: widget.minFontSize ?? 10.0,
+                  maxLines: widget.maxLines ?? 3,
+                  style: widget.style,
+                ),
+              ),
             ),
           )
         : SizedBox(
             width: 110,
             height: 50,
             child: TextField(
-              controller: widget.controller,
+              controller: _textEditingController,
               focusNode: widget.focusNode,
               cursorColor: Colors.amber,
               onChanged: (value) {
@@ -72,11 +92,9 @@ class _DisplayTextState extends State<DisplayText> {
                 }
               },
               onSubmitted: (value) {
-                if (widget.controller != null &&
-                    widget.controller!.text.isNotEmpty) {
+                if (_textEditingController.text.isNotEmpty) {
                   label = value;
                 }
-
                 showFirstWidget = true;
               },
               onEditingComplete: () => setState(() {
