@@ -51,6 +51,7 @@ jobs:
 #      with:
 #        eslint_github_checks_enabled: true
   build:
+    name: Build Package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -68,6 +69,7 @@ jobs:
 
     publish:
       needs: build
+      name: Publish Package
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
