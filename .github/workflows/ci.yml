@@ -1,4 +1,4 @@
-name: CI/CD for Flutter Resume Template
+name: CI/CD for Flutter release
 on:
   push:
     branches:
