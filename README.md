@@ -8,7 +8,7 @@
 
 <br/>
 
-The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, `onEmpty()`, and `style`, to customize the template according to your needs.
+The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, and `onEmpty()`, to customize the template according to your needs.
 
 <br/>
 
@@ -72,10 +72,6 @@ class MyResumePage extends StatelessWidget {
         onEmpty: () {
           return Text('No data found.');
         },
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black,
-        ),
       ),
     );
   }
@@ -88,7 +84,6 @@ class MyResumePage extends StatelessWidget {
 - `withButtons` (required): A boolean value that determines whether or not to show the action buttons at the bottom of the template.
 - `templateType` (optional): A string value that determines the template style. The available styles are `minimal`, `creative`, `modern`, and `classic`.
 - `onEmpty` (optional): A callback function that will be called when there is no data to display in the template.
-- `style` (optional): A TextStyle object that defines the style of the text in the template.
 
 <br/>
 
