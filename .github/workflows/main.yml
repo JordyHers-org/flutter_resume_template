@@ -1,0 +1,52 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  analyze_and_test:
+    name: Analyze and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '3.7.5'  # Change to the version you need
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Analyze code
+      run: flutter analyze
+
+    - name: Run tests
+      run: flutter test
+
+#     - name: Format code
+#       run: flutter format -n --set-exit-if-changed .
+#
+#    - name: Build app for release
+#      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+#      run: flutter build apk --release
+
+
+
+    - name: Check for security vulnerabilities
+      run: flutter pub outdated --mode=null-safety
+
+#   - name: Check for formatting errors
+#     run: flutter format --dry-run --set-exit-if-changed .
+#
+#    - name: Check for code smells
+#      uses: reviewdog/action-eslint@v1.2.0
+#      env:
+#        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      with:
+#        eslint_github_checks_enabled: true

@@ -9,17 +9,23 @@ import 'package:pdf/widgets.dart' as pw;
 
 abstract class PdfHandlerInterface {
   Future<void> createResume(GlobalKey key);
-  Future<Uint8List> _capturePng(GlobalKey key);
-  Future<void> _createPDF(GlobalKey key);
+
+  Future<Uint8List> capturePng(GlobalKey key);
+
+  Future<void> createPDF(GlobalKey key);
+
+  Future<String?> findLocalPath();
+
+  Future<Directory> prepareSaveDir();
 }
 
 class PdfHandler implements PdfHandlerInterface {
   // generate the final resume in pdf.
   @override
-  Future<void> createResume(GlobalKey key) async => _createPDF(key);
+  Future<void> createResume(GlobalKey key) async => createPDF(key);
 
   @override
-  Future<Uint8List> _capturePng(GlobalKey key) async {
+  Future<Uint8List> capturePng(GlobalKey key) async {
     RenderRepaintBoundary boundary =
         key.currentContext!.findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage(pixelRatio: 3.0);
@@ -28,19 +34,34 @@ class PdfHandler implements PdfHandlerInterface {
   }
 
   @override
-  Future<void> _createPDF(GlobalKey key) async {
-    final directory;
+  Future<Directory> prepareSaveDir() async {
+    var localPath = (await findLocalPath())!;
+    final savedDir = Directory(localPath);
+    bool hasExisted = await savedDir.exists();
+    if (!hasExisted) {
+      savedDir.create();
+    }
+    return savedDir;
+  }
+
+  @override
+  Future<String?> findLocalPath() async {
+    if (Platform.isAndroid) {
+      return "/storage/emulated/0/Download";
+    } else {
+      var directory = await getApplicationDocumentsDirectory();
+      return '${directory.path}${Platform.pathSeparator}Download';
+    }
+  }
+
+  @override
+  Future<void> createPDF(GlobalKey key) async {
     try {
-      if (Platform.isAndroid) {
-        directory = await getApplicationDocumentsDirectory();
-      } else {
-        directory = (await getDownloadsDirectory()) ??
-            getApplicationDocumentsDirectory();
-      }
+      final directory = await prepareSaveDir();
 
       final path = '${directory.path}/resume_${key.hashCode}.pdf';
       final pdf = pw.Document();
-      final image = pw.MemoryImage(await _capturePng(key));
+      final image = pw.MemoryImage(await capturePng(key));
       pdf.addPage(
         pw.Page(
           build: (pw.Context context) => pw.Center(child: pw.Image(image)),
