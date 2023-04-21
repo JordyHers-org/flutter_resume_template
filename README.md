@@ -22,8 +22,6 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 <br/>
 
 
-
-
 ## Editing Mode Features
 
 | Feature | Description |
@@ -81,8 +79,8 @@ class MyResumePage extends StatelessWidget {
 
 ### Parameters
 
-- `withButtons` (required): A boolean value that determines whether or not to show the action buttons at the bottom of the template.
-- `templateType` (optional): A string value that determines the template style. The available styles are `minimal`, `creative`, `modern`, and `classic`.
+- `withButtons` (optional): A boolean value that determines whether or not to show the action buttons at the bottom of the template.
+- `TemplateType` (required): A string value that determines the template style. The available styles are `business`, `technical`, `modern`, and `classic`.
 - `onEmpty` (optional): A callback function that will be called when there is no data to display in the template.
 
 <br/>
