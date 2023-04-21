@@ -31,9 +31,9 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install and configure GitHub CLI
-        uses: github-cli@0.11.0
-        with:
-          version: '0.11.0'
+#        uses: github-cli@0.11.0
+#        with:
+#          version: '0.11.0'
       - run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh release create v${{ env.VERSION }} --title "Flutter Resume Template v${{ env.VERSION }}" flutter_resume_template.tar.gz
