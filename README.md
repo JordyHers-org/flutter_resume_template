@@ -117,7 +117,7 @@ Contributions to this plugin are welcome. Please create issues and pull requests
 
 ## License
 
-This plugin is released under the [MIT License](LICENSE). See the [LICENSE.txt](LICENSE) file for more details.
+This plugin is released under the [MIT License](https://github.com/JordyHers/flutter_resume_template/blob/34704667781ba7b286f4b2c667951a261d1e1763/LICENSE). See the [LICENSE.txt](LICENSE) file for more details.
 
 ## Workflows
 
