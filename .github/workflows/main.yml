@@ -32,9 +32,9 @@ jobs:
 #     - name: Format code
 #       run: flutter format -n --set-exit-if-changed .
 
-    - name: Build app for release
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: flutter build apk --release
+#    - name: Build app for release
+ #     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+#      run: flutter build apk --release
 
     - name: Publish APK to GitHub Releases
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
