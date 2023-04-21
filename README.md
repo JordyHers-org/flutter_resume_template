@@ -1,7 +1,7 @@
 # Flutter Resume Template Plugin
 
 [![Coverage Status](https://coveralls.io/repos/github/JordyHers/flutter_resume_template/badge.svg?branch=master)](https://coveralls.io/github/JordyHers/flutter_resume_template?branch=master)
-![CI/CD for Flutter Release](https://github.com/JordyHers/flutter_resume_template/workflows/CI/CD%20for%20Flutter%20Release/badge.svg)
+![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/workflows/CI/CD%20for%20Flutter%20release/badge.svg)
 ![Flutter CI](https://github.com/JordyHers/flutter_resume_template/workflows/Flutter%20CI/badge.svg)
 ![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/workflows/Publish%20Flutter%20Plugin/badge.svg)
 
