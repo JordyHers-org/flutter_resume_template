@@ -1,5 +1,6 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
+import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/repository/pdf_saver.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 class LayoutModern extends StatefulWidget {
   const LayoutModern({
     super.key,
+    this.withButtons,
     required this.data,
     required this.h,
     required this.w,
@@ -15,6 +17,7 @@ class LayoutModern extends StatefulWidget {
   final double h;
   final double w;
   final TemplateData data;
+  final bool? withButtons;
 
   @override
   State<LayoutModern> createState() => _LayoutModernState();
@@ -67,7 +70,7 @@ class _LayoutModernState extends State<LayoutModern> {
                   margin: Config.margin,
                   constraints: BoxConstraints(
                     minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
-                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.8,
+                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.9,
                   ),
                   decoration: Config.decoration(context),
                   child: RepaintBoundary(
@@ -78,13 +81,14 @@ class _LayoutModernState extends State<LayoutModern> {
                             flex: 3,
                             child: Container(
                               margin: Config.margin,
+                              padding: Config.padding.padding,
                               height: widget.h,
+                              color: Theme.of(context).primaryColor,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Config.spaceBox(Config.largeSpacer),
-                                  ShakeWidget(
-                                    shakeConstant: shakingConstant,
+                                  AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: ClipRRect(
                                       borderRadius:
@@ -98,8 +102,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                     ),
                                   ),
                                   Config.spaceBox(Config.smallSpacer),
-                                  ShakeWidget(
-                                    shakeConstant: shakingConstant,
+                                  AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       text: 'ABOUT ME',
@@ -113,8 +116,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                     ),
                                   ),
                                   Config.spaceBox(Config.smallSpacer),
-                                  ShakeWidget(
-                                    shakeConstant: shakingConstant,
+                                  AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       text: widget.data.bio,
@@ -132,8 +134,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                     padding: Config.padding.padding,
                                     child: const SHDivider(),
                                   ),
-                                  ShakeWidget(
-                                    shakeConstant: shakingConstant,
+                                  AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       text: 'Hobbies',
@@ -142,8 +143,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                           .headlineLarge,
                                     ),
                                   ),
-                                  ShakeWidget(
-                                    shakeConstant: shakingConstant,
+                                  AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -191,8 +191,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Config.spaceBox(Config.largeSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.fullName,
@@ -202,8 +201,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.fourPx),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.currentPosition,
@@ -214,8 +212,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.largeSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: SizedBox(
                                         width: widget.w,
@@ -274,8 +271,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ],
                                     ),
                                     Config.spaceBox(Config.mediumSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: 'Experience',
@@ -285,8 +281,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: SizedBox(
                                         width: widget.w,
@@ -314,8 +309,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                         ),
                                       ),
                                     ),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.experienceLocation,
@@ -326,8 +320,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.experienceDescription,
@@ -338,8 +331,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.mediumSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: SizedBox(
                                         width: widget.w,
@@ -366,8 +358,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                         ),
                                       ),
                                     ),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.experienceLocation,
@@ -378,8 +369,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: widget.data.experienceDescription,
@@ -398,8 +388,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ],
                                     ),
                                     Config.spaceBox(Config.mediumSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         text: 'Education',
@@ -409,8 +398,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    ShakeWidget(
-                                      shakeConstant: shakingConstant,
+                                    AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: SizedBox(
                                         width: widget.w,
@@ -449,74 +437,75 @@ class _LayoutModernState extends State<LayoutModern> {
             ),
           ),
         ),
-        Visibility(
-          visible: isButtonVisible,
-          child: Positioned(
-            bottom: 20,
-            right: 20,
-            child: Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () => setState(() {
-                    enableEditingMode = !enableEditingMode;
-                    if (enableEditingMode) {
-                      _controller.value = Matrix4.identity();
-                    }
-                  }),
-                  style: !enableEditingMode
-                      ? OutlinedButton.styleFrom(backgroundColor: Colors.grey)
-                      : null,
-                  child: Text(
-                    enableEditingMode ? 'Edit template' : 'Editing ...',
-                    style: enableEditingMode
-                        ? Theme.of(context).textTheme.titleSmall
-                        : Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: Colors.white),
-                  ),
-                ),
-                SizedBox(width: Config.tenPx),
-                enableEditingMode
-                    ? OutlinedButton(
-                        onPressed: () async {
-                          setState(() {
-                            isButtonVisible = false;
-                          });
-                          await Future.delayed(
-                                  const Duration(milliseconds: 300))
-                              .then((value) => PdfHandler()
-                                  .createResume(globalKey)
-                                  .whenComplete(() => setState(() {
-                                        isButtonVisible = true;
-                                      })));
-                        },
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            foregroundColor: Colors.white),
-                        child: Text(
-                          'Download CV ',
-                          style: Theme.of(context)
+        if (widget.withButtons ?? false)
+          Visibility(
+            visible: isButtonVisible,
+            child: Positioned(
+              bottom: 20,
+              right: 20,
+              child: Row(
+                children: [
+                  OutlinedButton(
+                    onPressed: () => setState(() {
+                      enableEditingMode = !enableEditingMode;
+                      if (enableEditingMode) {
+                        _controller.value = Matrix4.identity();
+                      }
+                    }),
+                    style: !enableEditingMode
+                        ? OutlinedButton.styleFrom(backgroundColor: Colors.grey)
+                        : null,
+                    child: Text(
+                      enableEditingMode ? 'Edit template' : 'Editing ...',
+                      style: enableEditingMode
+                          ? Theme.of(context).textTheme.titleSmall
+                          : Theme.of(context)
                               .textTheme
                               .titleSmall
                               ?.copyWith(color: Colors.white),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                enableEditingMode
-                    ? IconButton(
-                        icon: const Icon(Icons.drag_indicator),
-                        onPressed: () async {
-                          setState(() {
-                            isDragged = !isDragged;
-                          });
-                        },
-                      )
-                    : const SizedBox.shrink(),
-              ],
+                    ),
+                  ),
+                  SizedBox(width: Config.tenPx),
+                  enableEditingMode
+                      ? OutlinedButton(
+                          onPressed: () async {
+                            setState(() {
+                              isButtonVisible = false;
+                            });
+                            await Future.delayed(
+                                    const Duration(milliseconds: 300))
+                                .then((value) => PdfHandler()
+                                    .createResume(globalKey)
+                                    .whenComplete(() => setState(() {
+                                          isButtonVisible = true;
+                                        })));
+                          },
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.white),
+                          child: Text(
+                            'Download CV ',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                  enableEditingMode
+                      ? IconButton(
+                          onPressed: () async {
+                            setState(() {
+                              isDragged = !isDragged;
+                            });
+                          },
+                          icon: const Icon(Icons.drag_indicator),
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }

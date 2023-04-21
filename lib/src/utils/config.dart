@@ -1,4 +1,5 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 
 class Config {
   static double smallHeight = 250.0;
@@ -23,6 +24,10 @@ class Config {
   static double onePx = 1.0;
   static double oneHalfPx = 0.5;
   static double oPx = 0.0;
+
+  static final shakingConstant = ShakeSlowConstant1();
+
+  static const shakingDuration = Duration(seconds: 5);
 
   static spaceBox(double height) => SizedBox(
         height: height,
