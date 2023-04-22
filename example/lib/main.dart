@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           ),
           body: FlutterResumeTemplate(
             data: data,
-            templateTheme: TemplateTheme.technical,
+            templateTheme: theme,
             mode: TemplateMode.shakeEditAndSaveMode,
             onSaveResume: (key) async =>
                 await Future.delayed(const Duration(milliseconds: 300))
