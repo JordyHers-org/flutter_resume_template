@@ -12,6 +12,10 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 
 <br/>
 
+
+
+<img width="1587" alt="templates" src="https://user-images.githubusercontent.com/49708438/233781511-31535056-dedd-4748-9876-522b2bc19811.png">
+
 ## Features
 
 - Customizable resume template with multiple styles.
@@ -85,10 +89,6 @@ class MyResumePage extends StatelessWidget {
 
 <br/>
 
-## Screenshots
-
-
-<img width="1587" alt="templates" src="https://user-images.githubusercontent.com/49708438/233781511-31535056-dedd-4748-9876-522b2bc19811.png">
 
 ### Example Code
 
