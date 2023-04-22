@@ -177,7 +177,7 @@ class _LayoutModernState extends State<LayoutModern> {
                           ),
                           Expanded(
                             flex: 6,
-                            child: Container(
+                            child: SizedBox(
                               height: widget.h,
                               width: widget.w,
                               child: Padding(
