@@ -81,7 +81,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                             height: Config.smallHeight,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(Str.resumeHeader),
+                                image: NetworkImage(Str.backgroundImage),
                                 fit: BoxFit.cover,
                               ),
                             ),
