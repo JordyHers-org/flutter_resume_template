@@ -1,5 +1,4 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
-import 'package:flutter_resume_template/src/utils/enums.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomColors {
