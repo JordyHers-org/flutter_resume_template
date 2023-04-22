@@ -64,15 +64,12 @@ class _LayoutModernState extends State<LayoutModern> {
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Container(
-                  alignment: Alignment.centerRight,
                   height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
-                  width: widget.w < 400 ? widget.w : widget.w * 0.8,
-                  margin: Config.margin,
+                  width: widget.w < 400 ? widget.w : widget.w * 0.9,
                   constraints: BoxConstraints(
-                    minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
+                    minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1.1,
                     minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.9,
                   ),
-                  decoration: Config.decoration(context),
                   child: RepaintBoundary(
                       key: globalKey,
                       child: Row(
@@ -80,7 +77,6 @@ class _LayoutModernState extends State<LayoutModern> {
                           Expanded(
                             flex: 3,
                             child: Container(
-                              margin: Config.margin,
                               padding: Config.padding.padding,
                               height: widget.h,
                               color: Theme.of(context).primaryColor,
@@ -181,10 +177,9 @@ class _LayoutModernState extends State<LayoutModern> {
                           ),
                           Expanded(
                             flex: 6,
-                            child: Container(
+                            child: SizedBox(
                               height: widget.h,
                               width: widget.w,
-                              color: Colors.white,
                               child: Padding(
                                 padding: Config.dtHorPad.padding,
                                 child: Column(

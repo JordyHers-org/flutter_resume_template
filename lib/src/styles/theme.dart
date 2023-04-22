@@ -116,8 +116,8 @@ class TemplateTheme {
   static TemplateTheme technical = TemplateTheme(
       TemplateType.technicalResume,
       ThemeData(
-          shadowColor: Colors.green,
-          primarySwatch: Colors.green,
+          shadowColor: Colors.blueGrey,
+          primarySwatch: Colors.blueGrey,
           fontFamily: GoogleFonts.notoSansGeorgian().fontFamily,
           dividerColor: Colors.grey.shade300,
           textTheme: globalTextTheme));
