@@ -15,6 +15,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late bool withButtons = false;
+  late TemplateTheme theme = TemplateTheme.modern;
   List<TemplateTheme> list = [
     TemplateTheme.none,
     TemplateTheme.classic,
@@ -26,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   TemplateTheme getRandomItem() {
     final random = Random();
     final index = random.nextInt(5);
+    theme = list[index];
     return list[index];
   }
 
@@ -35,8 +38,17 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.white54,
+            onPressed: () {
+              setState(() {
+                theme = getRandomItem();
+              });
+            },
+          ),
           body: FlutterResumeTemplate(
-            templateTheme: getRandomItem(),
+            templateTheme: theme,
             withButtons: true,
             data: data,
           ),
