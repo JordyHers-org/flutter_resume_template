@@ -12,7 +12,7 @@ abstract class PdfHandlerInterface {
 
   Future<Uint8List> capturePng(GlobalKey key);
 
-  Future<void> createPDF(GlobalKey key);
+  Future<GlobalKey> createPDF(GlobalKey key);
 
   Future<String?> findLocalPath();
 
@@ -22,7 +22,7 @@ abstract class PdfHandlerInterface {
 class PdfHandler implements PdfHandlerInterface {
   // generate the final resume in pdf.
   @override
-  Future<void> createResume(GlobalKey key) async => createPDF(key);
+  Future<GlobalKey> createResume(GlobalKey key) async => createPDF(key);
 
   @override
   Future<Uint8List> capturePng(GlobalKey key) async {
@@ -55,7 +55,7 @@ class PdfHandler implements PdfHandlerInterface {
   }
 
   @override
-  Future<void> createPDF(GlobalKey key) async {
+  Future<GlobalKey> createPDF(GlobalKey key) async {
     try {
       final directory = await prepareSaveDir();
 
@@ -73,5 +73,7 @@ class PdfHandler implements PdfHandlerInterface {
     } catch (e) {
       throw Exception(e.toString());
     }
+
+    return key;
   }
 }
