@@ -38,15 +38,19 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final TemplateTheme templateTheme;
 
-  /// If  [withButtons] is true the buttons to edit and
-  /// save the resume will be displayed at the bottom of the page.
-  /// Do not worry the buttons will not be displayed on the final PDF
-  /// version of the resume.
+  /// If  [mode] is given the user will experience different behavior on the widget
   ///
-  /// When buttons are enabled you can either edit template or save the Resume as
-  /// PDF in your local device storage. Keep in mind that the editing is still `experimental`
-  /// some functionalities may not work as expected.
-  final bool? withButtons;
+  /// The modes are
+  ///
+  /// [TemplateMode.onlyEditableMode] - The Resume can be edited , zoomed in- out
+  ///
+  /// [TemplateMode.shakeEditAndSaveMode] - The Resume will shake while being updated
+  ///
+  ///[TemplateMode.readOnlyMode] - The resume template can't be edited. All actions on
+  ///
+  ///the template will be dismissed.
+  ///
+  final TemplateMode mode;
 
   /// The [TemplateData] class holds the general values available on the
   /// on the resume. They are specifically separated to make them quite
@@ -67,12 +71,26 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final ResumeBuilder<Widget>? onEmpty;
 
+  /// To save a pdf version of the update resume the function [onSaveResume] is passed
+  ///
+  /// only enable it if mode is [TemplateMode.shakeEditAndSaveMode]
+  /// then just us a Future to create the PDF receiving the globalGey
+  ///
+  /// await Future.delayed(
+  ///    const Duration(milliseconds: 300))
+  ///       .then((value) =>
+  ///       PdfHandler().createResume(_globalKey));
+  ///
+  ///
+  final SaveResume<GlobalKey>? onSaveResume;
+
   const FlutterResumeTemplate({
     Key? key,
     required this.templateTheme,
+    this.mode = TemplateMode.onlyEditableMode,
     this.data,
-    this.withButtons = false,
     this.onEmpty,
+    this.onSaveResume,
   })  : assert(data != null || onEmpty != null),
         super(key: key);
 
@@ -94,28 +112,32 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
             return LayoutModern(
               h: h,
               w: w,
-              withButtons: widget.withButtons,
+              onSaveResume: widget.onSaveResume,
+              mode: widget.mode,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.classicResume:
             return LayoutClassic(
               h: h,
               w: w,
-              withButtons: widget.withButtons,
+              onSaveResume: widget.onSaveResume,
+              mode: widget.mode,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.technicalResume:
             return LayoutTechnical(
               h: h,
               w: w,
-              withButtons: widget.withButtons,
+              onSaveResume: widget.onSaveResume,
+              mode: widget.mode,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.businessResume:
             return LayoutBusiness(
               h: h,
               w: w,
-              withButtons: widget.withButtons,
+              onSaveResume: widget.onSaveResume,
+              mode: widget.mode,
               data: widget.data ?? Str.mockData,
             );
           case TemplateType.none:
@@ -125,7 +147,8 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               return LayoutBusiness(
                 h: h,
                 w: w,
-                withButtons: widget.withButtons,
+                onSaveResume: widget.onSaveResume,
+                mode: widget.mode,
                 data: widget.data ?? Str.mockData,
               );
             }

@@ -1,13 +1,14 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
-import 'package:flutter_resume_template/src/repository/pdf_saver.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
+import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
 class LayoutClassic extends StatefulWidget {
   const LayoutClassic({
     super.key,
-    this.withButtons,
+    this.onSaveResume,
+    required this.mode,
     required this.data,
     required this.h,
     required this.w,
@@ -16,7 +17,8 @@ class LayoutClassic extends StatefulWidget {
   final double h;
   final double w;
   final TemplateData data;
-  final bool? withButtons;
+  final TemplateMode mode;
+  final SaveResume<GlobalKey>? onSaveResume;
 
   @override
   State<LayoutClassic> createState() => _LayoutClassicState();
@@ -25,16 +27,17 @@ class LayoutClassic extends StatefulWidget {
 class _LayoutClassicState extends State<LayoutClassic> {
   GlobalKey globalKey = GlobalKey();
 
-  bool enableEditingMode = true;
+  late bool enableEditingMode = true;
 
-  bool isButtonVisible = true;
-
-  bool isDragged = false;
+  late bool isDragged = false;
 
   late TransformationController _controller;
 
+  late bool absorbing = false;
+
   @override
   void initState() {
+    setMode();
     _controller = TransformationController();
     super.initState();
   }
@@ -45,12 +48,40 @@ class _LayoutClassicState extends State<LayoutClassic> {
     super.dispose();
   }
 
+  void setMode() {
+    switch (widget.mode) {
+      case TemplateMode.onlyEditableMode:
+        enableEditingMode = true;
+        isDragged = false;
+        absorbing = enableEditingMode && isDragged;
+        break;
+      case TemplateMode.readOnlyMode:
+        enableEditingMode = false;
+        isDragged = false;
+        absorbing = true;
+        break;
+      case TemplateMode.shakeEditAndSaveMode:
+        enableEditingMode = true;
+        isDragged = false;
+        absorbing = enableEditingMode && isDragged;
+        break;
+    }
+  }
+
+  void _save() {
+    if (widget.onSaveResume != null &&
+        widget.mode == TemplateMode.shakeEditAndSaveMode) {
+      widget.onSaveResume!(globalKey);
+      _controller.value = Matrix4.identity();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         AbsorbPointer(
-          absorbing: enableEditingMode && !isDragged,
+          absorbing: absorbing,
           child: InteractiveViewer(
             transformationController: _controller,
             panEnabled: false,
@@ -209,75 +240,37 @@ class _LayoutClassicState extends State<LayoutClassic> {
             ),
           ),
         ),
-        if (widget.withButtons ?? false)
-          Visibility(
-            visible: isButtonVisible,
-            child: Positioned(
-              bottom: 20,
-              right: 20,
-              child: Row(
-                children: [
-                  OutlinedButton(
-                    onPressed: () => setState(() {
-                      enableEditingMode = !enableEditingMode;
-                      if (enableEditingMode) {
-                        _controller.value = Matrix4.identity();
-                      }
-                    }),
-                    style: !enableEditingMode
-                        ? OutlinedButton.styleFrom(backgroundColor: Colors.grey)
-                        : null,
-                    child: Text(
-                      enableEditingMode ? 'Edit template' : 'Editing ...',
-                      style: enableEditingMode
-                          ? Theme.of(context).textTheme.titleSmall
-                          : Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: Colors.white),
-                    ),
-                  ),
-                  SizedBox(width: Config.tenPx),
-                  enableEditingMode
-                      ? OutlinedButton(
-                          onPressed: () async {
-                            setState(() {
-                              isButtonVisible = false;
-                            });
-                            await Future.delayed(
-                                    const Duration(milliseconds: 300))
-                                .then((value) => PdfHandler()
-                                    .createResume(globalKey)
-                                    .whenComplete(() => setState(() {
-                                          isButtonVisible = true;
-                                        })));
-                          },
-                          style: OutlinedButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              foregroundColor: Colors.white),
-                          child: Text(
-                            'Download CV ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(color: Colors.white),
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                  enableEditingMode
-                      ? IconButton(
-                          onPressed: () async {
-                            setState(() {
-                              isDragged = !isDragged;
-                            });
-                          },
-                          icon: const Icon(Icons.drag_indicator),
-                        )
-                      : const SizedBox.shrink(),
-                ],
+        if (widget.mode == TemplateMode.shakeEditAndSaveMode)
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Row(children: [
+              OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    _controller.value = Matrix4.identity();
+                    isDragged = !isDragged;
+                  });
+                },
+                style: OutlinedButton.styleFrom(
+                    backgroundColor: isDragged
+                        ? Colors.grey
+                        : Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white),
+                child: Text(
+                  isDragged ? 'Stop Editing' : 'Edit',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
-            ),
-          ),
+              IconButton(
+                onPressed: () => _save(),
+                icon: const Icon(Icons.download),
+              ),
+            ]),
+          )
       ],
     );
   }

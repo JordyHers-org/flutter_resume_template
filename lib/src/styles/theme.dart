@@ -1,18 +1,6 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-enum TemplateType {
-  modernResume,
-
-  classicResume,
-
-  technicalResume,
-
-  businessResume,
-
-  none,
-}
-
 class CustomColors {
   static MaterialColor primaryColorModern =
       buildMaterialColor(const Color(0xFF323b4c));
