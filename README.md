@@ -87,8 +87,8 @@ class MyResumePage extends StatelessWidget {
 
 ## Screenshots
 
-<img width="818" align="center" alt="Template Business" src="https://user-images.githubusercontent.com/49708438/233688118-5b6969e0-6434-4e9a-a8dc-6b1000b0316d.png">
 
+<img width="1587" alt="templates" src="https://user-images.githubusercontent.com/49708438/233781511-31535056-dedd-4748-9876-522b2bc19811.png">
 
 ### Example Code
 
