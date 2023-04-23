@@ -46,7 +46,7 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   /// [TemplateMode.shakeEditAndSaveMode] - The Resume will shake while being updated
   ///
-  ///[TemplateMode.readOnlyMode] - The resume template can't be edited. All actions on
+  /// [TemplateMode.readOnlyMode] - The resume template can't be edited. All actions on
   ///
   ///the template will be dismissed.
   ///
