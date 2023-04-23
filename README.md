@@ -108,6 +108,7 @@ class MyResumePage extends StatelessWidget {
             data: data,
             templateTheme: TemplateTheme.modern,
             mode: TemplateMode.shakeEditAndSaveMode,
+         // onEmpty: () => YourCustomTemplate(), uncomment if you want. to create your template.
             onSaveResume: (globalKey) async =>
                 await PdfHandler().createResume(globalKey),
           ),
