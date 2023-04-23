@@ -403,7 +403,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                         : Theme.of(context).primaryColor,
                     foregroundColor: Colors.white),
                 child: Text(
-                  isDragged ? 'Stop Editing' : 'Edit',
+                  isDragged ? 'Reset' : 'Animate',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall

@@ -360,7 +360,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                         : Theme.of(context).primaryColor,
                     foregroundColor: Colors.white),
                 child: Text(
-                  isDragged ? 'Stop Editing' : 'Edit',
+                  isDragged ? 'Reset' : 'Animate',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall

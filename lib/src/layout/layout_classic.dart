@@ -258,7 +258,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                         : Theme.of(context).primaryColor,
                     foregroundColor: Colors.white),
                 child: Text(
-                  isDragged ? 'Stop Editing' : 'Edit',
+                  isDragged ? 'Reset' : 'Animate',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall

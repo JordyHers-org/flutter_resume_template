@@ -12,6 +12,10 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 
 <br/>
 
+
+
+<img width="1587" alt="templates" src="https://user-images.githubusercontent.com/49708438/233781511-31535056-dedd-4748-9876-522b2bc19811.png">
+
 ## Features
 
 - Customizable resume template with multiple styles.
@@ -67,9 +71,7 @@ class MyResumePage extends StatelessWidget {
       body: FlutterResumeTemplate(
         withButtons: true,
         templateTheme: TemplateTheme.modern,
-        onEmpty: () {
-          return Text('No data found.');
-        },
+       // onEmpty: () => YourCustomTemplate(), uncomment if you want. to create your template.
       ),
     );
   }
@@ -84,10 +86,6 @@ class MyResumePage extends StatelessWidget {
 - `onEmpty` (optional): A callback function that will be called when there is no data to display in the template.
 
 <br/>
-
-## Screenshots
-
-<img width="818" align="center" alt="Template Business" src="https://user-images.githubusercontent.com/49708438/233688118-5b6969e0-6434-4e9a-a8dc-6b1000b0316d.png">
 
 
 ### Example Code
