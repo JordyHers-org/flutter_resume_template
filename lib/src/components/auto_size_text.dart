@@ -68,7 +68,6 @@ class _DisplayTextState extends State<DisplayText> {
                 }),
                 child: AutoSizeText(
                   label,
-                  presetFontSizes: const [14, 15, 16, 17],
                   maxFontSize: widget.maxFontSize ?? 30.0,
                   minFontSize: widget.minFontSize ?? 10.0,
                   maxLines: widget.maxLines ?? 3,
@@ -81,6 +80,17 @@ class _DisplayTextState extends State<DisplayText> {
             width: 110,
             height: 50,
             child: TextField(
+              maxLines: null, // Set this
+              expands: true,
+              textAlignVertical: TextAlignVertical.center,
+              decoration: InputDecoration(
+                hintText: _textEditingController.text,
+                border: const OutlineInputBorder(),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              ), // and this
+              keyboardType: TextInputType.multiline,
+              textInputAction: TextInputAction.done,
               controller: _textEditingController,
               focusNode: widget.focusNode,
               cursorColor: Colors.amber,
