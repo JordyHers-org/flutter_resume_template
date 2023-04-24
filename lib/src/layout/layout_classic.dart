@@ -1,5 +1,6 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/auto_size_text.dart';
+import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
@@ -264,36 +265,15 @@ class _LayoutClassicState extends State<LayoutClassic> {
           ),
         ),
         if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Row(children: [
-              OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    _controller.value = Matrix4.identity();
-                    isDragged = !isDragged;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                    backgroundColor: isDragged
-                        ? Colors.grey
-                        : Theme.of(context).primaryColor,
-                    foregroundColor: Colors.white),
-                child: Text(
-                  isDragged ? 'Reset' : 'Animate',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.white, fontSize: 12),
-                ),
-              ),
-              IconButton(
-                onPressed: () => _save(),
-                icon: const Icon(Icons.download),
-              ),
-            ]),
-          )
+          AnimateButton(
+              onDragged: () => setState(
+                    () {
+                      _controller.value = Matrix4.identity();
+                      isDragged = !isDragged;
+                    },
+                  ),
+              onSave: _save,
+              isDragged: isDragged)
       ],
     );
   }
