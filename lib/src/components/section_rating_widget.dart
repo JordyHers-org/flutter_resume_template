@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resume_template/src/components/auto_size_text.dart';
+import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 class RatingWidget extends StatelessWidget {
   final int rating;

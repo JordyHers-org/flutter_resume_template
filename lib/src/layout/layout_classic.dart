@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
-import 'package:flutter_resume_template/src/components/auto_size_text.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';

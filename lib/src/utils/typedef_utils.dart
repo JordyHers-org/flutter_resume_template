@@ -1,4 +1,4 @@
-import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter/material.dart';
 
 typedef ResumeBuilder<T> = T Function(BuildContext context);
 typedef SaveResume<T> = Future<T> Function(GlobalKey key);
