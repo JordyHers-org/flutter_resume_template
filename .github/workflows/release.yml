@@ -1,5 +1,7 @@
 name: Publish Flutter Plugin
-on: push
+on:
+  release:
+    types: [created]
 
 jobs:
   publishing:
