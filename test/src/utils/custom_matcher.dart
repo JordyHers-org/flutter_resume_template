@@ -18,7 +18,7 @@ class _ShakesMatcher extends Matcher {
         .view
         .animation as TweenSequence<double>;
 
-    return true;
+    return shakeAnimation.toString().length > 10;
   }
 
   @override

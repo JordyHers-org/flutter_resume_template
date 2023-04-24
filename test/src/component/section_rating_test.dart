@@ -9,7 +9,7 @@ void main() {
       (WidgetTester tester) async {
     // Build the RatingWidget with a rating of 3
     await tester.pumpWidget(
-        Launch.pumpWidget(RatingWidget(rating: 3, title: 'English')));
+        Launch.pumpWidget(const RatingWidget(rating: 3, title: 'English')));
 
     // Verify that the RatingWidget contains 3 filled stars and 2 empty stars
     expect(find.byIcon(Icons.star), findsNWidgets(3));

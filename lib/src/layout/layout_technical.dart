@@ -367,7 +367,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: RatingWidget(
+                                child: const RatingWidget(
                                   rating: 5,
                                   title: 'English',
                                 ),
@@ -378,7 +378,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: RatingWidget(
+                                child: const RatingWidget(
                                   rating: 4,
                                   title: 'French',
                                 ),
@@ -389,7 +389,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: RatingWidget(
+                                child: const RatingWidget(
                                   rating: 3,
                                   title: 'German',
                                 ),

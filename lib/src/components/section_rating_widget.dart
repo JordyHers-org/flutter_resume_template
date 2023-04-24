@@ -6,7 +6,8 @@ class RatingWidget extends StatelessWidget {
   final String title;
   final TextStyle? style;
 
-  RatingWidget({required this.rating, required this.title, this.style});
+  const RatingWidget(
+      {super.key, required this.rating, required this.title, this.style});
 
   @override
   Widget build(BuildContext context) {
