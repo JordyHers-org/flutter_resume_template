@@ -1,126 +1,31 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_resume_template/flutter_resume_template.dart';
+import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../app.dart';
+
 void main() {
-  testWidgets('Positioned widget is correctly positioned',
+  testWidgets('Test launching widget and shaking children widgets',
       (WidgetTester tester) async {
-    const position = Offset(20, 30);
+    // Create the widget that contains the button to test
+    final testWidget = Launch.pumpWidget(LayoutBusiness(
+        mode: TemplateMode.shakeEditAndSaveMode,
+        data: Str.mockData,
+        h: 1000,
+        w: 1000));
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Stack(
-          children: [
-            Positioned(
-              left: position.dx,
-              top: position.dy,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    // Launch the widget
+    await tester.pumpWidget(testWidget);
 
-    final positionedFinder = find.byType(Positioned);
-    expect(positionedFinder, findsOneWidget);
+    // Verify that the widget is displayed on the screen
+    expect(find.text('Animate'), findsOneWidget);
 
-    final positionedWidget =
-        positionedFinder.evaluate().first.widget as Positioned;
-    expect(positionedWidget.left, equals(position.dx));
-    expect(positionedWidget.top, equals(position.dy));
-  });
-  testWidgets('Positioned widget is correctly positioned',
-      (WidgetTester tester) async {
-    const position = Offset(20, 30);
+    // Pan the widget to the right
+    final gesture = await tester.startGesture(Offset.zero);
+    await gesture.moveBy(const Offset(200, 0));
+    await gesture.up();
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Stack(
-          children: [
-            Positioned(
-              left: position.dx,
-              top: position.dy,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    final positionedFinder = find.byType(Positioned);
-    expect(positionedFinder, findsOneWidget);
-
-    final positionedWidget =
-        positionedFinder.evaluate().first.widget as Positioned;
-    expect(positionedWidget.left, equals(position.dx));
-    expect(positionedWidget.top, equals(position.dy));
-  });
-  testWidgets('Positioned widget is correctly positioned',
-      (WidgetTester tester) async {
-    const position = Offset(20, 30);
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Stack(
-          children: [
-            Positioned(
-              left: position.dx,
-              top: position.dy,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    final positionedFinder = find.byType(Positioned);
-    expect(positionedFinder, findsOneWidget);
-
-    final positionedWidget =
-        positionedFinder.evaluate().first.widget as Positioned;
-    expect(positionedWidget.left, equals(position.dx));
-    expect(positionedWidget.top, equals(position.dy));
-  });
-
-  testWidgets('Positioned widget is correctly positioned',
-      (WidgetTester tester) async {
-    const position = Offset(20, 30);
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Stack(
-          children: [
-            Positioned(
-              left: position.dx,
-              top: position.dy,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    final positionedFinder = find.byType(Positioned);
-    expect(positionedFinder, findsOneWidget);
-
-    final positionedWidget =
-        positionedFinder.evaluate().first.widget as Positioned;
-    expect(positionedWidget.left, equals(position.dx));
-    expect(positionedWidget.top, equals(position.dy));
+    // Tap the button
+    await tester.tap(find.text('Animate'));
   });
 }

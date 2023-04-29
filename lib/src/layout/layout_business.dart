@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
-import 'package:flutter_resume_template/src/components/auto_size_text.dart';
 import 'package:flutter_resume_template/src/components/section_bio_container.dart';
+import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
+import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -95,289 +97,314 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                   alignment: Alignment.centerRight,
                   height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
                   width: widget.w < 400 ? widget.w : widget.w * 0.2,
-                  margin: Config.margin,
                   constraints: BoxConstraints(
                     minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
                     minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.5,
                     maxHeight: double.maxFinite,
                     maxWidth: double.maxFinite,
                   ),
-                  decoration: Config.decoration(context, color: Colors.white),
                   child: RepaintBoundary(
                     key: globalKey,
-                    child: Stack(
-                      children: [
-                        //Header top left
-                        Positioned(
-                          top: 30,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.fullName,
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 50,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.currentPosition,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Config.dtHorPad.padding.horizontal,
+                          vertical: Config.tenPx),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Header top left
 
-                        Positioned(
-                          top: 10,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.street,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 16,
+                                      text: widget.data.fullName,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.currentPosition,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.street,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.address,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.country,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.phoneNumber,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.email,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: 30,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.address,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
+                          Config.spaceBox(Config.mediumSpacer),
+                          const SHDivider(),
+                          Config.spaceBox(Config.smallSpacer),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: SBContainer(
+                                  child: DisplayText(
+                                    maxFontSize: 16,
+                                    text: 'Short bio',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge,
+                                  ),
+                                ),
+                              ),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: SBContainer(
+                                  child: DisplayText(
+                                    text: widget.data.bio,
+                                    maxFontSize: 14,
+                                    maxLines: 10,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(height: 1.2),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: 50,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.country,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
+                          Config.spaceBox(Config.smallSpacer),
+                          const SHDivider(),
+                          Config.spaceBox(Config.smallSpacer),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 16,
+                                  text: 'Work Experience',
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 16,
+                                      text: widget.data.experienceTitle,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge,
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.fourPx),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.experienceLocation,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge,
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.fourPx),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.experiencePeriod,
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      maxFontSize: 14,
+                                      text: widget.data.experienceLocation,
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ),
+                                  Config.spaceBox(Config.eightPx),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: SBContainer(
+                                      child: DisplayText(
+                                        text: widget.data.experienceDescription,
+                                        maxLines: 5,
+                                        maxFontSize: 14,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(height: 1.2),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: 80,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.phoneNumber,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
+                          Config.spaceBox(Config.smallSpacer),
+                          const SHDivider(),
+                          Config.spaceBox(Config.smallSpacer),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 16,
+                                  text: 'Education',
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: SBContainer(
+                                      child: DisplayText(
+                                        maxFontSize: 14,
+                                        text: widget.data.education,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge,
+                                      ),
+                                    ),
+                                  ),
+                                  AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: SBContainer(
+                                      child: DisplayText(
+                                        text: 'Bachelor Degree',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: 100,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: widget.data.email,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          ),
-                        ),
+                          Config.spaceBox(Config.smallSpacer),
+                          const SHDivider(),
+                          Config.spaceBox(Config.smallSpacer),
 
-                        const Positioned(
-                          top: 130,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-
-                        Positioned(
-                          top: 150,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Short bio',
-                                style: Theme.of(context).textTheme.displayLarge,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 16,
+                                  text: 'Languages',
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ),
-
-                        Positioned(
-                          top: 150,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.bio,
-                                maxLines: 20,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(height: 1.2),
-                              ),
-                            ),
+                          Config.spaceBox(Config.eightPx),
+                          RatingWidget(
+                            rating: 5,
+                            title: 'English',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontSize: 15),
                           ),
-                        ),
-
-                        const Positioned(
-                          top: 350,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-                        Positioned(
-                          top: 370,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: 'Work Experience',
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
+                          Config.spaceBox(Config.eightPx),
+                          RatingWidget(
+                            rating: 3,
+                            title: 'French',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontSize: 15),
                           ),
-                        ),
-                        Positioned(
-                          top: 370,
-                          right: 130,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.experienceTitle,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
+                          Config.spaceBox(Config.eightPx),
+                          RatingWidget(
+                            rating: 1,
+                            title: 'Russian',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontSize: 15),
                           ),
-                        ),
-                        Positioned(
-                          top: 390,
-                          right: 130,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.experienceLocation,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 410,
-                          right: 130,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.experiencePeriod,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 430,
-                          right: 130,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.experienceLocation,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 460,
-                          right: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.experienceDescription,
-                                maxLines: 15,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(height: 1.2),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 560,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-                        Positioned(
-                          top: 570,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: DisplayText(
-                              text: 'Education',
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 570,
-                          right: 110,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: widget.data.education,
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 590,
-                          right: 120,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Bachelor Degree',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const Positioned(
-                          top: 620,
-                          left: 30,
-                          right: 30,
-                          child: SHDivider(),
-                        ),
-
-                        Positioned(
-                          top: 640,
-                          left: 30,
-                          child: AnimatedShakingBuilder(
-                            autoPlay: isDragged,
-                            child: SBContainer(
-                              child: DisplayText(
-                                text: 'Social Media',
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -386,36 +413,15 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
           ),
         ),
         if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Row(children: [
-              OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    _controller.value = Matrix4.identity();
-                    isDragged = !isDragged;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                    backgroundColor: isDragged
-                        ? Colors.grey
-                        : Theme.of(context).primaryColor,
-                    foregroundColor: Colors.white),
-                child: Text(
-                  isDragged ? 'Stop Editing' : 'Edit',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.white),
-                ),
-              ),
-              IconButton(
-                onPressed: () => _save(),
-                icon: const Icon(Icons.download),
-              ),
-            ]),
-          )
+          AnimateButton(
+              onDragged: () => setState(
+                    () {
+                      _controller.value = Matrix4.identity();
+                      isDragged = !isDragged;
+                    },
+                  ),
+              onSave: _save,
+              isDragged: isDragged)
       ],
     );
   }

@@ -1,6 +1,6 @@
-export 'package:flutter/material.dart';
 export 'package:flutter_resume_template/src/app.dart';
 export 'package:flutter_resume_template/src/components/section_horizontal_divider.dart';
+export 'package:flutter_resume_template/src/components/section_responsive_text.dart';
 export 'package:flutter_resume_template/src/layout/layout_business.dart';
 export 'package:flutter_resume_template/src/layout/layout_classic.dart';
 export 'package:flutter_resume_template/src/layout/layout_modern.dart';

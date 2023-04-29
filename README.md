@@ -8,7 +8,7 @@
 
 <br/>
 
-The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes four parameters, `withButtons`, `templateType`, and `onEmpty()`, to customize the template according to your needs.
+The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes the parameters, `TemplateMode`, `TemplateTheme`, `onSaveResume`, `TemplateData` and `onEmpty()`, to customize the template according to your needs.
 
 <br/>
 
@@ -55,7 +55,43 @@ $ flutter packages get
 
 ## Usage
 
-To use `FlutterResumeTemplate` widget, simply import the `flutter_resume_template` package and create a new instance of the widget, providing the required parameters.
+To use `FlutterResumeTemplate` widget, simply import the `flutter_resume_template` package and 
+create a new instance of the widget, providing the required parameters.
+
+ create a dart file called **data.dart**
+ <br/>
+
+```dart
+
+TemplateData data = TemplateData(
+    fullName: 'Your FullName',
+    currentPosition: 'Flutter Developer',
+    street: '56B Wellington',
+    address: 'Toronto, 14568',
+    country: 'CANADA',
+    email: 'jordyhershel@wuerth.com',
+    phoneNumber: '+1 (106)341 753 12',
+    bio: 'I am a talented young mobile application developer .'
+        ' I have been developing Mobile application for several years now and'
+        ' I do have a solid background in Developing tools. I am keen to '
+        'learn and that would be a pleasure to be a member of your company.'
+        ' I am currently working at This awesome company',
+    experienceTitle: 'Software Engineer',
+    experienceLocation: 'at UberEats',
+    experiencePeriod: 'Aug 2021 - Dec 2023',
+    experiencePlace: 'Berlin',
+    experienceDescription:
+        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+    education: 'Yale University',
+    image:
+        'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+```
+
+<br/>
+
+
+Then import **data.dart** and use :
 
 ```dart
 import 'package:flutter/material.dart';
@@ -68,11 +104,14 @@ class MyResumePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Resume'),
       ),
-      body: FlutterResumeTemplate(
-        withButtons: true,
-        templateTheme: TemplateTheme.modern,
-       // onEmpty: () => YourCustomTemplate(), uncomment if you want. to create your template.
-      ),
+     body: FlutterResumeTemplate(
+            data: data,
+            templateTheme: TemplateTheme.modern,
+            mode: TemplateMode.shakeEditAndSaveMode,
+         // onEmpty: () => YourCustomTemplate(), uncomment if you want. to create your template.
+            onSaveResume: (globalKey) async =>
+                await PdfHandler().createResume(globalKey),
+          ),
     );
   }
 }
@@ -81,9 +120,11 @@ class MyResumePage extends StatelessWidget {
 
 ### Parameters
 
-- `withButtons` (optional): A boolean value that determines whether or not to show the action buttons at the bottom of the template.
-- `TemplateType` (required): A string value that determines the template style. The available styles are `business`, `technical`, `modern`, and `classic`.
-- `onEmpty` (optional): A callback function that will be called when there is no data to display in the template.
+- `mode` (required): That determines the different states of the Template which are `[TemplateMode.onlyEditableMode]` , `[TemplateMode.shakeEditAndSaveMode]`, `[TemplateMode.readOnlyMode]`
+- `TemplateTheme` (required): A string value that determines the template style. The available styles are `business`, `technical`, `modern`, and `classic`.
+- `TemplateData` (optional): An Oject that receives all the props of the resume suh as experience, address, name, current position etc and will be displayed on the Resume
+- `onEmpty` (optional): A callback function that allow the user to render his own template
+- `onSaveResume` (optional): A callback function that will save a PDF version of the resume in the local download path.
 
 <br/>
 

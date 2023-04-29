@@ -25,7 +25,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
+import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
@@ -46,7 +46,7 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   /// [TemplateMode.shakeEditAndSaveMode] - The Resume will shake while being updated
   ///
-  ///[TemplateMode.readOnlyMode] - The resume template can't be edited. All actions on
+  /// [TemplateMode.readOnlyMode] - The resume template can't be edited. All actions on
   ///
   ///the template will be dismissed.
   ///

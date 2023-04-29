@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 /// [SHDivider] is a section_horizontal_divider

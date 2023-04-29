@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template_example/data/data.dart';
 
@@ -15,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late bool withButtons = false;
   late TemplateTheme theme = TemplateTheme.modern;
   List<TemplateTheme> list = [
     TemplateTheme.none,
@@ -51,9 +51,8 @@ class _MyAppState extends State<MyApp> {
             data: data,
             templateTheme: theme,
             mode: TemplateMode.shakeEditAndSaveMode,
-            onSaveResume: (key) async =>
-                await Future.delayed(const Duration(milliseconds: 300))
-                    .then((value) => PdfHandler().createResume(key)),
+            onSaveResume: (globalKey) async =>
+                await PdfHandler().createResume(globalKey),
           ),
         ),
       ),
