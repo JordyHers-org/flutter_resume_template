@@ -108,13 +108,21 @@ class MyResumePage extends StatelessWidget {
             data: data,
             templateTheme: TemplateTheme.modern,
             mode: TemplateMode.shakeEditAndSaveMode,
-         // onEmpty: () => YourCustomTemplate(), uncomment if you want. to create your template.
             onSaveResume: (globalKey) async =>
                 await PdfHandler().createResume(globalKey),
           ),
     );
   }
 }
+```
+
+```dart
+// To create your own template set the [TemplateTheme.none]
+FlutterResumeTemplate(
+data: data,
+templateTheme: TemplateTheme.none,
+ onEmpty: () => YourCustomTemplate(), //just make sure you pass the data to your widget
+
 ```
 <br/>
 
