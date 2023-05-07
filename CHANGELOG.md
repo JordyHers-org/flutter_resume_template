@@ -1,3 +1,10 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+* Initial release of the project
+* Added basic project structure and files
+* Implemented core functionality of the application
+* Created user interface for the application
+
+
+
+

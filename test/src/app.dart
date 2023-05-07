@@ -26,7 +26,7 @@ class Launch {
         ),
       );
 
-  static pumpWidget(Widget child) => MaterialApp(
+  static Future<Widget> pumpWidget(Widget child) async => MaterialApp(
         home: Scaffold(body: child),
       );
 }

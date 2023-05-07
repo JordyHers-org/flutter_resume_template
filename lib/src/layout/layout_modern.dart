@@ -3,6 +3,7 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
+import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -112,18 +113,19 @@ class _LayoutModernState extends State<LayoutModern> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Config.spaceBox(Config.largeSpacer),
-                              AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    widget.data.image ?? Str.resumeHeader,
-                                    height: 100,
-                                    width: 90,
-                                    fit: BoxFit.fitWidth,
+                              if (Helper.isTestMode)
+                                AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Image.network(
+                                      widget.data.image ?? Str.resumeHeader,
+                                      height: 100,
+                                      width: 90,
+                                      fit: BoxFit.fitWidth,
+                                    ),
                                   ),
                                 ),
-                              ),
                               Config.spaceBox(Config.smallSpacer),
                               AnimatedShakingBuilder(
                                 autoPlay: isDragged,
@@ -539,7 +541,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                                 ?.copyWith(
                                                     fontSize: 13,
                                                     letterSpacing: 0.8,
-                                                    color: Colors.deepOrange),
+                                                    color: Colors.grey),
                                           )),
                                     ),
                                     Config.spaceBox(Config.eightPx),
@@ -556,7 +558,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                               ?.copyWith(
                                                   fontSize: 13,
                                                   letterSpacing: 0.8,
-                                                  color: Colors.deepOrange),
+                                                  color: Colors.grey),
                                         ),
                                       ),
                                     ),
