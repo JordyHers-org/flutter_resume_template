@@ -51,8 +51,7 @@ class _MyAppState extends State<MyApp> {
             data: data,
             templateTheme: theme,
             mode: TemplateMode.shakeEditAndSaveMode,
-            onSaveResume: (globalKey) async =>
-                await PdfHandler().createResume(globalKey),
+            onSaveResume: (_) async => await PdfHandler().createResume(_),
           ),
         ),
       ),
