@@ -1,16 +1,16 @@
 # Flutter Resume Template Plugin
-<br/>
 
-[![Coverage Status](https://coveralls.io/repos/github/JordyHers/flutter_resume_template/badge.svg?branch=master)](https://coveralls.io/github/JordyHers/flutter_resume_template?branch=master)
-![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/workflows/CI/CD%20for%20Flutter%20release/badge.svg)
-![Flutter CI](https://github.com/JordyHers/flutter_resume_template/workflows/Flutter%20CI/badge.svg)
-![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/workflows/Publish%20Flutter%20Plugin/badge.svg)
 
-<br/>
+[![Coverage Status](https://coveralls.io/repos/github/JordyHers/flutter_resume_template/badge.svg?branch=dev)](https://coveralls.io/github/JordyHers/flutter_resume_template?branch=master)
+![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/workflows/CI/CD%20for%20Flutter%20release/badge.svg?branch=master)
+![Flutter CI](https://github.com/JordyHers/flutter_resume_template/workflows/Flutter%20CI/badge.svg?branch=master)
+![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/workflows/Publish%20Flutter%20Plugin/badge.svg?branch=master)
+
+
 
 The `flutter_resume_template` plugin provides a customizable resume template that can be easily integrated into a Flutter application. This plugin provides a `FlutterResumeTemplate` widget that takes the parameters, `TemplateMode`, `TemplateTheme`, `onSaveResume`, `TemplateData` and `onEmpty()`, to customize the template according to your needs.
 
-<br/>
+
 
 
 
@@ -23,7 +23,6 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 - Easy to integrate and customize with the existing Flutter application.
 
 
-<br/>
 
 
 ## Editing Mode Features
@@ -35,7 +34,6 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 | Widget Shake | When editing mode is selected, widgets on the canvas will shake to indicate that they can be moved or modified. |
 
 You can modify the table format and content to fit your specific needs, but this should give you a good starting point.
-<br/>
 
 ## Installation
 
@@ -51,7 +49,6 @@ Then, run the following command to install the dependencies:
 ```bash
 $ flutter packages get
 ```
-<br/>
 
 ## Usage
 
@@ -59,7 +56,7 @@ To use `FlutterResumeTemplate` widget, simply import the `flutter_resume_templat
 create a new instance of the widget, providing the required parameters.
 
  create a dart file called **data.dart**
- <br/>
+
 
 ```dart
 
@@ -88,7 +85,7 @@ TemplateData data = TemplateData(
 
 ```
 
-<br/>
+
 
 
 Then import **data.dart** and use :
@@ -124,7 +121,6 @@ templateTheme: TemplateTheme.none,
  onEmpty: () => YourCustomTemplate(), //just make sure you pass the data to your widget
 
 ```
-<br/>
 
 ### Parameters
 
@@ -134,19 +130,17 @@ templateTheme: TemplateTheme.none,
 - `onEmpty` (optional): A callback function that allow the user to render his own template
 - `onSaveResume` (optional): A callback function that will save a PDF version of the resume in the local download path.
 
-<br/>
 
 
 ### Example Code
 
 Check out the [example](example) directory for a sample application that uses the `FlutterResumeTemplate` widget.
-<br/>
 
 ## Contributions
 
 Contributions to this plugin are welcome. Please create issues and pull requests on the [GitHub repository](https://github.com/jordyhers/flutter_resume_template).
 
-<br/>
+
 
 <h2>⚠️ Warning ⚠️</h2>
 
