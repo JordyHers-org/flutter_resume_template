@@ -7,4 +7,7 @@
 
 
 
+## 1.0.1
+
+* Refactor Readme to meet format
 
