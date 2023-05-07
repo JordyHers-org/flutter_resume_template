@@ -2,9 +2,9 @@
 
 
 
-[![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml)
-[![Flutter CI](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml)
-[![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml/badge.svg?branch=master)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml)
+[![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml)
+[![Flutter CI](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml)
+[![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml)
 
 
 
