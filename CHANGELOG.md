@@ -11,3 +11,6 @@
 
 * Refactor Readme to meet format
 
+## 1.0.2
+
+* minor fixes
