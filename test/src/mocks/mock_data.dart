@@ -1,7 +1,7 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 
 class MockData {
-  TemplateData data = TemplateData(
+  static TemplateData data = TemplateData(
       fullName: 'Jordy Hershel Igondjo',
       currentPosition: 'Flutter Developer',
       street: 'Curvy Str. 53',

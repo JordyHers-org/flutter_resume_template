@@ -11,7 +11,7 @@ void main() {
       child: Text('child'),
     );
     // Create a test widget that has SbContainer with a Text widget as its child
-    final widget = Launch.pumpWidget(passedChild);
+    final widget = await Launch.pumpWidget(passedChild);
 
     // Build the widget tree
     await tester.pumpWidget(widget);

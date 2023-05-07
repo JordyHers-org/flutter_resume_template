@@ -10,7 +10,7 @@ void main() {
   testWidgets('AnimatedShakingBuilder applies ShakeWidget to child',
       (WidgetTester tester) async {
     // Build the AnimatedShakingBuilder with autoPlay set to true
-    await tester.pumpWidget(Launch.pumpWidget(
+    await tester.pumpWidget(await Launch.pumpWidget(
       const AnimatedShakingBuilder(
         autoPlay: true,
         child: Text('Hello, world!'),

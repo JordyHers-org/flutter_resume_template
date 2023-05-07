@@ -1,8 +1,8 @@
 import 'package:flutter_resume_template/flutter_resume_template.dart';
-import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../app.dart';
+import '../mocks/mock_data.dart';
 
 void main() {
   testWidgets('Test launching widget and shaking children widgets',
@@ -10,12 +10,12 @@ void main() {
     // Create the widget that contains the button to test
     final testWidget = Launch.pumpWidget(LayoutBusiness(
         mode: TemplateMode.shakeEditAndSaveMode,
-        data: Str.mockData,
+        data: MockData.data,
         h: 1000,
         w: 1000));
 
     // Launch the widget
-    await tester.pumpWidget(testWidget);
+    await tester.pumpWidget(await testWidget);
 
     // Verify that the widget is displayed on the screen
     expect(find.text('Animate'), findsOneWidget);

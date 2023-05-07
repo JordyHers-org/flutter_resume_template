@@ -3,6 +3,7 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
+import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -110,26 +111,28 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(Str.backgroundImage),
-                                  fit: BoxFit.cover,
+                            if (Helper.isTestMode)
+                              Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(Str.backgroundImage),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 400,
-                                child: Container(
-                                  alignment: const Alignment(0.0, 1.3),
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        widget.data.image ?? Str.resumeHeader),
-                                    radius: 70.0,
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  height: 400,
+                                  child: Container(
+                                    alignment: const Alignment(0.0, 1.3),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          widget.data.image ??
+                                              Str.resumeHeader),
+                                      radius: 70.0,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                             Config.spaceBox(60.0),
                             Center(
                               child: AnimatedShakingBuilder(
