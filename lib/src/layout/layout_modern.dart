@@ -7,6 +7,19 @@ import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
+/// A stateful widget that provides a modern-style layout for displaying content.
+///
+/// This widget, named LayoutModern, is designed to display text, images, and other content in a clean, minimalist format.
+/// The template includes a hero section with a large background image or video, a main content area for displaying
+/// additional content, and a footer section for additional information or navigation links.
+///
+/// The widget is customizable, with options for adjusting font sizes, colors, and other visual elements to match the
+/// user's branding or preferences. It also supports dynamic data binding, allowing users to easily update the content of
+/// their layout without needing to modify the underlying widget code.
+///
+/// To use this widget, simply create an instance of LayoutModern and pass in the required parameters. The widget will
+/// automatically render the modern-style layout based on the provided data.
+
 class LayoutModern extends StatefulWidget {
   const LayoutModern({
     super.key,

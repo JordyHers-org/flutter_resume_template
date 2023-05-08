@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// This [AnimateButton] is displayed at the bottom
+/// of the page when the [TemplateMode] selected is
+/// shake while editing. This is not compulsory
 class AnimateButton extends StatefulWidget {
   const AnimateButton({
     Key? key,

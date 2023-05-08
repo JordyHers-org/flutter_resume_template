@@ -3,6 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bio_container.dart';
 
+/// A class that represents a display text component used in
+/// all resume layouts.
+///
+/// The [DisplayText] class is a composite widget that includes an
+/// `AutoSizeText` widget and a `TextField` widget. The
+/// `AutoSizeText` widget is used to display the text in a layout
+/// when editing mode is disabled, while the `TextField`
+/// widget is used to allow the user to edit the text when editing
+/// mode is enabled.
+///
+/// The `DisplayText` class automatically switches between display
+/// modes based on the value of the `editing` parameter.
+/// When `editing` is `true`, the `TextField` widget is displayed,
+/// allowing the user to edit the text. When `editing`
+/// is `false`, the `AutoSizeText` widget is displayed, showing
+/// the text using the current theme.
+///
+/// This class is intended to be used as a major component in all
+/// resume layouts. It provides a consistent way of
+/// displaying and editing text across all layouts.
+
 class DisplayText extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final String? text;
@@ -87,8 +108,10 @@ class _DisplayTextState extends State<DisplayText> {
               decoration: InputDecoration(
                 hintText: _textEditingController.text,
                 border: const OutlineInputBorder(),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: Config.eightPx * 2,
+                  vertical: Config.eightPx,
+                ),
               ), // and this
               keyboardType: TextInputType.multiline,
               textInputAction: TextInputAction.done,

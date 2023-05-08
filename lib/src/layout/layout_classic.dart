@@ -7,6 +7,19 @@ import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
+/// A stateful widget that provides a classic-style layout for displaying content.
+///
+/// This widget, named LayoutClassic, is designed to display text, images, and other content in a simple, elegant format.
+/// The template includes a header section with a title and subtitle, a main content area, and a footer section for
+/// additional information or navigation links.
+///
+/// The widget is customizable, with options for adjusting font sizes, colors, and other visual elements to match the
+/// user's branding or preferences. It also supports dynamic data binding, allowing users to easily update the content of
+/// their layout without needing to modify the underlying widget code.
+///
+/// To use this widget, simply create an instance of LayoutClassic and pass in the required parameters. The widget will
+/// automatically render the classic-style layout based on the provided data.
+
 class LayoutClassic extends StatefulWidget {
   const LayoutClassic({
     super.key,
