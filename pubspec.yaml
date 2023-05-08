@@ -2,14 +2,12 @@ name: flutter_resume_template
 
 #description of the package
 description:  >-
-  The flutter_resume_template plugin provides a customizable resume template
+  This plugin provides a customizable resume template
   that can be easily integrated into a Flutter application.
-  This plugin provides a FlutterResumeTemplate widget that takes the parameters,
-  TemplateMode, TemplateTheme, onSaveResume, TemplateData and onEmpty(), 
-  to customize the template according to your needs.
+  
 
 #Version to be released
-version: 1.0.2
+version: 1.0.3
 
 #package homepage:
 homepage: https://github.com/JordyHers/flutter_resume_template
