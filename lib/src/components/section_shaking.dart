@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 
+/// This element create a shaking effect when the
+/// editing mode is selected. pass the child or autoplay
+/// parameter
+///
 class AnimatedShakingBuilder extends StatelessWidget {
   final Widget child;
   final bool autoPlay;

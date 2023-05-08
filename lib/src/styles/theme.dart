@@ -2,6 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// A class that defines a set of custom colors for use in an application.
+///
+/// The `CustomColors` class provides a static set of color constants that can
+/// be used to provide a consistent color scheme throughout an application. These
+/// colors are chosen to match the branding or visual design of the application
+/// and can be easily referenced from anywhere in the code.
+///
+/// The color constants defined in this class are static and immutable, and can be
+/// accessed using the class name and the dot notation, for example `CustomColors.primaryColor`.
+/// This allows for easy and consistent usage of colors
+/// throughout the codebase.
+///
+/// To add additional colors, simply define a new static `Color` constant in the `
+/// CustomColors` class. This can be done using the `Color` constructor with a hex
+/// code or an RGB value. For example, to define a new color named `accentColor`,
+/// you could add `static const Color accentColor = Color(0xFF00FF00);` to the
+/// `CustomColors` class.
+///
+/// This class is intended to be used as a global color theme for the entire application,
+/// and should be used in conjunction with a `Theme` widget or a similar mechanism for
+/// setting the theme of an application.
+///
+///
+
 class CustomColors {
   static MaterialColor primaryColorModern =
       buildMaterialColor(const Color(0xFF323b4c));
@@ -27,6 +51,37 @@ class CustomColors {
     return MaterialColor(color.value, swatch);
   }
 }
+
+/// A class that defines the theme for each resume layout template.
+///
+/// The `TemplateTheme` class provides a set of constants for the
+/// colors, fonts, and other visual elements that are
+/// specific to each resume layout template. This class is responsible
+/// for handling the theme of each resume layout and
+/// ensuring that the correct colors and fonts are used in each template.
+///
+/// The theme of each resume layout is accessible and handled in this
+/// class through a set of static constants. Each
+/// constant corresponds to a different theme element, such as
+/// `backgroundColor`, `primaryColor`, `secondaryColor`,
+/// `headlineFont`, and `bodyFont`. These constants can be used to
+/// set the theme of a specific layout by passing them to
+/// a `Theme` widget or a similar mechanism for setting the theme
+/// of a widget subtree.
+///
+/// To add a new resume layout template, simply define a new set
+/// of constants for the colors, fonts, and other visual
+/// elements that are specific to the layout. These constants should
+/// be added as static constants to this class and
+/// should follow the naming conventions used by the existing constants.
+/// Each new layout template should have a unique
+/// set of constants to ensure that the correct theme is applied to
+/// each layout.
+///
+/// This class is intended to be used as a global theme for the entire
+/// resume generation process, and should be used in
+/// conjunction with the layout templates and other widgets that make
+/// up the resume generation process.
 
 class TemplateTheme {
   /// templateType

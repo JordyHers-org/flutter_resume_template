@@ -6,6 +6,20 @@ import 'package:flutter_resume_template/src/components/section_rating_widget.dar
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
+/// A stateful widget that provides a resume template designed to look like a business curriculum vitae.
+///
+/// This widget, named LayoutBusiness, can be used to display personal information, work experience, education, and other
+/// relevant details in a professional format suitable for job applications and career-oriented websites. The template
+/// includes a header section with the user's name and contact information, a summary section highlighting key skills and
+/// qualifications, and sections for listing work experience, education, and other achievements.
+///
+/// The widget is designed to be customizable, with options for adjusting font sizes, colors, and other visual elements to
+/// match the user's branding or preferences. It also supports dynamic data binding, allowing users to easily update the
+/// content of their resume without needing to modify the underlying widget code.
+///
+/// To use this widget, simply create an instance of LayoutBusiness and pass in the required parameters. The widget will
+/// automatically render the resume template based on the provided data.
+
 class LayoutBusiness extends StatefulWidget {
   const LayoutBusiness({
     super.key,

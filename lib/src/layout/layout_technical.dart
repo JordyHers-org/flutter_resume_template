@@ -7,6 +7,19 @@ import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
+/// A stateful widget that provides a technical-style layout for displaying content.
+///
+/// This widget, named LayoutTechnical, is designed to display technical documentation, code snippets, and other content
+/// in a modern, streamlined format. The template includes a sidebar section for navigation links, a main content area
+/// for displaying documentation or code, and a footer section for additional information or attribution.
+///
+/// The widget is customizable, with options for adjusting font sizes, colors, and other visual elements to match the
+/// user's branding or preferences. It also supports dynamic data binding, allowing users to easily update the content of
+/// their layout without needing to modify the underlying widget code.
+///
+/// To use this widget, simply create an instance of LayoutTechnical and pass in the required parameters. The widget will
+/// automatically render the technical-style layout based on the provided data.
+
 class LayoutTechnical extends StatefulWidget {
   const LayoutTechnical({
     super.key,
