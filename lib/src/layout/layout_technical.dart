@@ -273,7 +273,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                   AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
-                                      text: widget.data.experienceTitle,
+                                      text: widget.data.experience.first.experienceTitle,
                                       style: const TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.black54,
