@@ -13,12 +13,32 @@ TemplateData data = TemplateData(
         ' I do have a solid background in Developing tools. I am keen to '
         'learn and that would be a pleasure to be a member of your company.'
         ' I am currently working at This awesome company',
-    experienceTitle: 'Software Engineer',
-    experienceLocation: 'at Mindable Health',
-    experiencePeriod: 'Aug 2021 - Dec 2023',
-    experiencePlace: 'Berlin',
-    experienceDescription:
+    experience: [
+              ExperienceData(
+                experienceTitle: 'Software Engineer',
+                experienceLocation: 'at Mindable Health',
+                experiencePeriod: 'Aug 2021 - Dec 2023',
+                experiencePlace: 'Berlin',
+                experienceDescription:
+                    '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              ),
+      ExperienceData(
+        experienceTitle: 'Product Design',
+        experienceLocation: 'Uk . London',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'London',
+        experienceDescription:
         '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+      ),
+      ExperienceData(
+        experienceTitle: 'Flutter Developer',
+        experienceLocation: 'Uk . London',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'London',
+        experienceDescription:
+        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+      ),
+    ],
     education: 'Istanbul Gelisim University',
     image:
         'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');

@@ -224,7 +224,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                               autoPlay: isDragged,
                               child: DisplayText(
                                 maxFontSize: 16,
-                                text: widget.data.experienceDescription,
+                                text: widget.data.experience.first.experienceDescription,
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                             ),

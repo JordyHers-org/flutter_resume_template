@@ -137,7 +137,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                   AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
-                                      maxFontSize: 16,
+                                      maxFontSize: 20,
                                       text: widget.data.fullName,
                                       style: Theme.of(context)
                                           .textTheme
@@ -271,7 +271,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       maxFontSize: 16,
-                                      text: widget.data.experienceTitle,
+                                      text: widget.data.experience.first.experienceTitle,
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge,
@@ -282,7 +282,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       maxFontSize: 14,
-                                      text: widget.data.experienceLocation,
+                                      text: widget.data.experience.first.experienceLocation,
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge,
@@ -293,7 +293,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       maxFontSize: 14,
-                                      text: widget.data.experiencePeriod,
+                                      text: widget.data.experience.first.experiencePeriod,
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     ),
@@ -302,7 +302,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                     autoPlay: isDragged,
                                     child: DisplayText(
                                       maxFontSize: 14,
-                                      text: widget.data.experienceLocation,
+                                      text: widget.data.experience.first.experienceLocation,
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     ),
@@ -312,7 +312,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                     autoPlay: isDragged,
                                     child: SBContainer(
                                       child: DisplayText(
-                                        text: widget.data.experienceDescription,
+                                        text: widget.data.experience.first.experienceDescription,
                                         maxLines: 5,
                                         maxFontSize: 14,
                                         style: Theme.of(context)
