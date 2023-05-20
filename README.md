@@ -86,7 +86,7 @@ TemplateData data = TemplateData(
   );
 
 
-    ExperienceData(
+   ExperienceData experience =  ExperienceData(
     experienceTitle: 'Software Engineer',
     experienceLocation: 'at UberEats',
     experiencePeriod: 'Aug 2021 - Dec 2023',
