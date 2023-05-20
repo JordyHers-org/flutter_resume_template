@@ -265,65 +265,87 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                 ),
                               ),
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      maxFontSize: 16,
-                                      text: widget.data.experience.first.experienceTitle,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge,
-                                    ),
-                                  ),
-                                  Config.spaceBox(Config.fourPx),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      maxFontSize: 14,
-                                      text: widget.data.experience.first.experienceLocation,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge,
-                                    ),
-                                  ),
-                                  Config.spaceBox(Config.fourPx),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      maxFontSize: 14,
-                                      text: widget.data.experience.first.experiencePeriod,
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      maxFontSize: 14,
-                                      text: widget.data.experience.first.experienceLocation,
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ),
-                                  Config.spaceBox(Config.eightPx),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: SBContainer(
-                                      child: DisplayText(
-                                        text: widget.data.experience.first.experienceDescription,
-                                        maxLines: 5,
-                                        maxFontSize: 14,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(height: 1.2),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: List<Widget>.generate(
+                                      2,
+                                      (index) => Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 16,
+                                                  text: widget
+                                                      .data
+                                                      .experience[index]
+                                                      .experienceTitle,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayLarge,
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.fourPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 14,
+                                                  text: widget
+                                                      .data
+                                                      .experience[index]
+                                                      .experienceLocation,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayLarge,
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.fourPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 14,
+                                                  text: widget
+                                                      .data
+                                                      .experience[index]
+                                                      .experiencePeriod,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall,
+                                                ),
+                                              ),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 14,
+                                                  text: widget
+                                                      .data
+                                                      .experience[index]
+                                                      .experienceLocation,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall,
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.eightPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SBContainer(
+                                                  child: DisplayText(
+                                                    text: widget
+                                                        .data
+                                                        .experience[index]
+                                                        .experienceDescription,
+                                                    maxLines: 5,
+                                                    maxFontSize: 14,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium
+                                                        ?.copyWith(height: 1.2),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ))),
                             ],
                           ),
                           Config.spaceBox(Config.smallSpacer),
