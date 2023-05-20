@@ -15,13 +15,9 @@ class TemplateData {
       email,
       phoneNumber,
       bio,
-      experienceTitle,
-      experiencePlace,
-      experiencePeriod,
-      experienceLocation,
-      experienceDescription,
       education,
       image;
+      List<ExperienceData> experience;
 
   TemplateData(
       {required this.fullName,
@@ -32,11 +28,21 @@ class TemplateData {
       this.email,
       this.phoneNumber,
       this.bio,
-      this.experienceTitle,
-      this.experiencePlace,
-      this.experiencePeriod,
-      this.experienceLocation,
-      this.experienceDescription,
+      required this.experience,
       this.education,
       this.image});
+}
+
+class ExperienceData {
+  String experienceTitle;
+  String experiencePlace;
+  String experiencePeriod;
+  String experienceLocation;
+  String experienceDescription;
+  ExperienceData(
+      {required this.experienceTitle,
+      required this.experiencePlace,
+      required this.experiencePeriod,
+      required this.experienceLocation,
+      required this.experienceDescription});
 }
