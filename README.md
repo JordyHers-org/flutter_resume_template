@@ -1,7 +1,13 @@
-# Flutter Resume Template Plugin
 
 
 
+
+
+<p align="center">
+  <img align="center" height="400"  src="https://github.com/JordyHers/flutter_resume_template/assets/49708438/0091f85d-d869-433b-8221-19a8e51a4412">
+ </p>
+  
+# flutter resume template 
 [![CI/CD for Flutter release](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/ci.yml)
 [![Flutter CI](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/main.yml)
 [![Publish Flutter Plugin](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml/badge.svg)](https://github.com/JordyHers/flutter_resume_template/actions/workflows/release.yml)
