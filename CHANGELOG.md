@@ -19,3 +19,7 @@
 * Improve pub dev score
 * Implement more comments
 
+## 1.0.4
+
+* Refactor readMe
+* Created `ExperienceData`
