@@ -21,7 +21,8 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 
 
 
-<img width="1587" alt="templates" src="https://user-images.githubusercontent.com/49708438/233781511-31535056-dedd-4748-9876-522b2bc19811.png">
+
+<img width="287" alt="templates" src="https://github.com/JordyHers/flutter_resume_template/assets/49708438/c0097b65-be62-4d24-a862-d17be6a7c12d">
 
 ## Features
 
