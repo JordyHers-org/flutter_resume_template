@@ -318,10 +318,10 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         SHDivider(),
                                       ],
                                     ),
@@ -413,10 +413,10 @@ class _LayoutModernState extends State<LayoutModern> {
                                         ],
                                       ),
                                     ),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         SHDivider(),
                                       ],
                                     ),
