@@ -321,7 +321,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         SHDivider(),
                                       ],
                                     ),
@@ -420,7 +420,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         SHDivider(),
                                       ],
                                     ),
