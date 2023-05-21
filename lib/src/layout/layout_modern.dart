@@ -417,7 +417,6 @@ class _LayoutModernState extends State<LayoutModern> {
                                           ],
                                         ),
                                       ),
-                                    ),
                                     const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
