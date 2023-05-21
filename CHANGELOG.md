@@ -23,3 +23,8 @@
 
 * Refactor readMe
 * Created `ExperienceData`
+
+## 1.0.5
+
+* Fix Bug two minimum experience data required
+* minor changes `classic` theme color
