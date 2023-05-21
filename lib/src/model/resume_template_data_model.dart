@@ -17,7 +17,7 @@ class TemplateData {
       bio,
       education,
       image;
-      List<ExperienceData> experience;
+  List<ExperienceData>? experience;
 
   TemplateData(
       {required this.fullName,
@@ -28,7 +28,7 @@ class TemplateData {
       this.email,
       this.phoneNumber,
       this.bio,
-      required this.experience,
+      this.experience,
       this.education,
       this.image});
 }
