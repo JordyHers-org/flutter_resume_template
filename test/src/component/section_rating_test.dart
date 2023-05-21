@@ -8,7 +8,7 @@ void main() {
   testWidgets('RatingWidget displays correct number of filled stars',
       (WidgetTester tester) async {
     // Build the RatingWidget with a rating of 3
-    await tester.pumpWidget(await Launch.pumpWidget(RatingWidget(
+    await tester.pumpWidget(await Launch.pumpWidget(const RatingWidget(
       rating: 3,
       title: 'English',
       autoplay: true,
