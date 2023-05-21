@@ -270,18 +270,23 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      text: widget.data.experience.first.experienceTitle,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black54,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.w300,
+                                  if (widget.data.experience != null &&
+                                      widget.data.experience!.isNotEmpty)
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.experience?.first
+                                                .experienceTitle ??
+                                            Str.mockData.experience?.first
+                                                .experienceTitle,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black54,
+                                          letterSpacing: 1.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
                                       ),
                                     ),
-                                  ),
                                   AnimatedShakingBuilder(
                                     autoPlay: isDragged,
                                     child: DisplayText(
@@ -383,7 +388,8 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const RatingWidget(
+                                child: RatingWidget(
+                                  autoplay: isDragged,
                                   rating: 5,
                                   title: 'English',
                                 ),
@@ -394,7 +400,8 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const RatingWidget(
+                                child: RatingWidget(
+                                  autoplay: isDragged,
                                   rating: 4,
                                   title: 'French',
                                 ),
@@ -405,7 +412,8 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const RatingWidget(
+                                child: RatingWidget(
+                                  autoplay: isDragged,
                                   rating: 3,
                                   title: 'German',
                                 ),

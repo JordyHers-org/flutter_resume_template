@@ -149,8 +149,8 @@ class TemplateTheme {
   static TemplateTheme classic = TemplateTheme(
       TemplateType.classicResume,
       ThemeData(
-        shadowColor: Colors.brown,
-        primarySwatch: Colors.brown,
+        shadowColor: CustomColors.buildMaterialColor(Colors.indigo.shade100),
+        primarySwatch: CustomColors.buildMaterialColor(Colors.indigo.shade900),
         fontFamily: GoogleFonts.tinos().fontFamily,
         dividerColor: Colors.grey.shade300,
         textTheme: globalTextTheme,
