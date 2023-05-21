@@ -23,7 +23,7 @@ class Str {
           experiencePeriod: 'Aug 2021 - Dec 2023',
           experiencePlace: 'Berlin',
           experienceDescription:
-          '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
         ExperienceData(
           experienceTitle: 'Product Design',
@@ -31,7 +31,7 @@ class Str {
           experiencePeriod: 'Sep 2022 - Dec 2023',
           experiencePlace: 'Freelancer',
           experienceDescription:
-          '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
         ExperienceData(
           experienceTitle: 'Flutter Developer',
@@ -39,7 +39,7 @@ class Str {
           experiencePeriod: 'Sep 2022 - Dec 2023',
           experiencePlace: 'Freelancer',
           experienceDescription:
-          '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
       ],
       education: 'Yale Gala University',
@@ -47,5 +47,5 @@ class Str {
   static String backgroundImage =
       'https://images.pexels.com/photos/10319780/pexels-photo-10319780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
   static String resumeHeader =
-      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+      'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 }

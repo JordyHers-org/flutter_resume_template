@@ -318,10 +318,10 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         SHDivider(),
                                       ],
                                     ),
@@ -338,85 +338,89 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    ...List<Widget>.generate(
-                                      widget.data.experience.length,
-                                      (i) => Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          AnimatedShakingBuilder(
-                                            autoPlay: isDragged,
-                                            child: SizedBox(
-                                              width: widget.w,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  DisplayText(
-                                                    maxFontSize: 16,
-                                                    text: widget
-                                                        .data
-                                                        .experience[i]
-                                                        .experienceTitle,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall
-                                                        ?.copyWith(
-                                                            fontSize: 14,
-                                                            letterSpacing: 1.2,
-                                                            color: Colors
-                                                                .deepOrange),
-                                                  ),
-                                                  DisplayText(
+                                    if (widget.data.experience != null &&
+                                        widget.data.experience!.isNotEmpty)
+                                      ...List<Widget>.generate(
+                                        widget.data.experience!.length,
+                                        (i) => Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: SizedBox(
+                                                width: widget.w,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    DisplayText(
+                                                      maxFontSize: 16,
                                                       text: widget
                                                           .data
-                                                          .experience[i]
-                                                          .experiencePeriod,
+                                                          .experience![i]
+                                                          .experienceTitle,
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodySmall
+                                                          .titleSmall
                                                           ?.copyWith(
-                                                              fontSize: 13)),
-                                                ],
+                                                              fontSize: 14,
+                                                              letterSpacing:
+                                                                  1.2,
+                                                              color: Colors
+                                                                  .deepOrange),
+                                                    ),
+                                                    DisplayText(
+                                                        text: widget
+                                                            .data
+                                                            .experience![i]
+                                                            .experiencePeriod,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodySmall
+                                                            ?.copyWith(
+                                                                fontSize: 13)),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          AnimatedShakingBuilder(
-                                            autoPlay: isDragged,
-                                            child: DisplayText(
-                                              text: widget.data.experience[i]
-                                                  .experienceLocation,
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                                  ?.copyWith(
-                                                    fontSize: 14,
-                                                  ),
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: DisplayText(
+                                                text: widget.data.experience![i]
+                                                    .experienceLocation,
+                                                maxLines: 10,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall
+                                                    ?.copyWith(
+                                                      fontSize: 14,
+                                                    ),
+                                              ),
                                             ),
-                                          ),
-                                          Config.spaceBox(Config.smallSpacer),
-                                          AnimatedShakingBuilder(
-                                            autoPlay: isDragged,
-                                            child: DisplayText(
-                                              maxFontSize: 14,
-                                              text: widget.data.experience[i]
-                                                  .experienceDescription,
-                                              maxLines: 20,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
+                                            Config.spaceBox(Config.smallSpacer),
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: DisplayText(
+                                                maxFontSize: 14,
+                                                text: widget.data.experience![i]
+                                                    .experienceDescription,
+                                                maxLines: 20,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall,
+                                              ),
                                             ),
-                                          ),
-                                          Config.spaceBox(Config.mediumSpacer),
-                                        ],
+                                            Config.spaceBox(
+                                                Config.mediumSpacer),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         SHDivider(),
                                       ],
                                     ),
@@ -511,6 +515,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       child: SizedBox(
                                           width: widget.w,
                                           child: RatingWidget(
+                                            autoplay: isDragged,
                                             title: 'English',
                                             rating: 5,
                                             style: Theme.of(context)
@@ -528,6 +533,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                       child: SizedBox(
                                         width: widget.w,
                                         child: RatingWidget(
+                                          autoplay: isDragged,
                                           title: 'French',
                                           rating: 4,
                                           style: Theme.of(context)

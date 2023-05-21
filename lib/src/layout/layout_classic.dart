@@ -126,7 +126,8 @@ class _LayoutClassicState extends State<LayoutClassic> {
                             height: Config.smallHeight,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(Str.backgroundImage),
+                                image: NetworkImage(
+                                    Str.mockData.image ?? Str.backgroundImage),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -134,6 +135,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Config.spaceBox(Config.eightPx),
                             AnimatedShakingBuilder(
                               autoPlay: isDragged,
                               child: DisplayText(
@@ -150,8 +152,11 @@ class _LayoutClassicState extends State<LayoutClassic> {
                             AnimatedShakingBuilder(
                               autoPlay: isDragged,
                               child: DisplayText(
-                                text: widget.data.email,
-                                style: Theme.of(context).textTheme.displayLarge,
+                                text: widget.data.email ?? Str.mockData.email,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge
+                                    ?.copyWith(color: Colors.blueGrey[100]),
                               ),
                             ),
                             Config.spaceBox(Config.tenPx),
@@ -160,7 +165,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                               child: DisplayText(
                                 maxFontSize: 16,
                                 text:
-                                    '${widget.data.street}, ${widget.data.address}',
+                                    '${widget.data.street ?? Str.mockData.street}, ${widget.data.address ?? Str.mockData.address} ',
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
@@ -173,14 +178,16 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
-                                    ?.copyWith(letterSpacing: 1),
+                                    ?.copyWith(
+                                        letterSpacing: 1,
+                                        color: Theme.of(context).primaryColor),
                               ),
                             ),
                             Config.spaceBox(Config.tenPx),
                             AnimatedShakingBuilder(
                               autoPlay: isDragged,
                               child: DisplayText(
-                                text: widget.data.bio,
+                                text: widget.data.bio ?? Str.mockData.bio,
                                 maxFontSize: 16,
                                 maxLines: 20,
                                 style: Theme.of(context).textTheme.displaySmall,
@@ -195,7 +202,10 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
-                                    ?.copyWith(letterSpacing: 1),
+                                    ?.copyWith(
+                                      letterSpacing: 1,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                               ),
                             ),
                             Config.spaceBox(Config.tenPx),
@@ -203,7 +213,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                               autoPlay: isDragged,
                               child: DisplayText(
                                 maxFontSize: 16,
-                                text: 'Playing football',
+                                text: 'Your Hobbie',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                             ),
@@ -216,26 +226,37 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
-                                    ?.copyWith(letterSpacing: 1),
+                                    ?.copyWith(
+                                        letterSpacing: 1,
+                                        color: Theme.of(context).primaryColor),
                               ),
                             ),
                             Config.spaceBox(Config.eightPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 16,
-                                text: widget.data.experience.first.experienceDescription,
-                                style: Theme.of(context).textTheme.displaySmall,
+                            if (widget.data.experience != null &&
+                                widget.data.experience!.isNotEmpty)
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 16,
+                                  text: widget.data.experience?.first
+                                          .experienceDescription ??
+                                      Str.mockData.experience!.first
+                                          .experienceDescription,
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
                               ),
-                            ),
                             Config.spaceBox(Config.mediumSpacer),
                             AnimatedShakingBuilder(
                               autoPlay: isDragged,
                               child: DisplayText(
                                 maxFontSize: 20,
                                 text: 'Education',
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context).primaryColor),
                               ),
                             ),
                             Config.spaceBox(Config.eightPx),
@@ -243,7 +264,8 @@ class _LayoutClassicState extends State<LayoutClassic> {
                               autoPlay: isDragged,
                               child: DisplayText(
                                 maxFontSize: 16,
-                                text: widget.data.education,
+                                text: widget.data.education ??
+                                    Str.mockData.education,
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                             ),
@@ -253,14 +275,18 @@ class _LayoutClassicState extends State<LayoutClassic> {
                               child: DisplayText(
                                 maxFontSize: 20,
                                 text: 'Languages',
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context).primaryColor),
                               ),
                             ),
                             Config.spaceBox(Config.eightPx),
                             AnimatedShakingBuilder(
                               autoPlay: isDragged,
                               child: RatingWidget(
+                                autoplay: isDragged,
                                 title: 'English',
                                 rating: 5,
                                 style: Theme.of(context)
