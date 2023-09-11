@@ -38,18 +38,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.white54,
-            onPressed: () {
-              setState(() {
-                theme = getRandomItem();
-              });
-            },
-          ),
           body: FlutterResumeTemplate(
             data: data,
-            templateTheme: theme,
+            templateTheme: TemplateTheme.business,
             mode: TemplateMode.onlyEditableMode,
           ),
         ),

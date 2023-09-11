@@ -161,7 +161,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: SizedBox(
-                          height: widget.h * 3,
+                          height: widget.h * 2.5,
                           width: widget.w * 1.6,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
