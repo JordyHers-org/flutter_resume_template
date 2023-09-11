@@ -19,10 +19,10 @@ The `flutter_resume_template` plugin provides a customizable resume template tha
 
 
 
+<img width="1454" alt="Screenshot 2023-09-11 at 19 27 06" src="https://github.com/JordyHers-org/flutter_resume_template/assets/49708438/5c58e646-c92d-4044-bc7f-d00bc9b591a1">
 
 
 
-<img width="287" alt="templates" src="https://github.com/JordyHers/flutter_resume_template/assets/49708438/c0097b65-be62-4d24-a862-d17be6a7c12d">
 
 ## Features
 
@@ -183,6 +183,7 @@ primaryColor: Colors.red
 - `onSaveResume` (optional): A callback function that will save a PDF version of the resume in the local download path.
 
 
+<img width="287" alt="templates" src="https://github.com/JordyHers/flutter_resume_template/assets/49708438/c0097b65-be62-4d24-a862-d17be6a7c12d">
 
 ### Example Code
 
