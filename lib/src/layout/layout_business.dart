@@ -131,7 +131,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Stack(
         children: [
           AbsorbPointer(
