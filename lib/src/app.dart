@@ -58,7 +58,8 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   /// The  [street] , [address], [country], [email] and [phoneNumber] are
   /// all at the top right corner. Although the location depend on the
-  /// template type.
+  /// template type. Other classes allow you to pass more specific data
+  /// such as [Education], [Language] and [ExperienceData].
   ///
   final TemplateData? data;
 
@@ -84,6 +85,67 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final SaveResume<GlobalKey>? onSaveResume;
 
+  /// The [backgroundColor] only changes the background color of the
+  /// Resume template. Pay attention the entire scaffold color
+  /// does not change. The placeholder value of the Section title.
+  ///
+  final Color? backgroundColor;
+
+  /// The [aboutMePlaceholder] changes the value of the commonly used
+  /// about me or biography section. The placeholder value
+  /// of the Section title.
+  ///
+  final String? aboutMePlaceholder;
+
+  /// The [educationPlaceHolder] changes the value of the commonly used
+  /// education section holding as values the school name and the grade or
+  /// education level. The placeholder value of the Section title.
+  ///
+  final String? educationPlaceHolder;
+
+  /// The [hobbiesPlaceholder] changes the value of the commonly used
+  /// hobby section. Skills can be used too  The placeholder value of
+  /// the Section title.
+  ///
+  final String? hobbiesPlaceholder;
+
+  /// The [emailPlaceHolder] changes the value of the commonly used
+  /// email. The placeholder value of the Section title.
+  ///
+  final String? emailPlaceHolder;
+
+  /// The [telPlaceHolder] changes the value of the commonly used
+  /// telephone. The placeholder value of the Section title.
+  ///
+  final String? telPlaceHolder;
+
+  /// The [experiencePlaceHolder] changes the value of the commonly used
+  /// experience. The placeholder value of the Experience Section title.
+  ///
+  final String? experiencePlaceHolder;
+
+  /// The [languagePlaceHolder] changes the value of the commonly used
+  /// experience. The placeholder value of the Language Section title.
+  ///
+  final String? languagePlaceHolder;
+
+  /// The [imageHeight]
+  final double? imageHeight;
+
+  /// The [imageWidth]
+  final double? imageWidth;
+
+  /// The [imageRadius]
+  final double? imageRadius;
+
+  /// The [imageBoxFit]
+  final BoxFit? imageBoxFit;
+
+  /// This [enableDivider] will enable or disable all
+  /// the dividers in several section. Note that all
+  /// the template do not have `SHDivider`
+  final bool? enableDivider;
+
   const FlutterResumeTemplate({
     Key? key,
     required this.templateTheme,
@@ -91,6 +153,19 @@ class FlutterResumeTemplate extends StatefulWidget {
     this.data,
     this.onEmpty,
     this.onSaveResume,
+    this.backgroundColor,
+    this.aboutMePlaceholder,
+    this.hobbiesPlaceholder,
+    this.emailPlaceHolder,
+    this.telPlaceHolder,
+    this.experiencePlaceHolder,
+    this.educationPlaceHolder,
+    this.languagePlaceHolder,
+    this.imageHeight,
+    this.imageWidth,
+    this.imageRadius,
+    this.imageBoxFit,
+    this.enableDivider = true,
   })  : assert(data != null || onEmpty != null),
         super(key: key);
 
@@ -112,6 +187,19 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
             return LayoutModern(
               h: h,
               w: w,
+              imageBoxFit: widget.imageBoxFit,
+              imageHeight: widget.imageHeight,
+              imageRadius: widget.imageRadius,
+              imageWidth: widget.imageWidth,
+              educationPlaceHolder: widget.educationPlaceHolder,
+              enableDividers: widget.enableDivider,
+              backgroundColor: widget.backgroundColor,
+              emailPlaceHolder: widget.emailPlaceHolder,
+              aboutMePlaceholder: widget.aboutMePlaceholder,
+              experiencePlaceHolder: widget.experiencePlaceHolder,
+              telPlaceHolder: widget.telPlaceHolder,
+              languagePlaceHolder: widget.languagePlaceHolder,
+              hobbiesPlaceholder: widget.hobbiesPlaceholder,
               onSaveResume: widget.onSaveResume,
               mode: widget.mode,
               data: widget.data ?? Str.mockData,
@@ -120,6 +208,19 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
             return LayoutClassic(
               h: h,
               w: w,
+              imageBoxFit: widget.imageBoxFit,
+              imageHeight: widget.imageHeight,
+              imageRadius: widget.imageRadius,
+              imageWidth: widget.imageWidth,
+              educationPlaceHolder: widget.educationPlaceHolder,
+              enableDividers: widget.enableDivider,
+              backgroundColor: widget.backgroundColor,
+              emailPlaceHolder: widget.emailPlaceHolder,
+              aboutMePlaceholder: widget.aboutMePlaceholder,
+              experiencePlaceHolder: widget.experiencePlaceHolder,
+              telPlaceHolder: widget.telPlaceHolder,
+              languagePlaceHolder: widget.languagePlaceHolder,
+              hobbiesPlaceholder: widget.hobbiesPlaceholder,
               onSaveResume: widget.onSaveResume,
               mode: widget.mode,
               data: widget.data ?? Str.mockData,
@@ -136,6 +237,19 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
             return LayoutBusiness(
               h: h,
               w: w,
+              imageBoxFit: widget.imageBoxFit,
+              imageHeight: widget.imageHeight,
+              imageRadius: widget.imageRadius,
+              imageWidth: widget.imageWidth,
+              educationPlaceHolder: widget.educationPlaceHolder,
+              enableDividers: widget.enableDivider,
+              backgroundColor: widget.backgroundColor,
+              emailPlaceHolder: widget.emailPlaceHolder,
+              aboutMePlaceholder: widget.aboutMePlaceholder,
+              experiencePlaceHolder: widget.experiencePlaceHolder,
+              telPlaceHolder: widget.telPlaceHolder,
+              languagePlaceHolder: widget.languagePlaceHolder,
+              hobbiesPlaceholder: widget.hobbiesPlaceholder,
               onSaveResume: widget.onSaveResume,
               mode: widget.mode,
               data: widget.data ?? Str.mockData,
@@ -147,6 +261,19 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               return LayoutBusiness(
                 h: h,
                 w: w,
+                imageBoxFit: widget.imageBoxFit,
+                imageHeight: widget.imageHeight,
+                imageRadius: widget.imageRadius,
+                imageWidth: widget.imageWidth,
+                educationPlaceHolder: widget.educationPlaceHolder,
+                enableDividers: widget.enableDivider,
+                backgroundColor: widget.backgroundColor,
+                emailPlaceHolder: widget.emailPlaceHolder,
+                aboutMePlaceholder: widget.aboutMePlaceholder,
+                experiencePlaceHolder: widget.experiencePlaceHolder,
+                telPlaceHolder: widget.telPlaceHolder,
+                languagePlaceHolder: widget.languagePlaceHolder,
+                hobbiesPlaceholder: widget.hobbiesPlaceholder,
                 onSaveResume: widget.onSaveResume,
                 mode: widget.mode,
                 data: widget.data ?? Str.mockData,

@@ -21,7 +21,7 @@ class MockData {
           experiencePeriod: 'Aug 2021 - Dec 2023',
           experiencePlace: 'Berlin',
           experienceDescription:
-          '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
         ExperienceData(
           experienceTitle: 'Product Design',
@@ -29,10 +29,17 @@ class MockData {
           experiencePeriod: 'Aug 2021 - Dec 2023',
           experiencePlace: 'London',
           experienceDescription:
-          '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+              '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
       ],
-      education: 'Istanbul Gelisim University',
+      educationDetails: [
+        Education('Bachelor Degree', 'Oxford University'),
+        Education('Post Graduate Degree', 'Oxford University'),
+      ],
+      languages: [
+        Language('English', 3),
+        Language('French', 4),
+      ],
       image:
           'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
 }

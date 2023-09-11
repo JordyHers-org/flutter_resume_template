@@ -49,7 +49,7 @@ To use this plugin, add `flutter_resume_template` as a dependency in your projec
 
 ```yaml
 dependencies:
-  flutter_resume_template: ^1.0.3
+  flutter_resume_template: <latest.version>
 ```
 
 Then, run the following command to install the dependencies:
@@ -68,35 +68,56 @@ create a new instance of the widget, providing the required parameters.
 
 ```dart
 
-TemplateData data = TemplateData(
-    fullName: 'Jordy Hershel',
-    currentPosition: 'Flutter Developer',
-    street: '56B Wellington',
-    address: 'Toronto, 14568',
-    country: 'CANADA',
-    email: 'jordyhershel@email.com',
-    phoneNumber: '+1 (106)341 753 12',
-    bio: 'I am a talented young mobile application developer .'
-        ' I have been developing Mobile application for several years now and'
-        ' I do have a solid background in Developing tools. I am keen to '
-        'learn and that would be a pleasure to be a member of your company.'
-        ' I am currently working at This awesome company',
-    experience: experience
+static TemplateData data = TemplateData(
+    fullName: 'Matthew Smith',
+    currentPosition: 'Service Designer',
+    street: '63 Fall Street',
+    address: 'Toronto, ST 12874',
+    country: 'Canada',
+    email: 'matthewsmith@join.com',
+    phoneNumber: '+ 1 (246)869 453 00',
+    bio: Str.bioText,
+    experience: [
+      ExperienceData(
+        experienceTitle: 'Software Engineer',
+        experienceLocation: ' Mindable Health',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'Berlin',
+        experienceDescription:
+        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+      ),
+      ExperienceData(
+        experienceTitle: 'Product Design',
+        experienceLocation: 'UK . London',
+        experiencePeriod: 'Sep 2022 - Dec 2023',
+        experiencePlace: 'Freelancer',
+        experienceDescription:
+        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+      ),
+      ExperienceData(
+        experienceTitle: 'Flutter Developer',
+        experienceLocation: 'UK . London',
+        experiencePeriod: 'Sep 2022 - Dec 2023',
+        experiencePlace: 'Freelancer',
+        experienceDescription:
+        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+      ),
+    ],
+    educationDetails: [
+      Education('Bachelor Degree', 'Oxford University'),
+      Education('Post Graduate Degree', 'Oxford University'),
+    ],
+    languages: [
+      Language('English', 3),
+      Language('French', 4),
+    ],
+    image: resumeHeader);
+static String backgroundImage =
+    'https://images.pexels.com/photos/10319780/pexels-photo-10319780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+static String resumeHeader =
+    'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
-  );
-
-
-   ExperienceData experience =  ExperienceData(
-    experienceTitle: 'Software Engineer',
-    experienceLocation: 'at UberEats',
-    experiencePeriod: 'Aug 2021 - Dec 2023',
-    experiencePlace: 'Berlin',
-    experienceDescription:
-    '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
-    education: 'Yale University',
-    image:
-    'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-
+  
    
 
 ```
@@ -129,12 +150,27 @@ class MyResumePage extends StatelessWidget {
 }
 ```
 
+## Additional Information
+
 ```dart
 // To create your own template set the [TemplateTheme.none]
 FlutterResumeTemplate(
 data: data,
 templateTheme: TemplateTheme.none,
  onEmpty: () => YourCustomTemplate(), //just make sure you pass the data to your widget
+
+
+
+
+// To add your own template style [background color etc...],
+// You should define and pass your own ThemeData.
+templateTheme: TemplateTheme(
+TemplateType.modernResume, // set the template mode that you would like to customise
+ThemeData(
+primaryColor: Colors.red
+//...
+  ),
+),
 
 ```
 

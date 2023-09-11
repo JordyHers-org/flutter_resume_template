@@ -38,20 +38,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.white54,
-            onPressed: () {
-              setState(() {
-                theme = getRandomItem();
-              });
-            },
-          ),
           body: FlutterResumeTemplate(
             data: data,
-            templateTheme: theme,
-            mode: TemplateMode.shakeEditAndSaveMode,
-            onSaveResume: (_) async => await PdfHandler().createResume(_),
+            templateTheme: TemplateTheme.modern,
+            mode: TemplateMode.onlyEditableMode,
           ),
         ),
       ),

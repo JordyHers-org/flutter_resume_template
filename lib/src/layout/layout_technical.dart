@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
-import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
+
+import '../components/section_rating_widget.dart';
 
 /// A stateful widget that provides a technical-style layout for displaying content.
 ///
@@ -21,19 +22,53 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 /// automatically render the technical-style layout based on the provided data.
 
 class LayoutTechnical extends StatefulWidget {
-  const LayoutTechnical({
+  LayoutTechnical({
     super.key,
-    this.onSaveResume,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
-  });
+    this.backgroundColor,
+    this.onSaveResume,
+    this.aboutMePlaceholder,
+    this.hobbiesPlaceholder,
+    this.emailPlaceHolder,
+    this.telPlaceHolder,
+    this.experiencePlaceHolder,
+    this.educationPlaceHolder,
+    this.languagePlaceHolder,
+    this.enableDividers = true,
+    this.imageHeight,
+    this.imageWidth,
+    this.imageBoxFit,
+    this.imageRadius,
+  })  : assert(data.experience != null && data.experience!.length <= 3),
+        assert(data.educationDetails != null &&
+            data.educationDetails!.length <= 2),
+        assert(
+          data.languages != null && data.languages!.length <= 2,
+        );
 
   final double h;
   final double w;
+  final double? imageHeight;
+  final double? imageWidth;
+  final double? imageRadius;
+  final BoxFit? imageBoxFit;
+
   final TemplateData data;
   final TemplateMode mode;
+  final Color? backgroundColor;
+
+  final String? aboutMePlaceholder;
+  final String? educationPlaceHolder;
+  final String? hobbiesPlaceholder;
+  final String? emailPlaceHolder;
+  final String? telPlaceHolder;
+  final String? experiencePlaceHolder;
+  final String? languagePlaceHolder;
+  final bool? enableDividers;
+
   final SaveResume<GlobalKey>? onSaveResume;
 
   @override
@@ -94,32 +129,35 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        AbsorbPointer(
-          absorbing: absorbing,
-          child: InteractiveViewer(
-            transformationController: _controller,
-            panEnabled: false,
-            boundaryMargin: EdgeInsets.all(Config.smallWidth),
-            maxScale: Config.fourPx,
-            child: Align(
-              alignment: Alignment.topCenter,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Stack(
+        children: [
+          AbsorbPointer(
+            absorbing: absorbing,
+            child: InteractiveViewer(
+              transformationController: _controller,
+              panEnabled: false,
+              boundaryMargin: EdgeInsets.all(Config.smallWidth),
+              maxScale: Config.fourPx,
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Container(
-                  height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
-                  width: widget.w < 400 ? widget.w : widget.w * 0.8,
+                  color: widget.backgroundColor,
+                  height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.7,
+                  width: widget.w < 400 ? widget.w : widget.w * 1.2,
                   constraints: BoxConstraints(
                     minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
-                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.9,
+                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.5,
+                    maxHeight: double.maxFinite,
+                    maxWidth: double.maxFinite,
                   ),
                   child: RepaintBoundary(
                     key: globalKey,
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 1.5,
+                        height: widget.h * 2.5,
                         width: widget.w * 1.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -238,9 +276,10 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 children: [
                                   AnimatedShakingBuilder(
                                     autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Work Experience",
-                                      style: TextStyle(
+                                    child: DisplayText(
+                                      text: widget.experiencePlaceHolder ??
+                                          "Work Experience",
+                                      style: const TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.blueGrey,
                                         letterSpacing: 1.5,
@@ -250,9 +289,10 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                   ),
                                   AnimatedShakingBuilder(
                                     autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Education",
-                                      style: TextStyle(
+                                    child: DisplayText(
+                                      text: widget.educationPlaceHolder ??
+                                          "Education",
+                                      style: const TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.blueGrey,
                                         letterSpacing: 1.5,
@@ -272,33 +312,98 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 children: [
                                   if (widget.data.experience != null &&
                                       widget.data.experience!.isNotEmpty)
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        text: widget.data.experience?.first
-                                                .experienceTitle ??
-                                            Str.mockData.experience?.first
-                                                .experienceTitle,
-                                        style: const TextStyle(
-                                          fontSize: 16.0,
-                                          color: Colors.black54,
-                                          letterSpacing: 1.0,
-                                          fontWeight: FontWeight.w300,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ...List.generate(
+                                          widget.data.experience!.length,
+                                          (index) => Column(
+                                            children: [
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  text: widget
+                                                          .data
+                                                          .experience?[index]
+                                                          .experienceTitle ??
+                                                      Str
+                                                          .mockData
+                                                          .experience?[index]
+                                                          .experienceTitle,
+                                                  style: const TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.black54,
+                                                    letterSpacing: 1.0,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.tenPx),
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      text: widget.data.education,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black54,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.w300,
-                                      ),
+                                  if (widget.data.educationDetails != null &&
+                                      widget.data.educationDetails!.isNotEmpty)
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ...List.generate(
+                                          widget.data.educationDetails!.length,
+                                          (index) => Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Config.spaceBox(Config.tenPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  text: widget
+                                                          .data
+                                                          .educationDetails?[
+                                                              index]
+                                                          .schoolName ??
+                                                      Str
+                                                          .mockData
+                                                          .educationDetails?[
+                                                              index]
+                                                          .schoolName,
+                                                  style: const TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.black54,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.tenPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  text: widget
+                                                          .data
+                                                          .educationDetails?[
+                                                              index]
+                                                          .schoolLevel ??
+                                                      Str
+                                                          .mockData
+                                                          .educationDetails?[
+                                                              index]
+                                                          .schoolLevel,
+                                                  style: const TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.black54,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -307,9 +412,9 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "About Me",
-                                  style: TextStyle(
+                                child: DisplayText(
+                                  text: widget.aboutMePlaceholder ?? "About Me",
+                                  style: const TextStyle(
                                     fontSize: 18.0,
                                     color: Colors.blueGrey,
                                     letterSpacing: 1.5,
@@ -318,7 +423,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 ),
                               ),
                             ),
-                            Config.spaceBox(10.0),
+                            Config.spaceBox(Config.tenPx),
                             Padding(
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
@@ -335,14 +440,14 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 ),
                               ),
                             ),
-                            Config.spaceBox(40.0),
+                            Config.spaceBox(Config.fortyPx),
                             Padding(
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "Hobbies",
-                                  style: TextStyle(
+                                child: DisplayText(
+                                  text: widget.hobbiesPlaceholder ?? "Hobbies",
+                                  style: const TextStyle(
                                     fontSize: 18.0,
                                     color: Colors.blueGrey,
                                     letterSpacing: 1.0,
@@ -351,30 +456,36 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 ),
                               ),
                             ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: ' BasketBall',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black54,
-                                    letterSpacing: 1.0,
-                                    fontWeight: FontWeight.w300,
+                            Config.spaceBox(Config.tenPx),
+                            if (widget.data.hobbies != null &&
+                                widget.data.hobbies!.isNotEmpty)
+                              ...List.generate(
+                                widget.data.hobbies!.length,
+                                (index) => Padding(
+                                  padding: Config.dtHorPad.padding,
+                                  child: AnimatedShakingBuilder(
+                                    autoPlay: isDragged,
+                                    child: DisplayText(
+                                      text: widget.data.hobbies![index],
+                                      style: const TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.black54,
+                                        letterSpacing: 1.0,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Config.spaceBox(40.0),
+                            Config.spaceBox(Config.fortyPx),
                             Padding(
                               padding: Config.dtHorPad.padding,
                               child: AnimatedShakingBuilder(
                                 autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "Languages",
-                                  style: TextStyle(
+                                child: DisplayText(
+                                  text:
+                                      widget.languagePlaceHolder ?? "Languages",
+                                  style: const TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.blueGrey,
                                     letterSpacing: 1.0,
@@ -383,42 +494,30 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                 ),
                               ),
                             ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 5,
-                                  title: 'English',
+                            Config.spaceBox(Config.tenPx),
+                            if (widget.data.languages != null &&
+                                widget.data.languages!.isNotEmpty)
+                              ...List.generate(
+                                widget.data.languages!.length,
+                                (index) => Column(
+                                  children: [
+                                    Padding(
+                                      padding: Config.dtHorPad.padding,
+                                      child: AnimatedShakingBuilder(
+                                        autoPlay: isDragged,
+                                        child: RatingWidget(
+                                          autoplay: isDragged,
+                                          rating: widget
+                                              .data.languages![index].level,
+                                          title: widget
+                                              .data.languages![index].language,
+                                        ),
+                                      ),
+                                    ),
+                                    Config.spaceBox(Config.tenPx),
+                                  ],
                                 ),
                               ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 4,
-                                  title: 'French',
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 3,
-                                  title: 'German',
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -428,18 +527,18 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
               ),
             ),
           ),
-        ),
-        if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-          AnimateButton(
-              onDragged: () => setState(
-                    () {
-                      _controller.value = Matrix4.identity();
-                      isDragged = !isDragged;
-                    },
-                  ),
-              onSave: _save,
-              isDragged: isDragged)
-      ],
+          if (widget.mode == TemplateMode.shakeEditAndSaveMode)
+            AnimateButton(
+                onDragged: () => setState(
+                      () {
+                        _controller.value = Matrix4.identity();
+                        isDragged = !isDragged;
+                      },
+                    ),
+                onSave: _save,
+                isDragged: isDragged)
+        ],
+      ),
     );
   }
 }
