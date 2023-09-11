@@ -68,7 +68,7 @@ create a new instance of the widget, providing the required parameters.
 
 ```dart
 
-static TemplateData mockData = TemplateData(
+static TemplateData data = TemplateData(
     fullName: 'Matthew Smith',
     currentPosition: 'Service Designer',
     street: '63 Fall Street',
