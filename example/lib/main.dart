@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         child: Scaffold(
           body: FlutterResumeTemplate(
             data: data,
-            templateTheme: TemplateTheme.business,
+            templateTheme: TemplateTheme.modern,
             mode: TemplateMode.onlyEditableMode,
           ),
         ),

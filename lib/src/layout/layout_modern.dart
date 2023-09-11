@@ -152,7 +152,7 @@ class _LayoutModernState extends State<LayoutModern> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 1.4,
+                        height: widget.h * 1.7,
                         width: widget.w * 1.05,
                         child: Column(
                           children: [
