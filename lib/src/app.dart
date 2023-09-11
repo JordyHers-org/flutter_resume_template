@@ -58,7 +58,8 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   /// The  [street] , [address], [country], [email] and [phoneNumber] are
   /// all at the top right corner. Although the location depend on the
-  /// template type.
+  /// template type. Other classes allow you to pass more specific data
+  /// such as [Education], [Language] and [ExperienceData].
   ///
   final TemplateData? data;
 
