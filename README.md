@@ -160,8 +160,8 @@ templateTheme: TemplateTheme.none,
 
 
 
-// To add your own template style [background color etc...]
-
+// To add your own template style [background color etc...],
+// You should define and pass your own ThemeData.
 templateTheme: TemplateTheme(
 TemplateType.modernResume, // set the template mode that you would like to customise
 ThemeData(
