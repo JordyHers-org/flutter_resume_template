@@ -21,19 +21,66 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 /// automatically render the classic-style layout based on the provided data.
 
 class LayoutClassic extends StatefulWidget {
-  const LayoutClassic({
+  LayoutClassic({
     super.key,
-    this.onSaveResume,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
-  });
+    this.backgroundColor,
+    this.onSaveResume,
+    this.aboutMePlaceholder,
+    this.hobbiesPlaceholder,
+    this.emailPlaceHolder,
+    this.telPlaceHolder,
+    this.experiencePlaceHolder,
+    this.educationPlaceHolder,
+    this.languagePlaceHolder,
+    this.aboutMeStyle,
+    this.hobbiesStyle,
+    this.emailStyle,
+    this.telStyle,
+    this.enableDividers = true,
+    this.experienceStyle,
+    this.languageStyle,
+    this.imageHeight,
+    this.imageWidth,
+    this.imageBoxFit,
+    this.imageRadius,
+  })  : assert(data.experience != null && data.experience!.length <= 3),
+        assert(data.educationDetails != null &&
+            data.educationDetails!.length <= 2),
+        assert(
+          data.languages != null && data.languages!.length <= 2,
+        );
 
   final double h;
   final double w;
+  final double? imageHeight;
+  final double? imageWidth;
+  final double? imageRadius;
+  final BoxFit? imageBoxFit;
+
   final TemplateData data;
   final TemplateMode mode;
+  final Color? backgroundColor;
+
+  final String? aboutMePlaceholder;
+  final String? educationPlaceHolder;
+  final String? hobbiesPlaceholder;
+  final String? emailPlaceHolder;
+  final String? telPlaceHolder;
+  final String? experiencePlaceHolder;
+  final String? languagePlaceHolder;
+  final bool? enableDividers;
+
+  final TextStyle? aboutMeStyle;
+  final TextStyle? hobbiesStyle;
+  final TextStyle? emailStyle;
+  final TextStyle? telStyle;
+  final TextStyle? experienceStyle;
+  final TextStyle? languageStyle;
+
   final SaveResume<GlobalKey>? onSaveResume;
 
   @override
@@ -108,6 +155,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Container(
+                  color: widget.backgroundColor,
                   margin: Config.margin,
                   height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
                   width: widget.w < 400 ? widget.w : widget.w * 0.2,
@@ -119,185 +167,284 @@ class _LayoutClassicState extends State<LayoutClassic> {
                   ),
                   child: RepaintBoundary(
                     key: globalKey,
-                    child: Wrap(
-                      children: [
-                        if (Helper.isTestMode)
-                          Container(
-                            height: Config.smallHeight,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    Str.mockData.image ?? Str.backgroundImage),
-                                fit: BoxFit.cover,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Wrap(
+                        children: [
+                          if (Helper.isTestMode)
+                            Container(
+                              height: Config.smallHeight,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(Str.mockData.image ??
+                                      Str.backgroundImage),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Config.spaceBox(Config.eightPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                text: widget.data.fullName,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        letterSpacing: 1,
-                                        color: Theme.of(context).primaryColor),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Config.spaceBox(Config.eightPx),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  text: widget.data.fullName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                          letterSpacing: 1,
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                ),
                               ),
-                            ),
-                            Config.spaceBox(Config.tenPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                text: widget.data.email ?? Str.mockData.email,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayLarge
-                                    ?.copyWith(color: Colors.blueGrey[100]),
+                              Config.spaceBox(Config.tenPx),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  text: widget.data.email ?? Str.mockData.email,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge
+                                      ?.copyWith(color: Colors.blueGrey[100]),
+                                ),
                               ),
-                            ),
-                            Config.spaceBox(Config.tenPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 16,
-                                text:
-                                    '${widget.data.street ?? Str.mockData.street}, ${widget.data.address ?? Str.mockData.address} ',
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                            ),
-                            Config.spaceBox(Config.mediumSpacer),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                text: 'About Me',
-                                maxFontSize: 20,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        letterSpacing: 1,
-                                        color: Theme.of(context).primaryColor),
-                              ),
-                            ),
-                            Config.spaceBox(Config.tenPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                text: widget.data.bio ?? Str.mockData.bio,
-                                maxFontSize: 16,
-                                maxLines: 20,
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                            ),
-                            Config.spaceBox(Config.mediumSpacer),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                text: 'Hobbies',
-                                maxFontSize: 20,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                      letterSpacing: 1,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                              ),
-                            ),
-                            Config.spaceBox(Config.tenPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 16,
-                                text: 'Your Hobbie',
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                            ),
-                            Config.spaceBox(Config.mediumSpacer),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 20,
-                                text: 'Work Experience',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        letterSpacing: 1,
-                                        color: Theme.of(context).primaryColor),
-                              ),
-                            ),
-                            Config.spaceBox(Config.eightPx),
-                            if (widget.data.experience != null &&
-                                widget.data.experience!.isNotEmpty)
+                              Config.spaceBox(Config.tenPx),
                               AnimatedShakingBuilder(
                                 autoPlay: isDragged,
                                 child: DisplayText(
                                   maxFontSize: 16,
-                                  text: widget.data.experience?.first
-                                          .experienceDescription ??
-                                      Str.mockData.experience!.first
-                                          .experienceDescription,
+                                  text:
+                                      '${widget.data.street ?? Str.mockData.street}, ${widget.data.address ?? Str.mockData.address} ',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                              ),
+                              Config.spaceBox(Config.mediumSpacer),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  text: widget.aboutMePlaceholder ?? 'About Me',
+                                  maxFontSize: 20,
+                                  style: widget.aboutMeStyle ??
+                                      Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge
+                                          ?.copyWith(
+                                              letterSpacing: 1,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                ),
+                              ),
+                              Config.spaceBox(Config.tenPx),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  text: widget.data.bio ?? Str.mockData.bio,
+                                  maxFontSize: 16,
+                                  maxLines: 20,
                                   style:
                                       Theme.of(context).textTheme.displaySmall,
                                 ),
                               ),
-                            Config.spaceBox(Config.mediumSpacer),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 20,
-                                text: 'Education',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        color: Theme.of(context).primaryColor),
+                              Config.spaceBox(Config.mediumSpacer),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  text: widget.hobbiesPlaceholder ?? 'Hobbies',
+                                  maxFontSize: 20,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                        letterSpacing: 1,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                ),
                               ),
-                            ),
-                            Config.spaceBox(Config.eightPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 16,
-                                text: widget.data.education ??
-                                    Str.mockData.education,
-                                style: Theme.of(context).textTheme.displaySmall,
+                              Config.spaceBox(Config.smallSpacer),
+                              if (widget.data.hobbies != null)
+                                ...List.generate(
+                                    widget.data.hobbies!.length,
+                                    (index) => Column(
+                                          children: [
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: DisplayText(
+                                                maxFontSize: 16,
+                                                text:
+                                                    widget.data.hobbies![index],
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displaySmall,
+                                              ),
+                                            ),
+                                            Config.spaceBox(Config.threePx),
+                                          ],
+                                        )),
+                              Config.spaceBox(Config.mediumSpacer),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 20,
+                                  text: widget.experiencePlaceHolder ??
+                                      'Work Experience',
+                                  style: widget.experienceStyle ??
+                                      Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge
+                                          ?.copyWith(
+                                              letterSpacing: 1,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                ),
                               ),
-                            ),
-                            Config.spaceBox(Config.mediumSpacer),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: DisplayText(
-                                maxFontSize: 20,
-                                text: 'Languages',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge
-                                    ?.copyWith(
-                                        color: Theme.of(context).primaryColor),
+                              Config.spaceBox(Config.eightPx),
+                              if (widget.data.experience != null &&
+                                  widget.data.experience!.isNotEmpty)
+                                ...List.generate(
+                                    widget.data.experience!.length,
+                                    (index) => Column(
+                                          children: [
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: DisplayText(
+                                                maxFontSize: 16,
+                                                minFontSize: 16,
+                                                text: widget
+                                                        .data
+                                                        .experience?[index]
+                                                        .experienceDescription ??
+                                                    Str
+                                                        .mockData
+                                                        .experience![index]
+                                                        .experienceDescription,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displaySmall,
+                                              ),
+                                            ),
+                                            Config.spaceBox(Config.tenPx),
+                                          ],
+                                        )),
+                              Config.spaceBox(Config.mediumSpacer),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 20,
+                                  text: widget.educationPlaceHolder ??
+                                      'Education',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                ),
                               ),
-                            ),
-                            Config.spaceBox(Config.eightPx),
-                            AnimatedShakingBuilder(
-                              autoPlay: isDragged,
-                              child: RatingWidget(
-                                autoplay: isDragged,
-                                title: 'English',
-                                rating: 5,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(fontSize: 16),
+                              Config.spaceBox(Config.eightPx),
+                              if (widget.data.educationDetails != null &&
+                                  widget.data.educationDetails!.isNotEmpty)
+                                ...List.generate(
+                                    widget.data.educationDetails!.length,
+                                    (index) => Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: DisplayText(
+                                                    maxFontSize: 16,
+                                                    text: widget
+                                                            .data
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolName ??
+                                                        Str
+                                                            .mockData
+                                                            .educationDetails![
+                                                                index]
+                                                            .schoolName,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .displaySmall,
+                                                  ),
+                                                ),
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: DisplayText(
+                                                    maxFontSize: 16,
+                                                    text: widget
+                                                            .data
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolLevel ??
+                                                        Str
+                                                            .mockData
+                                                            .educationDetails![
+                                                                index]
+                                                            .schoolLevel,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .displaySmall,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Config.spaceBox(Config.tenPx),
+                                          ],
+                                        )),
+                              Config.spaceBox(Config.mediumSpacer),
+                              AnimatedShakingBuilder(
+                                autoPlay: isDragged,
+                                child: DisplayText(
+                                  maxFontSize: 20,
+                                  text:
+                                      widget.languagePlaceHolder ?? 'Languages',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge
+                                      ?.copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              if (widget.data.languages != null &&
+                                  widget.data.languages!.isNotEmpty)
+                                ...List.generate(
+                                    widget.data.languages!.length,
+                                    (index) => Column(
+                                          children: [
+                                            Config.spaceBox(Config.eightPx),
+                                            AnimatedShakingBuilder(
+                                              autoPlay: isDragged,
+                                              child: RatingWidget(
+                                                autoplay: isDragged,
+                                                title: widget
+                                                        .data
+                                                        .languages?[index]
+                                                        .language ??
+                                                    'English',
+                                                rating: widget
+                                                        .data
+                                                        .languages?[index]
+                                                        .level ??
+                                                    5,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displaySmall
+                                                    ?.copyWith(fontSize: 16),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

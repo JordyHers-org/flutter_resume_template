@@ -49,9 +49,9 @@ class _MyAppState extends State<MyApp> {
           ),
           body: FlutterResumeTemplate(
             data: data,
+            aboutMePlaceholder: 'About Us',
             templateTheme: theme,
-            mode: TemplateMode.shakeEditAndSaveMode,
-            onSaveResume: (_) async => await PdfHandler().createResume(_),
+            mode: TemplateMode.onlyEditableMode,
           ),
         ),
       ),

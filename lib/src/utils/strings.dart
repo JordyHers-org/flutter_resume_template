@@ -42,7 +42,14 @@ class Str {
               '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
         ),
       ],
-      education: 'Yale Gala University',
+      educationDetails: [
+        Education('Bachelor Degree', 'Oxford University'),
+        Education('Post Graduate Degree', 'Oxford University'),
+      ],
+      languages: [
+        Language('English', 3),
+        Language('French', 4),
+      ],
       image: resumeHeader);
   static String backgroundImage =
       'https://images.pexels.com/photos/10319780/pexels-photo-10319780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';

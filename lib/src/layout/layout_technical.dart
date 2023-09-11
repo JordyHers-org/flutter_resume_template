@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
-import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
 import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
+
+import '../components/section_rating_widget.dart';
 
 /// A stateful widget that provides a technical-style layout for displaying content.
 ///
@@ -21,19 +22,53 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 /// automatically render the technical-style layout based on the provided data.
 
 class LayoutTechnical extends StatefulWidget {
-  const LayoutTechnical({
+  LayoutTechnical({
     super.key,
-    this.onSaveResume,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
-  });
+    this.backgroundColor,
+    this.onSaveResume,
+    this.aboutMePlaceholder,
+    this.hobbiesPlaceholder,
+    this.emailPlaceHolder,
+    this.telPlaceHolder,
+    this.experiencePlaceHolder,
+    this.educationPlaceHolder,
+    this.languagePlaceHolder,
+    this.enableDividers = true,
+    this.imageHeight,
+    this.imageWidth,
+    this.imageBoxFit,
+    this.imageRadius,
+  })  : assert(data.experience != null && data.experience!.length <= 3),
+        assert(data.educationDetails != null &&
+            data.educationDetails!.length <= 2),
+        assert(
+          data.languages != null && data.languages!.length <= 2,
+        );
 
   final double h;
   final double w;
+  final double? imageHeight;
+  final double? imageWidth;
+  final double? imageRadius;
+  final BoxFit? imageBoxFit;
+
   final TemplateData data;
   final TemplateMode mode;
+  final Color? backgroundColor;
+
+  final String? aboutMePlaceholder;
+  final String? educationPlaceHolder;
+  final String? hobbiesPlaceholder;
+  final String? emailPlaceHolder;
+  final String? telPlaceHolder;
+  final String? experiencePlaceHolder;
+  final String? languagePlaceHolder;
+  final bool? enableDividers;
+
   final SaveResume<GlobalKey>? onSaveResume;
 
   @override
@@ -108,6 +143,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
               child: FittedBox(
                 fit: BoxFit.contain,
                 child: Container(
+                  color: widget.backgroundColor,
                   height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
                   width: widget.w < 400 ? widget.w : widget.w * 0.8,
                   constraints: BoxConstraints(
@@ -116,169 +152,98 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                   ),
                   child: RepaintBoundary(
                     key: globalKey,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: SizedBox(
-                        height: widget.h * 1.5,
-                        width: widget.w * 1.6,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            if (Helper.isTestMode)
-                              Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(Str.backgroundImage),
-                                    fit: BoxFit.cover,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: SizedBox(
+                          height: widget.h * 1.5,
+                          width: widget.w * 1.6,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (Helper.isTestMode)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(Str.backgroundImage),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    height: 400,
+                                    child: Container(
+                                      alignment: const Alignment(0.0, 1.3),
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            widget.data.image ??
+                                                Str.resumeHeader),
+                                        radius: 70.0,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: 400,
-                                  child: Container(
-                                    alignment: const Alignment(0.0, 1.3),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          widget.data.image ??
-                                              Str.resumeHeader),
-                                      radius: 70.0,
+                              Config.spaceBox(60.0),
+                              Center(
+                                child: AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: DisplayText(
+                                    text: widget.data.fullName,
+                                    style: const TextStyle(
+                                      fontSize: 30.0,
+                                      color: Colors.blueGrey,
+                                      letterSpacing: 2.0,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
                               ),
-                            Config.spaceBox(60.0),
-                            Center(
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: DisplayText(
-                                  text: widget.data.fullName,
-                                  style: const TextStyle(
-                                    fontSize: 30.0,
-                                    color: Colors.blueGrey,
-                                    letterSpacing: 2.0,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                              Config.spaceBox(20.0),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: const DisplayText(
+                                        text: "Address",
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.blueGrey,
+                                          letterSpacing: 1.5,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: const DisplayText(
+                                        text: "Country",
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.blueGrey,
+                                          letterSpacing: 1.5,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            Config.spaceBox(20.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Address",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.blueGrey,
-                                        letterSpacing: 1.5,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Country",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.blueGrey,
-                                        letterSpacing: 1.5,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Config.spaceBox(10),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      text: widget.data.address,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black54,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      text: widget.data.street,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black54,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Config.spaceBox(30.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Work Experience",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.blueGrey,
-                                        letterSpacing: 1.5,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: const DisplayText(
-                                      text: "Education",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.blueGrey,
-                                        letterSpacing: 1.5,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Config.spaceBox(10),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  if (widget.data.experience != null &&
-                                      widget.data.experience!.isNotEmpty)
+                              Config.spaceBox(10),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
                                     AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
-                                        text: widget.data.experience?.first
-                                                .experienceTitle ??
-                                            Str.mockData.experience?.first
-                                                .experienceTitle,
+                                        text: widget.data.address,
                                         style: const TextStyle(
                                           fontSize: 16.0,
                                           color: Colors.black54,
@@ -287,139 +252,281 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                                         ),
                                       ),
                                     ),
-                                  AnimatedShakingBuilder(
-                                    autoPlay: isDragged,
-                                    child: DisplayText(
-                                      text: widget.data.education,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black54,
-                                        letterSpacing: 1.0,
-                                        fontWeight: FontWeight.w300,
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.street,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black54,
+                                          letterSpacing: 1.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Config.spaceBox(30.0),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.experiencePlaceHolder ??
+                                            "Work Experience",
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.blueGrey,
+                                          letterSpacing: 1.5,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.educationPlaceHolder ??
+                                            "Education",
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          color: Colors.blueGrey,
+                                          letterSpacing: 1.5,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Config.spaceBox(10),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    if (widget.data.experience != null &&
+                                        widget.data.experience!.isNotEmpty)
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ...List.generate(
+                                            widget.data.experience!.length,
+                                            (index) => Column(
+                                              children: [
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: DisplayText(
+                                                    text: widget
+                                                            .data
+                                                            .experience?[index]
+                                                            .experienceTitle ??
+                                                        Str
+                                                            .mockData
+                                                            .experience?[index]
+                                                            .experienceTitle,
+                                                    style: const TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: Colors.black54,
+                                                      letterSpacing: 1.0,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Config.spaceBox(Config.tenPx),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    if (widget.data.educationDetails != null &&
+                                        widget
+                                            .data.educationDetails!.isNotEmpty)
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ...List.generate(
+                                            widget
+                                                .data.educationDetails!.length,
+                                            (index) => Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Config.spaceBox(Config.tenPx),
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: DisplayText(
+                                                    text: widget
+                                                            .data
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolName ??
+                                                        Str
+                                                            .mockData
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolName,
+                                                    style: const TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: Colors.black54,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Config.spaceBox(Config.tenPx),
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: DisplayText(
+                                                    text: widget
+                                                            .data
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolLevel ??
+                                                        Str
+                                                            .mockData
+                                                            .educationDetails?[
+                                                                index]
+                                                            .schoolLevel,
+                                                    style: const TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: Colors.black54,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              Config.spaceBox(30.0),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: DisplayText(
+                                    text:
+                                        widget.aboutMePlaceholder ?? "About Me",
+                                    style: const TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.blueGrey,
+                                      letterSpacing: 1.5,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Config.spaceBox(Config.tenPx),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: DisplayText(
+                                    text: widget.data.bio,
+                                    minFontSize: 16,
+                                    maxLines: 20,
+                                    style: const TextStyle(
+                                      color: Colors.black54,
+                                      letterSpacing: 1.0,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Config.spaceBox(Config.fortyPx),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: DisplayText(
+                                    text:
+                                        widget.hobbiesPlaceholder ?? "Hobbies",
+                                    style: const TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.blueGrey,
+                                      letterSpacing: 1.0,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Config.spaceBox(Config.tenPx),
+                              if (widget.data.hobbies != null &&
+                                  widget.data.hobbies!.isNotEmpty)
+                                ...List.generate(
+                                  widget.data.hobbies!.length,
+                                  (index) => Padding(
+                                    padding: Config.dtHorPad.padding,
+                                    child: AnimatedShakingBuilder(
+                                      autoPlay: isDragged,
+                                      child: DisplayText(
+                                        text: widget.data.hobbies![index],
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black54,
+                                          letterSpacing: 1.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Config.spaceBox(30.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "About Me",
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.blueGrey,
-                                    letterSpacing: 1.5,
-                                    fontWeight: FontWeight.w400,
+                                ),
+                              Config.spaceBox(Config.fortyPx),
+                              Padding(
+                                padding: Config.dtHorPad.padding,
+                                child: AnimatedShakingBuilder(
+                                  autoPlay: isDragged,
+                                  child: DisplayText(
+                                    text: widget.languagePlaceHolder ??
+                                        "Languages",
+                                    style: const TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.blueGrey,
+                                      letterSpacing: 1.0,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: DisplayText(
-                                  text: widget.data.bio,
-                                  minFontSize: 16,
-                                  maxLines: 20,
-                                  style: const TextStyle(
-                                    color: Colors.black54,
-                                    letterSpacing: 1.0,
-                                    fontWeight: FontWeight.w300,
+                              Config.spaceBox(Config.tenPx),
+                              if (widget.data.languages != null &&
+                                  widget.data.languages!.isNotEmpty)
+                                ...List.generate(
+                                  widget.data.languages!.length,
+                                  (index) => Column(
+                                    children: [
+                                      Padding(
+                                        padding: Config.dtHorPad.padding,
+                                        child: AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: RatingWidget(
+                                            autoplay: isDragged,
+                                            rating: widget
+                                                .data.languages![index].level,
+                                            title: widget.data.languages![index]
+                                                .language,
+                                          ),
+                                        ),
+                                      ),
+                                      Config.spaceBox(Config.tenPx),
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ),
-                            Config.spaceBox(40.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "Hobbies",
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.blueGrey,
-                                    letterSpacing: 1.0,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: ' BasketBall',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black54,
-                                    letterSpacing: 1.0,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(40.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: const DisplayText(
-                                  text: "Languages",
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.blueGrey,
-                                    letterSpacing: 1.0,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 5,
-                                  title: 'English',
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 4,
-                                  title: 'French',
-                                ),
-                              ),
-                            ),
-                            Config.spaceBox(10.0),
-                            Padding(
-                              padding: Config.dtHorPad.padding,
-                              child: AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: RatingWidget(
-                                  autoplay: isDragged,
-                                  rating: 3,
-                                  title: 'German',
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

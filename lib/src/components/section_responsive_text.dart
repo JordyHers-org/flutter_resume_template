@@ -77,7 +77,7 @@ class _DisplayTextState extends State<DisplayText> {
                   label,
                   minFontSize: 11,
                   maxFontSize: 23,
-                  maxLines: 3,
+                  maxLines: widget.maxLines ?? 3,
                   style: widget.style,
                 ),
               ),
@@ -90,6 +90,7 @@ class _DisplayTextState extends State<DisplayText> {
                 }),
                 child: AutoSizeText(
                   label,
+                  overflow: TextOverflow.ellipsis,
                   maxFontSize: widget.maxFontSize ?? 30.0,
                   minFontSize: widget.minFontSize ?? 10.0,
                   maxLines: widget.maxLines ?? 3,

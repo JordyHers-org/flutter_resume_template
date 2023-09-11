@@ -21,19 +21,53 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 /// automatically render the modern-style layout based on the provided data.
 
 class LayoutModern extends StatefulWidget {
-  const LayoutModern({
+  LayoutModern({
     super.key,
-    this.onSaveResume,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
-  });
+    this.backgroundColor,
+    this.onSaveResume,
+    this.aboutMePlaceholder,
+    this.hobbiesPlaceholder,
+    this.emailPlaceHolder,
+    this.telPlaceHolder,
+    this.experiencePlaceHolder,
+    this.educationPlaceHolder,
+    this.languagePlaceHolder,
+    this.enableDividers = true,
+    this.imageHeight,
+    this.imageWidth,
+    this.imageBoxFit,
+    this.imageRadius,
+  })  : assert(data.experience != null && data.experience!.length <= 3),
+        assert(data.educationDetails != null &&
+            data.educationDetails!.length <= 2),
+        assert(
+          data.languages != null && data.languages!.length <= 2,
+        );
 
   final double h;
   final double w;
+  final double? imageHeight;
+  final double? imageWidth;
+  final double? imageRadius;
+  final BoxFit? imageBoxFit;
+
   final TemplateData data;
   final TemplateMode mode;
+  final Color? backgroundColor;
+
+  final String? aboutMePlaceholder;
+  final String? educationPlaceHolder;
+  final String? hobbiesPlaceholder;
+  final String? emailPlaceHolder;
+  final String? telPlaceHolder;
+  final String? experiencePlaceHolder;
+  final String? languagePlaceHolder;
+  final bool? enableDividers;
+
   final SaveResume<GlobalKey>? onSaveResume;
 
   @override
@@ -42,14 +76,10 @@ class LayoutModern extends StatefulWidget {
 
 class _LayoutModernState extends State<LayoutModern> {
   GlobalKey globalKey = GlobalKey();
-
   late bool enableEditingMode = true;
-
   late bool isDragged = false;
-
-  late TransformationController _controller;
-
   late bool absorbing = false;
+  late TransformationController _controller;
 
   @override
   void initState() {
@@ -106,6 +136,7 @@ class _LayoutModernState extends State<LayoutModern> {
             child: FittedBox(
               fit: BoxFit.contain,
               child: Container(
+                color: widget.backgroundColor,
                 height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
                 width: widget.w < 400 ? widget.w : widget.w * 0.9,
                 constraints: BoxConstraints(
@@ -130,12 +161,14 @@ class _LayoutModernState extends State<LayoutModern> {
                                 AnimatedShakingBuilder(
                                   autoPlay: isDragged,
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100.0),
+                                    borderRadius: BorderRadius.circular(
+                                        widget.imageRadius ?? 100.0),
                                     child: Image.network(
                                       widget.data.image ?? Str.resumeHeader,
-                                      height: 100,
-                                      width: 90,
-                                      fit: BoxFit.fitWidth,
+                                      height: widget.imageHeight ?? 100,
+                                      width: widget.imageWidth ?? 90,
+                                      fit:
+                                          widget.imageBoxFit ?? BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),
@@ -144,7 +177,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                 autoPlay: isDragged,
                                 child: DisplayText(
                                   maxFontSize: 30,
-                                  text: 'ABOUT ME',
+                                  text: widget.aboutMePlaceholder ?? 'ABOUT ME',
                                   style: Theme.of(context)
                                       .textTheme
                                       .displayLarge
@@ -169,15 +202,20 @@ class _LayoutModernState extends State<LayoutModern> {
                                 ),
                               ),
                               Config.spaceBox(Config.smallSpacer),
-                              Padding(
-                                padding: Config.padding.padding,
-                                child: const SHDivider(),
-                              ),
+                              if (widget.enableDividers!)
+                                Padding(
+                                  padding: Config.padding.padding,
+                                  child: const SHDivider(),
+                                )
+                              else
+                                Padding(
+                                  padding: Config.padding.padding,
+                                ),
                               AnimatedShakingBuilder(
                                 autoPlay: isDragged,
                                 child: DisplayText(
                                   maxFontSize: 20,
-                                  text: 'Hobbies',
+                                  text: widget.hobbiesPlaceholder ?? 'Hobbies',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineLarge
@@ -187,34 +225,60 @@ class _LayoutModernState extends State<LayoutModern> {
                               AnimatedShakingBuilder(
                                 autoPlay: isDragged,
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Config.spaceBox(Config.smallSpacer),
-                                    DisplayText(
-                                      text: 'Running',
-                                      maxLines: 10,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                    Config.spaceBox(Config.smallSpacer),
-                                    DisplayText(
-                                      text: 'Languages',
-                                      maxLines: 10,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                    Config.spaceBox(Config.smallSpacer),
-                                    DisplayText(
-                                      text: 'Programming',
-                                      maxLines: 10,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                  ],
-                                ),
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: widget.data.hobbies != null
+                                        ? List.generate(
+                                            widget.data.hobbies!.length,
+                                            (index) => Column(
+                                              children: [
+                                                Config.spaceBox(
+                                                    Config.smallSpacer),
+                                                DisplayText(
+                                                  text: widget
+                                                      .data.hobbies?[index],
+                                                  maxLines: 10,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                Config.spaceBox(
+                                                    Config.smallSpacer),
+                                              ],
+                                            ),
+                                          )
+                                        : [
+                                            Column(
+                                              children: [
+                                                Config.spaceBox(
+                                                    Config.smallSpacer),
+                                                DisplayText(
+                                                  text: 'Running',
+                                                  maxLines: 10,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                Config.spaceBox(
+                                                    Config.smallSpacer),
+                                                DisplayText(
+                                                  text: 'Languages',
+                                                  maxLines: 10,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                                Config.spaceBox(
+                                                    Config.smallSpacer),
+                                                DisplayText(
+                                                  text: 'Programming',
+                                                  maxLines: 10,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall,
+                                                ),
+                                              ],
+                                            ),
+                                          ]),
                               ),
                             ],
                           ),
@@ -273,7 +337,9 @@ class _LayoutModernState extends State<LayoutModern> {
                                               children: [
                                                 DisplayText(
                                                   maxFontSize: 16,
-                                                  text: 'Email',
+                                                  text:
+                                                      widget.emailPlaceHolder ??
+                                                          'Email',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineLarge
@@ -297,7 +363,8 @@ class _LayoutModernState extends State<LayoutModern> {
                                               children: [
                                                 DisplayText(
                                                   maxFontSize: 16,
-                                                  text: 'Tel:',
+                                                  text: widget.telPlaceHolder ??
+                                                      'Tel:',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .titleSmall
@@ -318,18 +385,20 @@ class _LayoutModernState extends State<LayoutModern> {
                                       ),
                                     ),
                                     Config.spaceBox(Config.smallSpacer),
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        SHDivider(),
+                                        if (widget.enableDividers!)
+                                          const SHDivider(),
                                       ],
                                     ),
                                     Config.spaceBox(Config.mediumSpacer),
                                     AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
-                                        text: 'Experience',
+                                        text: widget.experiencePlaceHolder ??
+                                            'Experience',
                                         maxFontSize: 16,
                                         style: Theme.of(context)
                                             .textTheme
@@ -357,6 +426,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                                   children: [
                                                     DisplayText(
                                                       maxFontSize: 16,
+                                                      maxLines: 4,
                                                       text: widget
                                                           .data
                                                           .experience![i]
@@ -406,7 +476,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                                 maxFontSize: 14,
                                                 text: widget.data.experience![i]
                                                     .experienceDescription,
-                                                maxLines: 20,
+                                                maxLines: 5,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .titleSmall,
@@ -417,18 +487,20 @@ class _LayoutModernState extends State<LayoutModern> {
                                           ],
                                         ),
                                       ),
-                                    const Row(
+                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        SHDivider(),
+                                        if (widget.enableDividers!)
+                                          const SHDivider(),
                                       ],
                                     ),
                                     Config.spaceBox(Config.mediumSpacer),
                                     AnimatedShakingBuilder(
                                       autoPlay: isDragged,
                                       child: DisplayText(
-                                        text: 'Education',
+                                        text: widget.educationPlaceHolder ??
+                                            'Education',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineLarge
@@ -446,7 +518,11 @@ class _LayoutModernState extends State<LayoutModern> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             DisplayText(
-                                              text: widget.data.education,
+                                              text: widget
+                                                      .data
+                                                      .educationDetails?[0]
+                                                      .schoolName ??
+                                                  'University Name ',
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -454,7 +530,11 @@ class _LayoutModernState extends State<LayoutModern> {
                                                   ?.copyWith(fontSize: 12),
                                             ),
                                             DisplayText(
-                                              text: 'Bachelor Degree',
+                                              text: widget
+                                                      .data
+                                                      .educationDetails?[0]
+                                                      .schoolLevel ??
+                                                  'Bachelor Degree',
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -476,7 +556,11 @@ class _LayoutModernState extends State<LayoutModern> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             DisplayText(
-                                              text: 'Yale University',
+                                              text: widget
+                                                      .data
+                                                      .educationDetails?[0]
+                                                      .schoolName ??
+                                                  'Yale University',
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -484,7 +568,11 @@ class _LayoutModernState extends State<LayoutModern> {
                                                   ?.copyWith(fontSize: 12),
                                             ),
                                             DisplayText(
-                                              text: 'Post Graduate',
+                                              text: widget
+                                                      .data
+                                                      .educationDetails?[1]
+                                                      .schoolLevel ??
+                                                  'Post Graduate',
                                               maxLines: 10,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -500,7 +588,8 @@ class _LayoutModernState extends State<LayoutModern> {
                                       autoPlay: isDragged,
                                       child: DisplayText(
                                         maxFontSize: 18,
-                                        text: 'Languages',
+                                        text: widget.languagePlaceHolder ??
+                                            'Languages',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineLarge
@@ -516,8 +605,12 @@ class _LayoutModernState extends State<LayoutModern> {
                                           width: widget.w,
                                           child: RatingWidget(
                                             autoplay: isDragged,
-                                            title: 'English',
-                                            rating: 5,
+                                            title: widget.data.languages?[0]
+                                                    .language ??
+                                                'English',
+                                            rating: widget
+                                                    .data.languages?[1].level ??
+                                                5,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall
@@ -534,8 +627,12 @@ class _LayoutModernState extends State<LayoutModern> {
                                         width: widget.w,
                                         child: RatingWidget(
                                           autoplay: isDragged,
-                                          title: 'French',
-                                          rating: 4,
+                                          title: widget.data.languages?[1]
+                                                  .language ??
+                                              'French',
+                                          rating:
+                                              widget.data.languages?[1].level ??
+                                                  4,
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall
@@ -561,15 +658,18 @@ class _LayoutModernState extends State<LayoutModern> {
           ),
         ),
         if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-          AnimateButton(
-              onDragged: () => setState(
-                    () {
-                      _controller.value = Matrix4.identity();
-                      isDragged = !isDragged;
-                    },
-                  ),
-              onSave: _save,
-              isDragged: isDragged)
+          Align(
+            alignment: Alignment.bottomRight,
+            child: AnimateButton(
+                onDragged: () => setState(
+                      () {
+                        _controller.value = Matrix4.identity();
+                        isDragged = !isDragged;
+                      },
+                    ),
+                onSave: _save,
+                isDragged: isDragged),
+          )
       ],
     );
   }

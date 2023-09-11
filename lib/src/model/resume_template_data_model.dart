@@ -8,6 +8,10 @@ class TemplateData {
   /// template type.
   ///
   final String fullName;
+  final List<String>? hobbies;
+  final List<Education>? educationDetails;
+  final List<Language>? languages;
+
   final String? currentPosition,
       street,
       address,
@@ -15,7 +19,6 @@ class TemplateData {
       email,
       phoneNumber,
       bio,
-      education,
       image;
   List<ExperienceData>? experience;
 
@@ -29,8 +32,10 @@ class TemplateData {
       this.phoneNumber,
       this.bio,
       this.experience,
-      this.education,
-      this.image});
+      this.educationDetails,
+      this.image,
+      this.hobbies,
+      this.languages});
 }
 
 class ExperienceData {
@@ -45,4 +50,18 @@ class ExperienceData {
       required this.experiencePeriod,
       required this.experienceLocation,
       required this.experienceDescription});
+}
+
+class Education {
+  final String schoolLevel;
+  final String schoolName;
+
+  Education(this.schoolLevel, this.schoolName);
+}
+
+class Language {
+  final String language;
+  final int level;
+
+  Language(this.language, this.level);
 }
