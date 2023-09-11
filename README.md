@@ -150,6 +150,8 @@ class MyResumePage extends StatelessWidget {
 }
 ```
 
+## Additional Information
+
 ```dart
 // To create your own template set the [TemplateTheme.none]
 FlutterResumeTemplate(
