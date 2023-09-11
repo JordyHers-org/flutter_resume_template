@@ -124,553 +124,658 @@ class _LayoutModernState extends State<LayoutModern> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        AbsorbPointer(
-          absorbing: absorbing,
-          child: InteractiveViewer(
-            transformationController: _controller,
-            panEnabled: false,
-            boundaryMargin: EdgeInsets.all(Config.mediumSpacer),
-            maxScale: Config.fourPx,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Container(
-                color: widget.backgroundColor,
-                height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.05,
-                width: widget.w < 400 ? widget.w : widget.w * 0.9,
-                constraints: BoxConstraints(
-                  minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1.1,
-                  minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.9,
-                ),
-                child: RepaintBoundary(
-                  key: globalKey,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          padding: Config.padding.padding,
-                          height: widget.h,
-                          color: Theme.of(context).primaryColor,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Config.spaceBox(Config.largeSpacer),
-                              if (Helper.isTestMode)
-                                AnimatedShakingBuilder(
-                                  autoPlay: isDragged,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                        widget.imageRadius ?? 100.0),
-                                    child: Image.network(
-                                      widget.data.image ?? Str.resumeHeader,
-                                      height: widget.imageHeight ?? 100,
-                                      width: widget.imageWidth ?? 90,
-                                      fit:
-                                          widget.imageBoxFit ?? BoxFit.fitWidth,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Stack(
+        children: [
+          AbsorbPointer(
+            absorbing: absorbing,
+            child: InteractiveViewer(
+              transformationController: _controller,
+              panEnabled: false,
+              boundaryMargin: EdgeInsets.all(Config.mediumSpacer),
+              maxScale: Config.fourPx,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Container(
+                  color: widget.backgroundColor,
+                  height: widget.h < 670 ? widget.h * 1.2 : widget.h * 1.7,
+                  width: widget.w < 400 ? widget.w : widget.w * 1.2,
+                  constraints: BoxConstraints(
+                    minWidth: widget.w < 400 ? widget.w * 1.2 : widget.w * 1,
+                    minHeight: widget.h < 670 ? widget.h * 1.2 : widget.h * 0.5,
+                    maxHeight: double.maxFinite,
+                    maxWidth: double.maxFinite,
+                  ),
+                  child: RepaintBoundary(
+                    key: globalKey,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: SizedBox(
+                        height: widget.h * 1.4,
+                        width: widget.w * 1.05,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    padding: Config.padding.padding,
+                                    height: widget.h,
+                                    color: Theme.of(context).primaryColor,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Config.spaceBox(Config.largeSpacer),
+                                        if (Helper.isTestMode)
+                                          AnimatedShakingBuilder(
+                                            autoPlay: isDragged,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      widget.imageRadius ??
+                                                          100.0),
+                                              child: Image.network(
+                                                widget.data.image ??
+                                                    Str.resumeHeader,
+                                                height:
+                                                    widget.imageHeight ?? 100,
+                                                width: widget.imageWidth ?? 90,
+                                                fit: widget.imageBoxFit ??
+                                                    BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        Config.spaceBox(Config.smallSpacer),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: DisplayText(
+                                            maxFontSize: 30,
+                                            text: widget.aboutMePlaceholder ??
+                                                'ABOUT ME',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge
+                                                ?.copyWith(
+                                                  letterSpacing: 1.2,
+                                                  color: Colors.deepOrange,
+                                                ),
+                                          ),
+                                        ),
+                                        Config.spaceBox(Config.smallSpacer),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: DisplayText(
+                                            text: widget.data.bio,
+                                            maxFontSize: 15,
+                                            maxLines: 25,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall
+                                                ?.copyWith(
+                                                    fontSize: 12,
+                                                    color: Colors.white),
+                                          ),
+                                        ),
+                                        Config.spaceBox(Config.smallSpacer),
+                                        if (widget.enableDividers!)
+                                          Padding(
+                                            padding: Config.padding.padding,
+                                            child: const SHDivider(),
+                                          )
+                                        else
+                                          Padding(
+                                            padding: Config.padding.padding,
+                                          ),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: DisplayText(
+                                            maxFontSize: 20,
+                                            text: widget.hobbiesPlaceholder ??
+                                                'Hobbies',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge
+                                                ?.copyWith(fontSize: 17),
+                                          ),
+                                        ),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: widget.data.hobbies !=
+                                                      null
+                                                  ? List.generate(
+                                                      widget
+                                                          .data.hobbies!.length,
+                                                      (index) => Column(
+                                                        children: [
+                                                          Config.spaceBox(Config
+                                                              .smallSpacer),
+                                                          DisplayText(
+                                                            text: widget.data
+                                                                    .hobbies?[
+                                                                index],
+                                                            maxLines: 10,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall
+                                                                ?.copyWith(
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                          Config.spaceBox(Config
+                                                              .smallSpacer),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : [
+                                                      Column(
+                                                        children: [
+                                                          Config.spaceBox(Config
+                                                              .smallSpacer),
+                                                          DisplayText(
+                                                            text: 'Running',
+                                                            maxLines: 10,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall,
+                                                          ),
+                                                          Config.spaceBox(Config
+                                                              .smallSpacer),
+                                                          DisplayText(
+                                                            text: 'Languages',
+                                                            maxLines: 10,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall,
+                                                          ),
+                                                          Config.spaceBox(Config
+                                                              .smallSpacer),
+                                                          DisplayText(
+                                                            text: 'Programming',
+                                                            maxLines: 10,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ]),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              Config.spaceBox(Config.smallSpacer),
-                              AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: DisplayText(
-                                  maxFontSize: 30,
-                                  text: widget.aboutMePlaceholder ?? 'ABOUT ME',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge
-                                      ?.copyWith(
-                                        letterSpacing: 1.2,
-                                        color: Colors.deepOrange,
-                                      ),
-                                ),
-                              ),
-                              Config.spaceBox(Config.smallSpacer),
-                              AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: DisplayText(
-                                  text: widget.data.bio,
-                                  maxFontSize: 15,
-                                  maxLines: 25,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall
-                                      ?.copyWith(
-                                          fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                              Config.spaceBox(Config.smallSpacer),
-                              if (widget.enableDividers!)
-                                Padding(
-                                  padding: Config.padding.padding,
-                                  child: const SHDivider(),
-                                )
-                              else
-                                Padding(
-                                  padding: Config.padding.padding,
-                                ),
-                              AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: DisplayText(
-                                  maxFontSize: 20,
-                                  text: widget.hobbiesPlaceholder ?? 'Hobbies',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineLarge
-                                      ?.copyWith(fontSize: 17),
-                                ),
-                              ),
-                              AnimatedShakingBuilder(
-                                autoPlay: isDragged,
-                                child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: widget.data.hobbies != null
-                                        ? List.generate(
-                                            widget.data.hobbies!.length,
-                                            (index) => Column(
-                                              children: [
-                                                Config.spaceBox(
-                                                    Config.smallSpacer),
-                                                DisplayText(
+                                Expanded(
+                                  flex: 6,
+                                  child: SizedBox(
+                                    height: widget.h,
+                                    width: widget.w,
+                                    child: Padding(
+                                      padding: Config.dtHorPad.padding,
+                                      child: Wrap(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Config.spaceBox(
+                                                  Config.smallSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 20,
+                                                  text: widget.data.fullName,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge
+                                                      ?.copyWith(
+                                                        letterSpacing: 1.2,
+                                                        fontSize: 18,
+                                                      ),
+                                                ),
+                                              ),
+                                              Config.spaceBox(Config.fourPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
                                                   text: widget
-                                                      .data.hobbies?[index],
-                                                  maxLines: 10,
+                                                      .data.currentPosition,
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .titleSmall,
+                                                      .titleMedium
+                                                      ?.copyWith(
+                                                          letterSpacing: 1.2),
                                                 ),
-                                                Config.spaceBox(
-                                                    Config.smallSpacer),
-                                              ],
-                                            ),
-                                          )
-                                        : [
-                                            Column(
-                                              children: [
-                                                Config.spaceBox(
-                                                    Config.smallSpacer),
-                                                DisplayText(
-                                                  text: 'Running',
-                                                  maxLines: 10,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall,
+                                              ),
+                                              Config.spaceBox(
+                                                  Config.mediumSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SizedBox(
+                                                  width: widget.w,
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          DisplayText(
+                                                            maxFontSize: 16,
+                                                            text: widget
+                                                                    .emailPlaceHolder ??
+                                                                'Email',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .headlineLarge
+                                                                ?.copyWith(
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                          DisplayText(
+                                                            maxFontSize: 16,
+                                                            text: widget
+                                                                .data.email,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .displaySmall
+                                                                ?.copyWith(
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          DisplayText(
+                                                            maxFontSize: 16,
+                                                            text: widget
+                                                                    .telPlaceHolder ??
+                                                                'Tel:',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall
+                                                                ?.copyWith(
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                          DisplayText(
+                                                            maxFontSize: 16,
+                                                            text: widget.data
+                                                                .phoneNumber,
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .displaySmall
+                                                                ?.copyWith(
+                                                                    fontSize:
+                                                                        14),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Config.spaceBox(
-                                                    Config.smallSpacer),
-                                                DisplayText(
-                                                  text: 'Languages',
-                                                  maxLines: 10,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall,
-                                                ),
-                                                Config.spaceBox(
-                                                    Config.smallSpacer),
-                                                DisplayText(
-                                                  text: 'Programming',
-                                                  maxLines: 10,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall,
-                                                ),
-                                              ],
-                                            ),
-                                          ]),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 6,
-                        child: SizedBox(
-                          height: widget.h,
-                          width: widget.w,
-                          child: Padding(
-                            padding: Config.dtHorPad.padding,
-                            child: Wrap(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Config.spaceBox(Config.smallSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        maxFontSize: 20,
-                                        text: widget.data.fullName,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge
-                                            ?.copyWith(
-                                              letterSpacing: 1.2,
-                                              fontSize: 18,
-                                            ),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.fourPx),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        text: widget.data.currentPosition,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(letterSpacing: 1.2),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.mediumSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: SizedBox(
-                                        width: widget.w,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DisplayText(
+                                              ),
+                                              Config.spaceBox(
+                                                  Config.smallSpacer),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  if (widget.enableDividers!)
+                                                    const SHDivider(),
+                                                ],
+                                              ),
+                                              Config.spaceBox(
+                                                  Config.mediumSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  text: widget
+                                                          .experiencePlaceHolder ??
+                                                      'Experience',
                                                   maxFontSize: 16,
-                                                  text:
-                                                      widget.emailPlaceHolder ??
-                                                          'Email',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineLarge
                                                       ?.copyWith(fontSize: 14),
                                                 ),
-                                                DisplayText(
-                                                  maxFontSize: 16,
-                                                  text: widget.data.email,
+                                              ),
+                                              Config.spaceBox(
+                                                  Config.smallSpacer),
+                                              if (widget.data.experience !=
+                                                      null &&
+                                                  widget.data.experience!
+                                                      .isNotEmpty)
+                                                ...List<Widget>.generate(
+                                                  widget
+                                                      .data.experience!.length,
+                                                  (i) => Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      AnimatedShakingBuilder(
+                                                        autoPlay: isDragged,
+                                                        child: SizedBox(
+                                                          width: widget.w,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              DisplayText(
+                                                                maxFontSize: 16,
+                                                                maxLines: 4,
+                                                                text: widget
+                                                                    .data
+                                                                    .experience![
+                                                                        i]
+                                                                    .experienceTitle,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .titleSmall
+                                                                    ?.copyWith(
+                                                                        fontSize:
+                                                                            14,
+                                                                        letterSpacing:
+                                                                            1.2,
+                                                                        color: Colors
+                                                                            .deepOrange),
+                                                              ),
+                                                              DisplayText(
+                                                                  text: widget
+                                                                      .data
+                                                                      .experience![
+                                                                          i]
+                                                                      .experiencePeriod,
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .bodySmall
+                                                                      ?.copyWith(
+                                                                          fontSize:
+                                                                              13)),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      AnimatedShakingBuilder(
+                                                        autoPlay: isDragged,
+                                                        child: DisplayText(
+                                                          text: widget
+                                                              .data
+                                                              .experience![i]
+                                                              .experienceLocation,
+                                                          maxLines: 10,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .titleSmall
+                                                                  ?.copyWith(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                        ),
+                                                      ),
+                                                      Config.spaceBox(
+                                                          Config.smallSpacer),
+                                                      AnimatedShakingBuilder(
+                                                        autoPlay: isDragged,
+                                                        child: DisplayText(
+                                                          maxFontSize: 14,
+                                                          text: widget
+                                                              .data
+                                                              .experience![i]
+                                                              .experienceDescription,
+                                                          maxLines: 5,
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .titleSmall,
+                                                        ),
+                                                      ),
+                                                      Config.spaceBox(
+                                                          Config.mediumSpacer),
+                                                    ],
+                                                  ),
+                                                ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  if (widget.enableDividers!)
+                                                    const SHDivider(),
+                                                ],
+                                              ),
+                                              Config.spaceBox(
+                                                  Config.mediumSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  text: widget
+                                                          .educationPlaceHolder ??
+                                                      'Education',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .displaySmall
+                                                      .headlineLarge
                                                       ?.copyWith(fontSize: 14),
                                                 ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DisplayText(
-                                                  maxFontSize: 16,
-                                                  text: widget.telPlaceHolder ??
-                                                      'Tel:',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall
-                                                      ?.copyWith(fontSize: 14),
-                                                ),
-                                                DisplayText(
-                                                  maxFontSize: 16,
-                                                  text: widget.data.phoneNumber,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .displaySmall
-                                                      ?.copyWith(fontSize: 14),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.smallSpacer),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        if (widget.enableDividers!)
-                                          const SHDivider(),
-                                      ],
-                                    ),
-                                    Config.spaceBox(Config.mediumSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        text: widget.experiencePlaceHolder ??
-                                            'Experience',
-                                        maxFontSize: 16,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge
-                                            ?.copyWith(fontSize: 14),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.smallSpacer),
-                                    if (widget.data.experience != null &&
-                                        widget.data.experience!.isNotEmpty)
-                                      ...List<Widget>.generate(
-                                        widget.data.experience!.length,
-                                        (i) => Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            AnimatedShakingBuilder(
-                                              autoPlay: isDragged,
-                                              child: SizedBox(
-                                                width: widget.w,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    DisplayText(
-                                                      maxFontSize: 16,
-                                                      maxLines: 4,
-                                                      text: widget
-                                                          .data
-                                                          .experience![i]
-                                                          .experienceTitle,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleSmall
-                                                          ?.copyWith(
-                                                              fontSize: 14,
-                                                              letterSpacing:
-                                                                  1.2,
-                                                              color: Colors
-                                                                  .deepOrange),
-                                                    ),
-                                                    DisplayText(
+                                              ),
+                                              Config.spaceBox(Config.eightPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SizedBox(
+                                                  width: widget.w,
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      DisplayText(
                                                         text: widget
-                                                            .data
-                                                            .experience![i]
-                                                            .experiencePeriod,
+                                                                .data
+                                                                .educationDetails?[
+                                                                    0]
+                                                                .schoolName ??
+                                                            'University Name ',
+                                                        maxLines: 10,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .titleSmall
+                                                            ?.copyWith(
+                                                                fontSize: 12),
+                                                      ),
+                                                      DisplayText(
+                                                        text: widget
+                                                                .data
+                                                                .educationDetails?[
+                                                                    0]
+                                                                .schoolLevel ??
+                                                            'Bachelor Degree',
+                                                        maxLines: 10,
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodySmall
                                                             ?.copyWith(
-                                                                fontSize: 13)),
-                                                  ],
+                                                                fontSize: 12),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            AnimatedShakingBuilder(
-                                              autoPlay: isDragged,
-                                              child: DisplayText(
-                                                text: widget.data.experience![i]
-                                                    .experienceLocation,
-                                                maxLines: 10,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleSmall
-                                                    ?.copyWith(
-                                                      fontSize: 14,
-                                                    ),
+                                              Config.spaceBox(
+                                                  Config.smallSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SizedBox(
+                                                  width: widget.w,
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      DisplayText(
+                                                        text: widget
+                                                                .data
+                                                                .educationDetails?[
+                                                                    0]
+                                                                .schoolName ??
+                                                            'Yale University',
+                                                        maxLines: 10,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .titleSmall
+                                                            ?.copyWith(
+                                                                fontSize: 12),
+                                                      ),
+                                                      DisplayText(
+                                                        text: widget
+                                                                .data
+                                                                .educationDetails?[
+                                                                    1]
+                                                                .schoolLevel ??
+                                                            'Post Graduate',
+                                                        maxLines: 10,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodySmall
+                                                            ?.copyWith(
+                                                                fontSize: 12),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            Config.spaceBox(Config.smallSpacer),
-                                            AnimatedShakingBuilder(
-                                              autoPlay: isDragged,
-                                              child: DisplayText(
-                                                maxFontSize: 14,
-                                                text: widget.data.experience![i]
-                                                    .experienceDescription,
-                                                maxLines: 5,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleSmall,
+                                              Config.spaceBox(
+                                                  Config.mediumSpacer),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: DisplayText(
+                                                  maxFontSize: 18,
+                                                  text: widget
+                                                          .languagePlaceHolder ??
+                                                      'Languages',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge
+                                                      ?.copyWith(
+                                                        fontSize: 14,
+                                                      ),
+                                                ),
                                               ),
-                                            ),
-                                            Config.spaceBox(
-                                                Config.mediumSpacer),
-                                          ],
-                                        ),
-                                      ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        if (widget.enableDividers!)
-                                          const SHDivider(),
-                                      ],
-                                    ),
-                                    Config.spaceBox(Config.mediumSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        text: widget.educationPlaceHolder ??
-                                            'Education',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge
-                                            ?.copyWith(fontSize: 14),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.eightPx),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: SizedBox(
-                                        width: widget.w,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            DisplayText(
-                                              text: widget
-                                                      .data
-                                                      .educationDetails?[0]
-                                                      .schoolName ??
-                                                  'University Name ',
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ),
-                                            DisplayText(
-                                              text: widget
-                                                      .data
-                                                      .educationDetails?[0]
-                                                      .schoolLevel ??
-                                                  'Bachelor Degree',
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
+                                              Config.spaceBox(Config.eightPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SizedBox(
+                                                    width: widget.w,
+                                                    child: RatingWidget(
+                                                      autoplay: isDragged,
+                                                      title: widget
+                                                              .data
+                                                              .languages?[0]
+                                                              .language ??
+                                                          'English',
+                                                      rating: widget
+                                                              .data
+                                                              .languages?[1]
+                                                              .level ??
+                                                          5,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleSmall
+                                                          ?.copyWith(
+                                                              fontSize: 13,
+                                                              letterSpacing:
+                                                                  0.8,
+                                                              color:
+                                                                  Colors.grey),
+                                                    )),
+                                              ),
+                                              Config.spaceBox(Config.eightPx),
+                                              AnimatedShakingBuilder(
+                                                autoPlay: isDragged,
+                                                child: SizedBox(
+                                                  width: widget.w,
+                                                  child: RatingWidget(
+                                                    autoplay: isDragged,
+                                                    title: widget
+                                                            .data
+                                                            .languages?[1]
+                                                            .language ??
+                                                        'French',
+                                                    rating: widget
+                                                            .data
+                                                            .languages?[1]
+                                                            .level ??
+                                                        4,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleSmall
+                                                        ?.copyWith(
+                                                            fontSize: 13,
+                                                            letterSpacing: 0.8,
+                                                            color: Colors.grey),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
                                       ),
                                     ),
-                                    Config.spaceBox(Config.smallSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: SizedBox(
-                                        width: widget.w,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            DisplayText(
-                                              text: widget
-                                                      .data
-                                                      .educationDetails?[0]
-                                                      .schoolName ??
-                                                  'Yale University',
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ),
-                                            DisplayText(
-                                              text: widget
-                                                      .data
-                                                      .educationDetails?[1]
-                                                      .schoolLevel ??
-                                                  'Post Graduate',
-                                              maxLines: 10,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodySmall
-                                                  ?.copyWith(fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.mediumSpacer),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: DisplayText(
-                                        maxFontSize: 18,
-                                        text: widget.languagePlaceHolder ??
-                                            'Languages',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge
-                                            ?.copyWith(
-                                              fontSize: 14,
-                                            ),
-                                      ),
-                                    ),
-                                    Config.spaceBox(Config.eightPx),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: SizedBox(
-                                          width: widget.w,
-                                          child: RatingWidget(
-                                            autoplay: isDragged,
-                                            title: widget.data.languages?[0]
-                                                    .language ??
-                                                'English',
-                                            rating: widget
-                                                    .data.languages?[1].level ??
-                                                5,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall
-                                                ?.copyWith(
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.8,
-                                                    color: Colors.grey),
-                                          )),
-                                    ),
-                                    Config.spaceBox(Config.eightPx),
-                                    AnimatedShakingBuilder(
-                                      autoPlay: isDragged,
-                                      child: SizedBox(
-                                        width: widget.w,
-                                        child: RatingWidget(
-                                          autoplay: isDragged,
-                                          title: widget.data.languages?[1]
-                                                  .language ??
-                                              'French',
-                                          rating:
-                                              widget.data.languages?[1].level ??
-                                                  4,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall
-                                              ?.copyWith(
-                                                  fontSize: 13,
-                                                  letterSpacing: 0.8,
-                                                  color: Colors.grey),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-          Align(
-            alignment: Alignment.bottomRight,
-            child: AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged),
-          )
-      ],
+          if (widget.mode == TemplateMode.shakeEditAndSaveMode)
+            Align(
+              alignment: Alignment.bottomRight,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
+        ],
+      ),
     );
   }
 }
