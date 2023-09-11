@@ -84,21 +84,65 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final SaveResume<GlobalKey>? onSaveResume;
 
+  /// The [backgroundColor] only changes the background color of the
+  /// Resume template. Pay attention the entire scaffold color
+  /// does not change. The placeholder value of the Section title.
+  ///
   final Color? backgroundColor;
 
+  /// The [aboutMePlaceholder] changes the value of the commonly used
+  /// about me or biography section. The placeholder value
+  /// of the Section title.
+  ///
   final String? aboutMePlaceholder;
+
+  /// The [educationPlaceHolder] changes the value of the commonly used
+  /// education section holding as values the school name and the grade or
+  /// education level. The placeholder value of the Section title.
+  ///
   final String? educationPlaceHolder;
+
+  /// The [hobbiesPlaceholder] changes the value of the commonly used
+  /// hobby section. Skills can be used too  The placeholder value of
+  /// the Section title.
+  ///
   final String? hobbiesPlaceholder;
+
+  /// The [emailPlaceHolder] changes the value of the commonly used
+  /// email. The placeholder value of the Section title.
+  ///
   final String? emailPlaceHolder;
+
+  /// The [telPlaceHolder] changes the value of the commonly used
+  /// telephone. The placeholder value of the Section title.
+  ///
   final String? telPlaceHolder;
+
+  /// The [experiencePlaceHolder] changes the value of the commonly used
+  /// experience. The placeholder value of the Experience Section title.
+  ///
   final String? experiencePlaceHolder;
+
+  /// The [languagePlaceHolder] changes the value of the commonly used
+  /// experience. The placeholder value of the Language Section title.
+  ///
   final String? languagePlaceHolder;
 
+  /// The [imageHeight]
   final double? imageHeight;
+
+  /// The [imageWidth]
   final double? imageWidth;
+
+  /// The [imageRadius]
   final double? imageRadius;
+
+  /// The [imageBoxFit]
   final BoxFit? imageBoxFit;
 
+  /// This [enableDivider] will enable or disable all
+  /// the dividers in several section. Note that all
+  /// the template do not have `SHDivider`
   final bool? enableDivider;
 
   const FlutterResumeTemplate({
