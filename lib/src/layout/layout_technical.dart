@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
-import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -24,11 +23,13 @@ import '../components/section_rating_widget.dart';
 class LayoutTechnical extends StatefulWidget {
   LayoutTechnical({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -42,6 +43,8 @@ class LayoutTechnical extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
+    this.height,
+    this.width,
   })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
@@ -49,6 +52,13 @@ class LayoutTechnical extends StatefulWidget {
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -155,33 +165,31 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 2.9,
-                        width: widget.w * 1.6,
+                        height: widget.height ?? widget.h * 2.9,
+                        width: widget.width ?? widget.w * 1.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            if (Helper.isTestMode)
-                              Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(Str.backgroundImage),
-                                    fit: BoxFit.cover,
-                                  ),
+                            Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(Str.backgroundImage),
+                                  fit: BoxFit.cover,
                                 ),
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: 400,
-                                  child: Container(
-                                    alignment: const Alignment(0.0, 1.3),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          widget.data.image ??
-                                              Str.resumeHeader),
-                                      radius: 70.0,
-                                    ),
+                              ),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 400,
+                                child: Container(
+                                  alignment: const Alignment(0.0, 1.3),
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        widget.data.image ?? Str.resumeHeader),
+                                    radius: 70.0,
                                   ),
                                 ),
                               ),
+                            ),
                             Config.spaceBox(60.0),
                             Center(
                               child: AnimatedShakingBuilder(
@@ -526,15 +534,18 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged)
+            Visibility(
+              visible: widget.showButtons,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
         ],
       ),
     );

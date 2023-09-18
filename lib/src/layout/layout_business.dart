@@ -25,6 +25,7 @@ import '../utils/strings.dart';
 class LayoutBusiness extends StatefulWidget {
   LayoutBusiness({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
@@ -44,6 +45,8 @@ class LayoutBusiness extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
+    this.height,
+    this.width,
   })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
@@ -51,6 +54,12 @@ class LayoutBusiness extends StatefulWidget {
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
   final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
@@ -161,8 +170,8 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: SizedBox(
-                          height: widget.h * 2.5,
-                          width: widget.w * 1.6,
+                          height: widget.height ?? widget.h * 2.5,
+                          width: widget.width ?? widget.w * 1.6,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Config.tenPx,
@@ -546,15 +555,18 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged)
+            Visibility(
+              visible: widget.showButtons,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
         ],
       ),
     );

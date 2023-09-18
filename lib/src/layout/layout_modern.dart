@@ -3,7 +3,6 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
-import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -23,6 +22,7 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 class LayoutModern extends StatefulWidget {
   LayoutModern({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
@@ -42,6 +42,8 @@ class LayoutModern extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
+    this.height,
+    this.width,
   })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
@@ -49,6 +51,12 @@ class LayoutModern extends StatefulWidget {
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
   final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
@@ -108,7 +116,7 @@ class _LayoutModernState extends State<LayoutModern> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -152,8 +160,8 @@ class _LayoutModernState extends State<LayoutModern> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 1.5,
-                        width: widget.w * 1.05,
+                        height: widget.height ?? widget.h * 1.5,
+                        width: widget.width ?? widget.w * 1.05,
                         child: Column(
                           children: [
                             Row(
@@ -169,25 +177,21 @@ class _LayoutModernState extends State<LayoutModern> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Config.spaceBox(Config.largeSpacer),
-                                        if (Helper.isTestMode)
-                                          AnimatedShakingBuilder(
-                                            autoPlay: isDragged,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      widget.imageRadius ??
-                                                          100.0),
-                                              child: Image.network(
-                                                widget.data.image ??
-                                                    Str.resumeHeader,
-                                                height:
-                                                    widget.imageHeight ?? 100,
-                                                width: widget.imageWidth ?? 90,
-                                                fit: widget.imageBoxFit ??
-                                                    BoxFit.fitWidth,
-                                              ),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                widget.imageRadius ?? 100.0),
+                                            child: Image.network(
+                                              widget.data.image ??
+                                                  Str.resumeHeader,
+                                              height: widget.imageHeight ?? 100,
+                                              width: widget.imageWidth ?? 90,
+                                              fit: widget.imageBoxFit ??
+                                                  BoxFit.fitWidth,
                                             ),
                                           ),
+                                        ),
                                         Config.spaceBox(Config.smallSpacer),
                                         AnimatedShakingBuilder(
                                           autoPlay: isDragged,
@@ -774,15 +778,18 @@ class _LayoutModernState extends State<LayoutModern> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged)
+            Visibility(
+              visible: widget.showButtons,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
         ],
       ),
     );
