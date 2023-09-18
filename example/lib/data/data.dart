@@ -55,7 +55,7 @@ Responsibilities:
 ''';
 
 const String bio = '''
-I am a genuine Flutter developer with four years of valuable experience in both front-end and back-end development. 
+I am a dedicated Flutter developer with four years of valuable experience in both front-end and back-end development. 
 My expertise lies in crafting robust and user-friendly applications using the Flutter framework. 
 Having worked on projects of all sizes, I possess a deep understanding of the development 
 lifecycle and a proven ability to deliver high-quality solutions.
@@ -74,12 +74,12 @@ I thrive in collaborative environments and enjoy working closely with cross-func
 ''';
 
 TemplateData data = TemplateData(
-    fullName: 'Jordy Hershel Igondjo',
+    fullName: 'Alicia Smith',
     currentPosition: 'Flutter Developer',
     street: 'Curvy Str. 53',
     address: 'Berlin, 14568',
     country: 'Germany',
-    email: 'jordyhershel@wuerth.com',
+    email: 'aliciasmith@wuerth.com',
     phoneNumber: '+ 49 (106)341 753 12',
     bio: bio,
     experience: [
@@ -96,13 +96,6 @@ TemplateData data = TemplateData(
         experiencePeriod: 'Aug 2021 - Dec 2023',
         experiencePlace: 'London',
         experienceDescription: workExperienceCompany2,
-      ),
-      ExperienceData(
-        experienceTitle: 'Flutter Developer',
-        experienceLocation: 'Uk . London',
-        experiencePeriod: 'Aug 2021 - Dec 2023',
-        experiencePlace: 'London',
-        experienceDescription: workExperienceCompany3,
       ),
       ExperienceData(
         experienceTitle: 'Flutter Developer',
@@ -130,4 +123,6 @@ TemplateData data = TemplateData(
       'Vintage Art Collection'
     ],
     image:
-        'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    backgroundImage:
+        'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');

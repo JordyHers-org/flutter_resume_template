@@ -91,6 +91,11 @@ class FlutterResumeTemplate extends StatefulWidget {
   ///
   final Color? backgroundColor;
 
+  /// The [backgroundColorLeftSection] only changes the background color of the
+  /// left section of Resume template when the mode is [Modern]
+  ///
+  final Color? backgroundColorLeftSection;
+
   /// The [aboutMePlaceholder] changes the value of the commonly used
   /// about me or biography section. The placeholder value
   /// of the Section title.
@@ -162,8 +167,6 @@ class FlutterResumeTemplate extends StatefulWidget {
   const FlutterResumeTemplate({
     Key? key,
     required this.templateTheme,
-    this.mode = TemplateMode.onlyEditableMode,
-    this.showButtons = true,
     this.data,
     this.maxLinesExperience,
     this.onEmpty,
@@ -180,9 +183,12 @@ class FlutterResumeTemplate extends StatefulWidget {
     this.imageWidth,
     this.imageRadius,
     this.imageBoxFit,
-    this.enableDivider = true,
     this.height,
     this.width,
+    this.enableDivider = true,
+    this.showButtons = true,
+    this.backgroundColorLeftSection,
+    this.mode = TemplateMode.onlyEditableMode,
   })  : assert(data != null || onEmpty != null),
         super(key: key);
 
@@ -217,6 +223,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               emailPlaceHolder: widget.emailPlaceHolder,
               aboutMePlaceholder: widget.aboutMePlaceholder,
               experiencePlaceHolder: widget.experiencePlaceHolder,
+              backgroundColorLeftSection: widget.backgroundColorLeftSection,
               maxLinesExperience: widget.maxLinesExperience,
               telPlaceHolder: widget.telPlaceHolder,
               languagePlaceHolder: widget.languagePlaceHolder,

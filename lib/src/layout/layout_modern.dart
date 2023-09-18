@@ -44,6 +44,7 @@ class LayoutModern extends StatefulWidget {
     this.imageRadius,
     this.height,
     this.width,
+    this.backgroundColorLeftSection,
   })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
@@ -66,6 +67,7 @@ class LayoutModern extends StatefulWidget {
   final TemplateData data;
   final TemplateMode mode;
   final Color? backgroundColor;
+  final Color? backgroundColorLeftSection;
 
   final String? aboutMePlaceholder;
   final String? educationPlaceHolder;
@@ -171,7 +173,8 @@ class _LayoutModernState extends State<LayoutModern> {
                                   child: Container(
                                     padding: Config.padding.padding,
                                     height: widget.h * 1.2,
-                                    color: Theme.of(context).primaryColor,
+                                    color: widget.backgroundColorLeftSection ??
+                                        Theme.of(context).primaryColor,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,

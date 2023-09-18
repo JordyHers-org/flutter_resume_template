@@ -123,7 +123,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
