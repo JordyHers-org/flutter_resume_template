@@ -51,7 +51,7 @@ class LayoutClassic extends StatefulWidget {
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
         assert(
-          data.languages != null && data.languages!.length <= 2,
+          data.languages != null && data.languages!.length <= 5,
         );
 
   final double h;
