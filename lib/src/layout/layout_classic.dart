@@ -120,7 +120,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -176,7 +176,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                 height: Config.mediumHeight,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(Str.mockData.image ??
+                                    image: NetworkImage(widget.data.image ??
                                         Str.backgroundImage),
                                     fit: BoxFit.fitHeight,
                                   ),

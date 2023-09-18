@@ -121,7 +121,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -173,7 +173,9 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                             Container(
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(Str.backgroundImage),
+                                  image: NetworkImage(
+                                      widget.data.backgroundImage ??
+                                          Str.backgroundImage),
                                   fit: BoxFit.cover,
                                 ),
                               ),
