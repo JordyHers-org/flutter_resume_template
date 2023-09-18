@@ -146,11 +146,15 @@ class FlutterResumeTemplate extends StatefulWidget {
   /// the template do not have `SHDivider`
   final bool? enableDivider;
 
+  /// Enter the maxLines the experience widget should take
+  final int? maxLinesExperience;
+
   const FlutterResumeTemplate({
     Key? key,
     required this.templateTheme,
     this.mode = TemplateMode.onlyEditableMode,
     this.data,
+    this.maxLinesExperience,
     this.onEmpty,
     this.onSaveResume,
     this.backgroundColor,
@@ -197,6 +201,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               emailPlaceHolder: widget.emailPlaceHolder,
               aboutMePlaceholder: widget.aboutMePlaceholder,
               experiencePlaceHolder: widget.experiencePlaceHolder,
+              maxLinesExperience: widget.maxLinesExperience,
               telPlaceHolder: widget.telPlaceHolder,
               languagePlaceHolder: widget.languagePlaceHolder,
               hobbiesPlaceholder: widget.hobbiesPlaceholder,
@@ -218,6 +223,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               emailPlaceHolder: widget.emailPlaceHolder,
               aboutMePlaceholder: widget.aboutMePlaceholder,
               experiencePlaceHolder: widget.experiencePlaceHolder,
+              maxLinesExperience: widget.maxLinesExperience,
               telPlaceHolder: widget.telPlaceHolder,
               languagePlaceHolder: widget.languagePlaceHolder,
               hobbiesPlaceholder: widget.hobbiesPlaceholder,
@@ -247,6 +253,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               emailPlaceHolder: widget.emailPlaceHolder,
               aboutMePlaceholder: widget.aboutMePlaceholder,
               experiencePlaceHolder: widget.experiencePlaceHolder,
+              maxLinesExperience: widget.maxLinesExperience,
               telPlaceHolder: widget.telPlaceHolder,
               languagePlaceHolder: widget.languagePlaceHolder,
               hobbiesPlaceholder: widget.hobbiesPlaceholder,
@@ -271,6 +278,7 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
                 emailPlaceHolder: widget.emailPlaceHolder,
                 aboutMePlaceholder: widget.aboutMePlaceholder,
                 experiencePlaceHolder: widget.experiencePlaceHolder,
+                maxLinesExperience: widget.maxLinesExperience,
                 telPlaceHolder: widget.telPlaceHolder,
                 languagePlaceHolder: widget.languagePlaceHolder,
                 hobbiesPlaceholder: widget.hobbiesPlaceholder,

@@ -28,6 +28,7 @@ class LayoutModern extends StatefulWidget {
     required this.h,
     required this.w,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -41,15 +42,14 @@ class LayoutModern extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 5,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -152,7 +152,7 @@ class _LayoutModernState extends State<LayoutModern> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 1.7,
+                        height: widget.h * 1.5,
                         width: widget.w * 1.05,
                         child: Column(
                           children: [
@@ -162,7 +162,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                   flex: 3,
                                   child: Container(
                                     padding: Config.padding.padding,
-                                    height: widget.h * 1.1,
+                                    height: widget.h * 1.2,
                                     color: Theme.of(context).primaryColor,
                                     child: Column(
                                       mainAxisAlignment:
@@ -316,7 +316,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                 Expanded(
                                   flex: 6,
                                   child: SizedBox(
-                                    height: widget.h,
+                                    height: widget.h * 1.2,
                                     width: widget.w,
                                     child: Padding(
                                       padding: Config.dtHorPad.padding,
@@ -548,7 +548,9 @@ class _LayoutModernState extends State<LayoutModern> {
                                                               .data
                                                               .experience![i]
                                                               .experienceDescription,
-                                                          maxLines: 5,
+                                                          maxLines: widget
+                                                                  .maxLinesExperience ??
+                                                              5,
                                                           style:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -772,18 +774,15 @@ class _LayoutModernState extends State<LayoutModern> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            Align(
-              alignment: Alignment.bottomRight,
-              child: AnimateButton(
-                  onDragged: () => setState(
-                        () {
-                          _controller.value = Matrix4.identity();
-                          isDragged = !isDragged;
-                        },
-                      ),
-                  onSave: _save,
-                  isDragged: isDragged),
-            )
+            AnimateButton(
+                onDragged: () => setState(
+                      () {
+                        _controller.value = Matrix4.identity();
+                        isDragged = !isDragged;
+                      },
+                    ),
+                onSave: _save,
+                isDragged: isDragged)
         ],
       ),
     );

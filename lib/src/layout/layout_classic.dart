@@ -28,6 +28,7 @@ class LayoutClassic extends StatefulWidget {
     required this.h,
     required this.w,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -47,15 +48,14 @@ class LayoutClassic extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 5,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -324,7 +324,9 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                                   autoPlay: isDragged,
                                                   child: DisplayText(
                                                     maxFontSize: 16,
-                                                    maxLines: 20,
+                                                    maxLines: widget
+                                                            .maxLinesExperience ??
+                                                        20,
                                                     text: widget
                                                             .data
                                                             .experience?[index]
