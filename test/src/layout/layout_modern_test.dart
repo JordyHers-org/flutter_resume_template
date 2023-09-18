@@ -9,10 +9,12 @@ void main() {
       (WidgetTester tester) async {
     // Create the widget that contains the button to test
     final testWidget = Launch.pumpWidget(LayoutModern(
-        mode: TemplateMode.shakeEditAndSaveMode,
-        data: MockData.data,
-        h: 1000,
-        w: 1000));
+      mode: TemplateMode.shakeEditAndSaveMode,
+      data: MockData.data,
+      h: 1000,
+      w: 1000,
+      showButtons: false,
+    ));
 
     // Launch the widget
     await tester.pumpWidget(await testWidget);

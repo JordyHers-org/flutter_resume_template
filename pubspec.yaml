@@ -26,6 +26,10 @@ funding:
 platforms:
   android:
   ios:
+  linux:
+  windows:
+  macos:
+  web:
 
 #licence supported
 license: MIT
@@ -74,5 +78,6 @@ flutter:
         pluginClass: FlutterResumeTemplatePlugin
       ios:
         pluginClass: FlutterResumeTemplatePlugin
+      web:
 
 
