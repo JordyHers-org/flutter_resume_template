@@ -1,3 +1,13 @@
+## 1.2.0
+
+*  Fix issue Web throwing error
+*  Technical Mode does not receive header image
+* `bacgroundColorLeftSection` implemented for Modern Template
+*  Add `height` and `width` for all templates
+*  Add `maxLinesExperience` for all templates
+*  Update MIT license
+* Update readme
+
 ## 1.1.0
 
 * Implement more parameter to customise templates
