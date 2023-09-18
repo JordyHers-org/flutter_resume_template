@@ -95,8 +95,11 @@ TemplateData data = TemplateData(
       Education('Post Graduate Degree', 'Oxford University'),
     ],
     languages: [
-      Language('English', 3),
+      Language('English', 5),
       Language('French', 4),
+      Language('Spanish', 3),
+      Language('Mandarin', 2),
+      Language('Russian', 1),
     ],
     hobbies: [
       'Bungee jumping',

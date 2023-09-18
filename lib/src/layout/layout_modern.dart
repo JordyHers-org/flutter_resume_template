@@ -45,7 +45,7 @@ class LayoutModern extends StatefulWidget {
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
         assert(
-          data.languages != null && data.languages!.length <= 2,
+          data.languages != null && data.languages!.length <= 5,
         );
 
   final double h;
@@ -162,7 +162,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                   flex: 3,
                                   child: Container(
                                     padding: Config.padding.padding,
-                                    height: widget.h,
+                                    height: widget.h * 1.1,
                                     color: Theme.of(context).primaryColor,
                                     child: Column(
                                       mainAxisAlignment:
@@ -689,22 +689,58 @@ class _LayoutModernState extends State<LayoutModern> {
                                                 ),
                                               ),
                                               Config.spaceBox(Config.eightPx),
-                                              AnimatedShakingBuilder(
-                                                autoPlay: isDragged,
-                                                child: SizedBox(
+                                              if (widget.data.languages != null)
+                                                ...List.generate(
+                                                    widget
+                                                        .data.languages!.length,
+                                                    (index) => Column(
+                                                          children: [
+                                                            AnimatedShakingBuilder(
+                                                              autoPlay:
+                                                                  isDragged,
+                                                              child: SizedBox(
+                                                                  width:
+                                                                      widget.w,
+                                                                  child:
+                                                                      RatingWidget(
+                                                                    autoplay:
+                                                                        isDragged,
+                                                                    title: widget
+                                                                            .data
+                                                                            .languages?[index]
+                                                                            .language ??
+                                                                        'English',
+                                                                    rating: widget
+                                                                            .data
+                                                                            .languages?[index]
+                                                                            .level ??
+                                                                        5,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .titleSmall
+                                                                        ?.copyWith(
+                                                                            fontSize:
+                                                                                13,
+                                                                            letterSpacing:
+                                                                                0.8,
+                                                                            color:
+                                                                                Colors.grey),
+                                                                  )),
+                                                            ),
+                                                            Config.spaceBox(
+                                                                Config.eightPx),
+                                                          ],
+                                                        ))
+                                              else
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: SizedBox(
                                                     width: widget.w,
                                                     child: RatingWidget(
                                                       autoplay: isDragged,
-                                                      title: widget
-                                                              .data
-                                                              .languages?[0]
-                                                              .language ??
-                                                          'English',
-                                                      rating: widget
-                                                              .data
-                                                              .languages?[1]
-                                                              .level ??
-                                                          5,
+                                                      title: 'French',
+                                                      rating: 4,
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .titleSmall
@@ -714,35 +750,9 @@ class _LayoutModernState extends State<LayoutModern> {
                                                                   0.8,
                                                               color:
                                                                   Colors.grey),
-                                                    )),
-                                              ),
-                                              Config.spaceBox(Config.eightPx),
-                                              AnimatedShakingBuilder(
-                                                autoPlay: isDragged,
-                                                child: SizedBox(
-                                                  width: widget.w,
-                                                  child: RatingWidget(
-                                                    autoplay: isDragged,
-                                                    title: widget
-                                                            .data
-                                                            .languages?[1]
-                                                            .language ??
-                                                        'French',
-                                                    rating: widget
-                                                            .data
-                                                            .languages?[1]
-                                                            .level ??
-                                                        4,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall
-                                                        ?.copyWith(
-                                                            fontSize: 13,
-                                                            letterSpacing: 0.8,
-                                                            color: Colors.grey),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
                                             ],
                                           )
                                         ],
