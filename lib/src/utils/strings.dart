@@ -77,7 +77,7 @@ I thrive in collaborative environments and enjoy working closely with cross-func
  my skills to deliver cutting-edge solutions.
 ''';
 
-  TemplateData data = TemplateData(
+  static TemplateData mockData = TemplateData(
       fullName: 'Alicia Smith',
       currentPosition: 'Flutter Developer',
       street: 'Curvy Str. 53',
@@ -85,7 +85,7 @@ I thrive in collaborative environments and enjoy working closely with cross-func
       country: 'Germany',
       email: 'aliciasmith@wuerth.com',
       phoneNumber: '+ 49 (106)341 753 12',
-      bio: bio,
+      bio: Str.bio,
       experience: [
         ExperienceData(
           experienceTitle: 'Software Engineer',
