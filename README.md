@@ -68,39 +68,110 @@ create a new instance of the widget, providing the required parameters.
 
 ```dart
 
-static TemplateData data = TemplateData(
-    fullName: 'Matthew Smith',
-    currentPosition: 'Service Designer',
-    street: '63 Fall Street',
-    address: 'Toronto, ST 12874',
-    country: 'Canada',
-    email: 'matthewsmith@join.com',
-    phoneNumber: '+ 1 (246)869 453 00',
-    bio: Str.bioText,
+
+const String workExperienceCompany1 = '''
+Responsibilities:
+  - Developed and maintained RESTful APIs using Node.js and Express.js for our web applications.
+  - Collaborated with the frontend team to integrate GraphQL APIs into our applications.
+  - Utilized Docker for containerization and Kubernetes for orchestration of microservices.
+  - Implemented user authentication and authorization using JWT tokens and OAuth2.
+
+  Technologies Used:
+  - Node.js, Express.js, GraphQL, RESTful APIs
+  - Docker, Kubernetes, JWT, OAuth2
+  - PostgreSQL, MongoDB
+  - Git, JIRA
+
+  Achievements:
+  - Successfully reduced API response times by 30% by optimizing database queries.
+  - Led a team of developers in delivering critical features on time.
+''';
+
+const String workExperienceCompany2 = '''
+Responsibilities:
+  - Developed scalable microservices using Java and Spring Boot for our cloud-based applications.
+  - Integrated Elasticsearch and Kibana for real-time log monitoring and analysis.
+  - Implemented message queuing systems using Apache Kafka for event-driven architecture.
+  - Collaborated with the QA team to ensure high code quality and performance.
+
+  Technologies Used:
+  - Java, Spring Boot, RESTful APIs
+  - Elasticsearch, Kibana, Apache Kafka
+  - AWS (Amazon Web Services)
+  - Git, Jenkins
+
+  Achievements:
+  - Improved application performance by optimizing database queries and reducing response times.
+  - Implemented automated deployment pipelines, resulting in a 50% reduction in release time.
+''';
+
+const String workExperienceCompany3 = '''
+Responsibilities:
+  - Designed and developed responsive web applications using React.js and Redux.
+  - Implemented serverless architecture using AWS Lambda and API Gateway for cost-effective solutions.
+  - Integrated third-party APIs and payment gateways for e-commerce applications.
+  - Conducted code reviews and mentored junior developers in best practices.
+
+  Technologies Used:
+  - React.js, Redux, GraphQL
+  - AWS Lambda, API Gateway
+  - MySQL, MongoDB
+  - Git, Bitbucket
+
+  Achievements:
+  - Successfully launched three web applications, increasing customer engagement by 25%.
+  - Implemented a GraphQL API, reducing the number of network requests and improving frontend performance.
+''';
+
+const String bio = '''
+I am a dedicated Flutter developer with four years of valuable experience in both front-end and back-end development. 
+My expertise lies in crafting robust and user-friendly applications using the Flutter framework. 
+Having worked on projects of all sizes, I possess a deep understanding of the development 
+lifecycle and a proven ability to deliver high-quality solutions.
+
+Currently based in the vibrant city of Berlin, Germany, I enjoy being a part of its thriving tech community.
+ As a Computer Engineering graduate, I bring a solid foundation of technical knowledge and problem-solving
+  skills to every project I undertake.
+
+Throughout my career, I have consistently demonstrated a passion for creating innovative and efficient applications
+ that provide an exceptional user experience. My proficiency in Flutter enables me to build cross-platform 
+ applications with beautiful interfaces, seamless functionality, and optimized performance.
+
+I thrive in collaborative environments and enjoy working closely with cross-functional teams to bring ideas to life.
+ I am always eager to stay up-to-date with the latest industry trends and technologies, continuously honing 
+ my skills to deliver cutting-edge solutions.
+''';
+
+TemplateData data = TemplateData(
+    fullName: 'Alicia Smith',
+    currentPosition: 'Flutter Developer',
+    street: 'Curvy Str. 53',
+    address: 'Berlin, 14568',
+    country: 'Germany',
+    email: 'aliciasmith@wuerth.com',
+    phoneNumber: '+ 49 (106)341 753 12',
+    bio: bio,
     experience: [
       ExperienceData(
         experienceTitle: 'Software Engineer',
-        experienceLocation: ' Mindable Health',
+        experienceLocation: 'at Mindable Health',
         experiencePeriod: 'Aug 2021 - Dec 2023',
         experiencePlace: 'Berlin',
-        experienceDescription:
-        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+        experienceDescription: workExperienceCompany1,
       ),
       ExperienceData(
         experienceTitle: 'Product Design',
-        experienceLocation: 'UK . London',
-        experiencePeriod: 'Sep 2022 - Dec 2023',
-        experiencePlace: 'Freelancer',
-        experienceDescription:
-        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+        experienceLocation: 'Uk . London',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'London',
+        experienceDescription: workExperienceCompany2,
       ),
       ExperienceData(
         experienceTitle: 'Flutter Developer',
-        experienceLocation: 'UK . London',
-        experiencePeriod: 'Sep 2022 - Dec 2023',
-        experiencePlace: 'Freelancer',
-        experienceDescription:
-        '''Worked hand to hand with backend dev and UI/Ux designer to deliver medical device. • GraphQL • GitLab • Posthog • Fastlane • Dynamic element ''',
+        experienceLocation: 'Uk . London',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'London',
+        experienceDescription: workExperienceCompany3,
       ),
     ],
     educationDetails: [
@@ -108,16 +179,23 @@ static TemplateData data = TemplateData(
       Education('Post Graduate Degree', 'Oxford University'),
     ],
     languages: [
-      Language('English', 3),
+      Language('English', 5),
       Language('French', 4),
+      Language('Spanish', 3),
+      Language('Mandarin', 2),
+      Language('Russian', 1),
     ],
-    image: resumeHeader);
-static String backgroundImage =
-    'https://images.pexels.com/photos/10319780/pexels-photo-10319780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
-static String resumeHeader =
-    'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+    hobbies: [
+      'Bungee jumping',
+      'Fitness Studio',
+      'Martial Art',
+      'Vintage Art Collection'
+    ],
+    image:
+    'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    backgroundImage:
+    'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 
-  
    
 
 ```
@@ -178,10 +256,27 @@ primaryColor: Colors.red
 
 - `mode` (required): That determines the different states of the Template which are `[TemplateMode.onlyEditableMode]` , `[TemplateMode.shakeEditAndSaveMode]`, `[TemplateMode.readOnlyMode]`
 - `TemplateTheme` (required): A string value that determines the template style. The available styles are `business`, `technical`, `modern`, and `classic`.
-- `TemplateData` (optional): An Object that receives all the props of the resume suh as experience, address, name, current position etc and will be displayed on the Resume
+- `data` (optional): An Object that receives all the props of the resume suh as experience, address, name, current position etc and will be displayed on the Resume
 - `onEmpty` (optional): A callback function that allow the user to render his own template
 - `onSaveResume` (optional): A callback function that will save a PDF version of the resume in the local download path.
+- `maxLinesExperience` (optional):maxLines the experience widget should take.
+- `showButtons` (optional):Decide if you should show or hide the animate and download button only in [shakeAndEditButton] mode
+- `height` (optional): This value is the entire widget height.
+- `width` (optional): This value is the entire widget width.
+- `enableDivider` (optional): This [enableDivider] will enable or disable all the dividers in several section. Note that all the template do not have `SHDivider`
+- `imageBoxFit` (optional): This renders the image fix by its parent widget 
+- `imageRadius` (optional): This renders the image Radius by its parent widget
+- `imageHeight` (optional): This renders the image Height by its parent widget
+- `imageWidth` (optional): This renders the image Width by its parent widget
+- `aboutMePlaceholder` (optional): This renders the aboutMePlaceholder 
+- `languagePlaceHolder` (optional): This renders the languagePlaceHolder 
+- `experiencePlaceHolder` (optional): This renders the experiencePlaceHolder 
+- `telPlaceHolder` (optional): This renders the telPlaceHolder 
+- `emailPlaceHolder` (optional): This renders the emailPlaceHolder 
+- `hobbiesPlaceholder` (optional): This renders the hobbiesPlaceholder 
+- `educationPlaceHolder` (optional): This renders the educationPlaceHolder 
 
+ 
 
 <img width="287" alt="templates" src="https://github.com/JordyHers/flutter_resume_template/assets/49708438/c0097b65-be62-4d24-a862-d17be6a7c12d">
 
