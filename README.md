@@ -263,6 +263,8 @@ primaryColor: Colors.red
 - `showButtons` (optional):Decide if you should show or hide the animate and download button only in [shakeAndEditButton] mode
 - `height` (optional): This value is the entire widget height.
 - `width` (optional): This value is the entire widget width.
+- `backgroundColor` (optional): This value is the entire widget backgroundColor.
+- `backgroundColorLeftSection` (optional): The [backgroundColorLeftSection] only changes the background color of the left section of Resume template when the mode is [Modern]
 - `enableDivider` (optional): This [enableDivider] will enable or disable all the dividers in several section. Note that all the template do not have `SHDivider`
 - `imageBoxFit` (optional): This renders the image fix by its parent widget 
 - `imageRadius` (optional): This renders the image Radius by its parent widget
