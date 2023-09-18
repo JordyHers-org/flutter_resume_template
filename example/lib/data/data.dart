@@ -89,6 +89,13 @@ TemplateData data = TemplateData(
         experiencePlace: 'London',
         experienceDescription: workExperienceCompany3,
       ),
+      ExperienceData(
+        experienceTitle: 'Flutter Developer',
+        experienceLocation: 'Uk . London',
+        experiencePeriod: 'Aug 2021 - Dec 2023',
+        experiencePlace: 'London',
+        experienceDescription: workExperienceCompany3,
+      ),
     ],
     educationDetails: [
       Education('Bachelor Degree', 'Oxford University'),

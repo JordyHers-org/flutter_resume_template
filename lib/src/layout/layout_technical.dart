@@ -42,12 +42,10 @@ class LayoutTechnical extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 5,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
@@ -157,7 +155,7 @@ class _LayoutTechnicalState extends State<LayoutTechnical> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 2.5,
+                        height: widget.h * 2.9,
                         width: widget.w * 1.6,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
