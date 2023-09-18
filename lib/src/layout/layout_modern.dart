@@ -3,7 +3,6 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
-import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -23,11 +22,13 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 class LayoutModern extends StatefulWidget {
   LayoutModern({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -41,15 +42,23 @@ class LayoutModern extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+    this.height,
+    this.width,
+    this.backgroundColorLeftSection,
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 2,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -58,6 +67,7 @@ class LayoutModern extends StatefulWidget {
   final TemplateData data;
   final TemplateMode mode;
   final Color? backgroundColor;
+  final Color? backgroundColorLeftSection;
 
   final String? aboutMePlaceholder;
   final String? educationPlaceHolder;
@@ -108,7 +118,7 @@ class _LayoutModernState extends State<LayoutModern> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -152,8 +162,8 @@ class _LayoutModernState extends State<LayoutModern> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: SizedBox(
-                        height: widget.h * 1.7,
-                        width: widget.w * 1.05,
+                        height: widget.height ?? widget.h * 1.5,
+                        width: widget.width ?? widget.w * 1.05,
                         child: Column(
                           children: [
                             Row(
@@ -162,32 +172,29 @@ class _LayoutModernState extends State<LayoutModern> {
                                   flex: 3,
                                   child: Container(
                                     padding: Config.padding.padding,
-                                    height: widget.h,
-                                    color: Theme.of(context).primaryColor,
+                                    height: widget.h * 1.2,
+                                    color: widget.backgroundColorLeftSection ??
+                                        Theme.of(context).primaryColor,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
                                         Config.spaceBox(Config.largeSpacer),
-                                        if (Helper.isTestMode)
-                                          AnimatedShakingBuilder(
-                                            autoPlay: isDragged,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      widget.imageRadius ??
-                                                          100.0),
-                                              child: Image.network(
-                                                widget.data.image ??
-                                                    Str.resumeHeader,
-                                                height:
-                                                    widget.imageHeight ?? 100,
-                                                width: widget.imageWidth ?? 90,
-                                                fit: widget.imageBoxFit ??
-                                                    BoxFit.fitWidth,
-                                              ),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                widget.imageRadius ?? 100.0),
+                                            child: Image.network(
+                                              widget.data.image ??
+                                                  Str.resumeHeader,
+                                              height: widget.imageHeight ?? 100,
+                                              width: widget.imageWidth ?? 90,
+                                              fit: widget.imageBoxFit ??
+                                                  BoxFit.fitWidth,
                                             ),
                                           ),
+                                        ),
                                         Config.spaceBox(Config.smallSpacer),
                                         AnimatedShakingBuilder(
                                           autoPlay: isDragged,
@@ -316,7 +323,7 @@ class _LayoutModernState extends State<LayoutModern> {
                                 Expanded(
                                   flex: 6,
                                   child: SizedBox(
-                                    height: widget.h,
+                                    height: widget.h * 1.2,
                                     width: widget.w,
                                     child: Padding(
                                       padding: Config.dtHorPad.padding,
@@ -548,7 +555,9 @@ class _LayoutModernState extends State<LayoutModern> {
                                                               .data
                                                               .experience![i]
                                                               .experienceDescription,
-                                                          maxLines: 5,
+                                                          maxLines: widget
+                                                                  .maxLinesExperience ??
+                                                              5,
                                                           style:
                                                               Theme.of(context)
                                                                   .textTheme
@@ -689,22 +698,58 @@ class _LayoutModernState extends State<LayoutModern> {
                                                 ),
                                               ),
                                               Config.spaceBox(Config.eightPx),
-                                              AnimatedShakingBuilder(
-                                                autoPlay: isDragged,
-                                                child: SizedBox(
+                                              if (widget.data.languages != null)
+                                                ...List.generate(
+                                                    widget
+                                                        .data.languages!.length,
+                                                    (index) => Column(
+                                                          children: [
+                                                            AnimatedShakingBuilder(
+                                                              autoPlay:
+                                                                  isDragged,
+                                                              child: SizedBox(
+                                                                  width:
+                                                                      widget.w,
+                                                                  child:
+                                                                      RatingWidget(
+                                                                    autoplay:
+                                                                        isDragged,
+                                                                    title: widget
+                                                                            .data
+                                                                            .languages?[index]
+                                                                            .language ??
+                                                                        'English',
+                                                                    rating: widget
+                                                                            .data
+                                                                            .languages?[index]
+                                                                            .level ??
+                                                                        5,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .titleSmall
+                                                                        ?.copyWith(
+                                                                            fontSize:
+                                                                                13,
+                                                                            letterSpacing:
+                                                                                0.8,
+                                                                            color:
+                                                                                Colors.grey),
+                                                                  )),
+                                                            ),
+                                                            Config.spaceBox(
+                                                                Config.eightPx),
+                                                          ],
+                                                        ))
+                                              else
+                                                AnimatedShakingBuilder(
+                                                  autoPlay: isDragged,
+                                                  child: SizedBox(
                                                     width: widget.w,
                                                     child: RatingWidget(
                                                       autoplay: isDragged,
-                                                      title: widget
-                                                              .data
-                                                              .languages?[0]
-                                                              .language ??
-                                                          'English',
-                                                      rating: widget
-                                                              .data
-                                                              .languages?[1]
-                                                              .level ??
-                                                          5,
+                                                      title: 'French',
+                                                      rating: 4,
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .titleSmall
@@ -714,35 +759,9 @@ class _LayoutModernState extends State<LayoutModern> {
                                                                   0.8,
                                                               color:
                                                                   Colors.grey),
-                                                    )),
-                                              ),
-                                              Config.spaceBox(Config.eightPx),
-                                              AnimatedShakingBuilder(
-                                                autoPlay: isDragged,
-                                                child: SizedBox(
-                                                  width: widget.w,
-                                                  child: RatingWidget(
-                                                    autoplay: isDragged,
-                                                    title: widget
-                                                            .data
-                                                            .languages?[1]
-                                                            .language ??
-                                                        'French',
-                                                    rating: widget
-                                                            .data
-                                                            .languages?[1]
-                                                            .level ??
-                                                        4,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleSmall
-                                                        ?.copyWith(
-                                                            fontSize: 13,
-                                                            letterSpacing: 0.8,
-                                                            color: Colors.grey),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
                                             ],
                                           )
                                         ],
@@ -762,8 +781,8 @@ class _LayoutModernState extends State<LayoutModern> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            Align(
-              alignment: Alignment.bottomRight,
+            Visibility(
+              visible: widget.showButtons,
               child: AnimateButton(
                   onDragged: () => setState(
                         () {

@@ -7,7 +7,7 @@ description:  >-
   
 
 #Version to be released
-version: 1.1.0
+version: 1.2.0
 
 #package homepage:
 homepage: https://github.com/JordyHers/flutter_resume_template
@@ -26,6 +26,10 @@ funding:
 platforms:
   android:
   ios:
+  linux:
+  windows:
+  macos:
+  web:
 
 #licence supported
 license: MIT
@@ -74,5 +78,6 @@ flutter:
         pluginClass: FlutterResumeTemplatePlugin
       ios:
         pluginClass: FlutterResumeTemplatePlugin
+      web:
 
 

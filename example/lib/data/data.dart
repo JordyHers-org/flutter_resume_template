@@ -54,19 +54,34 @@ Responsibilities:
   - Implemented a GraphQL API, reducing the number of network requests and improving frontend performance.
 ''';
 
+const String bio = '''
+I am a dedicated Flutter developer with four years of valuable experience in both front-end and back-end development. 
+My expertise lies in crafting robust and user-friendly applications using the Flutter framework. 
+Having worked on projects of all sizes, I possess a deep understanding of the development 
+lifecycle and a proven ability to deliver high-quality solutions.
+
+Currently based in the vibrant city of Berlin, Germany, I enjoy being a part of its thriving tech community.
+ As a Computer Engineering graduate, I bring a solid foundation of technical knowledge and problem-solving
+  skills to every project I undertake.
+
+Throughout my career, I have consistently demonstrated a passion for creating innovative and efficient applications
+ that provide an exceptional user experience. My proficiency in Flutter enables me to build cross-platform 
+ applications with beautiful interfaces, seamless functionality, and optimized performance.
+
+I thrive in collaborative environments and enjoy working closely with cross-functional teams to bring ideas to life.
+ I am always eager to stay up-to-date with the latest industry trends and technologies, continuously honing 
+ my skills to deliver cutting-edge solutions.
+''';
+
 TemplateData data = TemplateData(
-    fullName: 'Jordy Hershel Igondjo',
+    fullName: 'Alicia Smith',
     currentPosition: 'Flutter Developer',
     street: 'Curvy Str. 53',
     address: 'Berlin, 14568',
     country: 'Germany',
-    email: 'jordyhershel@wuerth.com',
+    email: 'aliciasmith@wuerth.com',
     phoneNumber: '+ 49 (106)341 753 12',
-    bio: 'I am a talented young mobile application developer .'
-        ' I have been developing Mobile application for several years now and'
-        ' I do have a solid background in Developing tools. I am keen to '
-        'learn and that would be a pleasure to be a member of your company.'
-        ' I am currently working at This awesome company',
+    bio: bio,
     experience: [
       ExperienceData(
         experienceTitle: 'Software Engineer',
@@ -95,8 +110,11 @@ TemplateData data = TemplateData(
       Education('Post Graduate Degree', 'Oxford University'),
     ],
     languages: [
-      Language('English', 3),
+      Language('English', 5),
       Language('French', 4),
+      Language('Spanish', 3),
+      Language('Mandarin', 2),
+      Language('Russian', 1),
     ],
     hobbies: [
       'Bungee jumping',
@@ -105,4 +123,6 @@ TemplateData data = TemplateData(
       'Vintage Art Collection'
     ],
     image:
-        'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    backgroundImage:
+        'https://images.pexels.com/photos/3768911/pexels-photo-3768911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');

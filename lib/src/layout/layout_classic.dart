@@ -3,7 +3,6 @@ import 'package:flutter_resume_template/flutter_resume_template.dart';
 import 'package:flutter_resume_template/src/components/section_bottom_buttons.dart';
 import 'package:flutter_resume_template/src/components/section_rating_widget.dart';
 import 'package:flutter_resume_template/src/components/section_shaking.dart';
-import 'package:flutter_resume_template/src/utils/helper.dart';
 import 'package:flutter_resume_template/src/utils/strings.dart';
 import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 
@@ -23,11 +22,15 @@ import 'package:flutter_resume_template/src/utils/typedef_utils.dart';
 class LayoutClassic extends StatefulWidget {
   LayoutClassic({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
+    this.height,
+    this.width,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -36,26 +39,25 @@ class LayoutClassic extends StatefulWidget {
     this.experiencePlaceHolder,
     this.educationPlaceHolder,
     this.languagePlaceHolder,
-    this.aboutMeStyle,
-    this.hobbiesStyle,
-    this.emailStyle,
-    this.telStyle,
     this.enableDividers = true,
-    this.experienceStyle,
-    this.languageStyle,
     this.imageHeight,
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 2,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -73,13 +75,6 @@ class LayoutClassic extends StatefulWidget {
   final String? experiencePlaceHolder;
   final String? languagePlaceHolder;
   final bool? enableDividers;
-
-  final TextStyle? aboutMeStyle;
-  final TextStyle? hobbiesStyle;
-  final TextStyle? emailStyle;
-  final TextStyle? telStyle;
-  final TextStyle? experienceStyle;
-  final TextStyle? languageStyle;
 
   final SaveResume<GlobalKey>? onSaveResume;
 
@@ -125,7 +120,7 @@ class _LayoutClassicState extends State<LayoutClassic> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -173,21 +168,20 @@ class _LayoutClassicState extends State<LayoutClassic> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: SizedBox(
-                          height: widget.h * 3,
-                          width: widget.w * 1.6,
+                          height: widget.height ?? widget.h * 3,
+                          width: widget.width ?? widget.w * 1.6,
                           child: Column(
                             children: [
-                              if (Helper.isTestMode)
-                                Container(
-                                  height: Config.mediumHeight,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(Str.mockData.image ??
-                                          Str.backgroundImage),
-                                      fit: BoxFit.fitHeight,
-                                    ),
+                              Container(
+                                height: Config.mediumHeight,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(widget.data.image ??
+                                        Str.backgroundImage),
+                                    fit: BoxFit.fitHeight,
                                   ),
                                 ),
+                              ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -237,14 +231,13 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                       text: widget.aboutMePlaceholder ??
                                           'About Me',
                                       maxFontSize: 20,
-                                      style: widget.aboutMeStyle ??
-                                          Theme.of(context)
-                                              .textTheme
-                                              .headlineLarge
-                                              ?.copyWith(
-                                                  letterSpacing: 1,
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge
+                                          ?.copyWith(
+                                              letterSpacing: 1,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                     ),
                                   ),
                                   Config.spaceBox(Config.tenPx),
@@ -303,14 +296,13 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                       maxFontSize: 20,
                                       text: widget.experiencePlaceHolder ??
                                           'Work Experience',
-                                      style: widget.experienceStyle ??
-                                          Theme.of(context)
-                                              .textTheme
-                                              .headlineLarge
-                                              ?.copyWith(
-                                                  letterSpacing: 1,
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge
+                                          ?.copyWith(
+                                              letterSpacing: 1,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                     ),
                                   ),
                                   Config.spaceBox(Config.eightPx),
@@ -324,7 +316,9 @@ class _LayoutClassicState extends State<LayoutClassic> {
                                                   autoPlay: isDragged,
                                                   child: DisplayText(
                                                     maxFontSize: 16,
-                                                    maxLines: 20,
+                                                    maxLines: widget
+                                                            .maxLinesExperience ??
+                                                        20,
                                                     text: widget
                                                             .data
                                                             .experience?[index]
@@ -469,15 +463,18 @@ class _LayoutClassicState extends State<LayoutClassic> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged)
+            Visibility(
+              visible: widget.showButtons,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
         ],
       ),
     );

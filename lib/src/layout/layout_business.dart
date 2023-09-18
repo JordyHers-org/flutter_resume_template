@@ -25,11 +25,13 @@ import '../utils/strings.dart';
 class LayoutBusiness extends StatefulWidget {
   LayoutBusiness({
     super.key,
+    required this.showButtons,
     required this.mode,
     required this.data,
     required this.h,
     required this.w,
     this.backgroundColor,
+    this.maxLinesExperience,
     this.onSaveResume,
     this.aboutMePlaceholder,
     this.hobbiesPlaceholder,
@@ -43,15 +45,22 @@ class LayoutBusiness extends StatefulWidget {
     this.imageWidth,
     this.imageBoxFit,
     this.imageRadius,
-  })  : assert(data.experience != null && data.experience!.length <= 3),
+    this.height,
+    this.width,
+  })  : assert(data.experience != null && data.experience!.length <= 4),
         assert(data.educationDetails != null &&
             data.educationDetails!.length <= 2),
-        assert(
-          data.languages != null && data.languages!.length <= 2,
-        );
+        assert(data.languages != null && data.languages!.length <= 5);
 
   final double h;
   final double w;
+
+  final double? height;
+  final double? width;
+
+  final bool showButtons;
+
+  final int? maxLinesExperience;
   final double? imageHeight;
   final double? imageWidth;
   final double? imageRadius;
@@ -114,7 +123,7 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
         break;
       case TemplateMode.shakeEditAndSaveMode:
         enableEditingMode = true;
-        isDragged = false;
+        isDragged = true;
         absorbing = enableEditingMode && isDragged;
         break;
     }
@@ -161,8 +170,8 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: SizedBox(
-                          height: widget.h * 2.5,
-                          width: widget.w * 1.6,
+                          height: widget.height ?? widget.h * 2.5,
+                          width: widget.width ?? widget.w * 1.6,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Config.tenPx,
@@ -379,7 +388,9 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
                                                         autoPlay: isDragged,
                                                         child: DisplayText(
                                                           maxFontSize: 14,
-                                                          maxLines: 10,
+                                                          maxLines: widget
+                                                                  .maxLinesExperience ??
+                                                              10,
                                                           text: widget
                                                               .data
                                                               .experience![
@@ -544,15 +555,18 @@ class _LayoutBusinessState extends State<LayoutBusiness> {
             ),
           ),
           if (widget.mode == TemplateMode.shakeEditAndSaveMode)
-            AnimateButton(
-                onDragged: () => setState(
-                      () {
-                        _controller.value = Matrix4.identity();
-                        isDragged = !isDragged;
-                      },
-                    ),
-                onSave: _save,
-                isDragged: isDragged)
+            Visibility(
+              visible: widget.showButtons,
+              child: AnimateButton(
+                  onDragged: () => setState(
+                        () {
+                          _controller.value = Matrix4.identity();
+                          isDragged = !isDragged;
+                        },
+                      ),
+                  onSave: _save,
+                  isDragged: isDragged),
+            )
         ],
       ),
     );

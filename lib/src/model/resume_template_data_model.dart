@@ -19,7 +19,8 @@ class TemplateData {
       email,
       phoneNumber,
       bio,
-      image;
+      image,
+      backgroundImage;
   List<ExperienceData>? experience;
 
   TemplateData(
@@ -34,6 +35,7 @@ class TemplateData {
       this.experience,
       this.educationDetails,
       this.image,
+      this.backgroundImage,
       this.hobbies,
       this.languages});
 }
