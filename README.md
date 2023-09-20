@@ -251,8 +251,6 @@ primaryColor: Colors.red
 
 ```
 
-Sure, I can help you reformat the information into tables.
-
 ### Parameters
 
 | Parameter                  | Description                                                                                      |
