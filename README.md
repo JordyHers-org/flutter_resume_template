@@ -251,31 +251,35 @@ primaryColor: Colors.red
 
 ```
 
+Sure, I can help you reformat the information into tables.
+
 ### Parameters
 
-- `mode` (required): That determines the different states of the Template which are `[TemplateMode.onlyEditableMode]` , `[TemplateMode.shakeEditAndSaveMode]`, `[TemplateMode.readOnlyMode]`
-- `TemplateTheme` (required): A string value that determines the template style. The available styles are `business`, `technical`, `modern`, and `classic`.
-- `data` (optional): An Object that receives all the props of the resume suh as experience, address, name, current position etc and will be displayed on the Resume
-- `onEmpty` (optional): A callback function that allow the user to render his own template
-- `onSaveResume` (optional): A callback function that will save a PDF version of the resume in the local download path.
-- `maxLinesExperience` (optional):maxLines the experience widget should take.
-- `showButtons` (optional):Decide if you should show or hide the animate and download button only in [shakeAndEditButton] mode
-- `height` (optional): This value is the entire widget height.
-- `width` (optional): This value is the entire widget width.
-- `backgroundColor` (optional): This value is the entire widget backgroundColor.
-- `backgroundColorLeftSection` (optional): The [backgroundColorLeftSection] only changes the background color of the left section of Resume template when the mode is [Modern]
-- `enableDivider` (optional): This [enableDivider] will enable or disable all the dividers in several section. Note that all the template do not have `SHDivider`
-- `imageBoxFit` (optional): This renders the image fix by its parent widget 
-- `imageRadius` (optional): This renders the image Radius by its parent widget
-- `imageHeight` (optional): This renders the image Height by its parent widget
-- `imageWidth` (optional): This renders the image Width by its parent widget
-- `aboutMePlaceholder` (optional): This renders the aboutMePlaceholder 
-- `languagePlaceHolder` (optional): This renders the languagePlaceHolder 
-- `experiencePlaceHolder` (optional): This renders the experiencePlaceHolder 
-- `telPlaceHolder` (optional): This renders the telPlaceHolder 
-- `emailPlaceHolder` (optional): This renders the emailPlaceHolder 
-- `hobbiesPlaceholder` (optional): This renders the hobbiesPlaceholder 
-- `educationPlaceHolder` (optional): This renders the educationPlaceHolder 
+| Parameter                  | Description                                                                                      |
+|----------------------------|--------------------------------------------------------------------------------------------------|
+| `mode` (required)          | Determines the different states of the Template: `[TemplateMode.onlyEditableMode]`, `[TemplateMode.shakeEditAndSaveMode]`, `[TemplateMode.readOnlyMode]` |
+| `TemplateTheme` (required) | A string value that determines the template style. Available styles are `business`, `technical`, `modern`, and `classic`. |
+| `data` (optional)          | An Object that receives all the props of the resume such as experience, address, name, current position, etc., and will be displayed on the Resume |
+| `onEmpty` (optional)       | A callback function that allows the user to render their own template                               |
+| `onSaveResume` (optional)  | A callback function that will save a PDF version of the resume in the local download path         |
+| `maxLinesExperience` (optional) | Maximum lines the experience widget should take                                             |
+| `showButtons` (optional)   | Decide whether to show or hide the animate and download button only in `[shakeAndEditButton]` mode |
+| `height` (optional)        | The entire widget height                                                                         |
+| `width` (optional)         | The entire widget width                                                                          |
+| `backgroundColor` (optional) | The entire widget background color                                                               |
+| `backgroundColorLeftSection` (optional) | Changes the background color of the left section of the Resume template when the mode is `Modern` |
+| `enableDivider` (optional) | Enable or disable all the dividers in several sections. Note that not all templates have `SHDivider` |
+| `imageBoxFit` (optional)   | Renders the image fit by its parent widget                                                       |
+| `imageRadius` (optional)   | Renders the image radius by its parent widget                                                    |
+| `imageHeight` (optional)   | Renders the image height by its parent widget                                                    |
+| `imageWidth` (optional)    | Renders the image width by its parent widget                                                     |
+| `aboutMePlaceholder` (optional) | Renders the `aboutMePlaceholder`                                                               |
+| `languagePlaceHolder` (optional) | Renders the `languagePlaceHolder`                                                             |
+| `experiencePlaceHolder` (optional) | Renders the `experiencePlaceHolder`                                                           |
+| `telPlaceHolder` (optional) | Renders the `telPlaceHolder`                                                                   |
+| `emailPlaceHolder` (optional) | Renders the `emailPlaceHolder`                                                                 |
+| `hobbiesPlaceholder` (optional) | Renders the `hobbiesPlaceholder`                                                               |
+| `educationPlaceHolder` (optional) | Renders the `educationPlaceHolder`                                                             |
 
  
 
