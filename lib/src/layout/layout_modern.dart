@@ -38,6 +38,8 @@ class LayoutModern extends StatefulWidget {
     this.educationPlaceHolder,
     this.languagePlaceHolder,
     this.enableDividers = true,
+    this.hobbiesPadding,
+    this.socialMediaPlaceholder,
     this.imageHeight,
     this.imageWidth,
     this.imageBoxFit,
@@ -77,6 +79,8 @@ class LayoutModern extends StatefulWidget {
   final String? experiencePlaceHolder;
   final String? languagePlaceHolder;
   final bool? enableDividers;
+  final EdgeInsetsGeometry? hobbiesPadding;
+  final Widget? socialMediaPlaceholder;
 
   final SaveResume<GlobalKey>? onSaveResume;
 
@@ -259,23 +263,27 @@ class _LayoutModernState extends State<LayoutModern> {
                                                           .data.hobbies!.length,
                                                       (index) => Column(
                                                         children: [
-                                                          Config.spaceBox(Config
-                                                              .smallSpacer),
-                                                          DisplayText(
-                                                            text: widget.data
-                                                                    .hobbies?[
-                                                                index],
-                                                            maxLines: 10,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .titleSmall
-                                                                ?.copyWith(
-                                                                    fontSize:
-                                                                        14),
+                                                          Padding(
+                                                            padding: widget
+                                                                    .hobbiesPadding ??
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                        8.0),
+                                                            child: DisplayText(
+                                                              text: widget.data
+                                                                      .hobbies?[
+                                                                  index],
+                                                              maxLines: 10,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .titleSmall
+                                                                  ?.copyWith(
+                                                                      fontSize:
+                                                                          14),
+                                                            ),
                                                           ),
-                                                          Config.spaceBox(Config
-                                                              .smallSpacer),
                                                         ],
                                                       ),
                                                     )
@@ -315,6 +323,39 @@ class _LayoutModernState extends State<LayoutModern> {
                                                         ],
                                                       ),
                                                     ]),
+                                        ),
+                                        Config.spaceBox(Config.largeSpacer),
+                                        AnimatedShakingBuilder(
+                                          autoPlay: isDragged,
+                                          child: widget
+                                                  .socialMediaPlaceholder ??
+                                              const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Icon(
+                                                    Icons.tiktok,
+                                                    color: Colors.deepOrange,
+                                                    size: 18,
+                                                  ),
+                                                  Icon(
+                                                    Icons.facebook,
+                                                    color: Colors.deepOrange,
+                                                    size: 18,
+                                                  ),
+                                                  Icon(
+                                                    Icons.telegram,
+                                                    color: Colors.deepOrange,
+                                                    size: 18,
+                                                  ),
+                                                  Icon(
+                                                    Icons.messenger,
+                                                    color: Colors.deepOrange,
+                                                    size: 18,
+                                                  ),
+                                                ],
+                                              ),
                                         ),
                                       ],
                                     ),
