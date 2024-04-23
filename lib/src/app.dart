@@ -164,6 +164,14 @@ class FlutterResumeTemplate extends StatefulWidget {
   /// This value is the entire widget width
   final double? width;
 
+  /// This value is used to define the spacing vertical or horizontal between
+  /// hobbies values. Only for the [TemplateTheme.modern]
+  final EdgeInsetsGeometry? hobbiesPadding;
+
+  /// The social medial placeholder is a widget that receives the
+  /// different social media accounts
+  final Widget? socialMediaPlaceholder;
+
   const FlutterResumeTemplate({
     Key? key,
     required this.templateTheme,
@@ -179,6 +187,7 @@ class FlutterResumeTemplate extends StatefulWidget {
     this.experiencePlaceHolder,
     this.educationPlaceHolder,
     this.languagePlaceHolder,
+    this.hobbiesPadding,
     this.imageHeight,
     this.imageWidth,
     this.imageRadius,
@@ -188,6 +197,7 @@ class FlutterResumeTemplate extends StatefulWidget {
     this.enableDivider = true,
     this.showButtons = true,
     this.backgroundColorLeftSection,
+    this.socialMediaPlaceholder,
     this.mode = TemplateMode.onlyEditableMode,
   })  : assert(data != null || onEmpty != null),
         super(key: key);
@@ -228,7 +238,9 @@ class _FlutterResumeTemplateState extends State<FlutterResumeTemplate> {
               telPlaceHolder: widget.telPlaceHolder,
               languagePlaceHolder: widget.languagePlaceHolder,
               hobbiesPlaceholder: widget.hobbiesPlaceholder,
+              hobbiesPadding: widget.hobbiesPadding,
               onSaveResume: widget.onSaveResume,
+              socialMediaPlaceholder: widget.socialMediaPlaceholder,
               mode: widget.mode,
               data: widget.data ?? Str.mockData,
             );
