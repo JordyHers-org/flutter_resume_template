@@ -16,37 +16,65 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   late TemplateTheme theme = TemplateTheme.modern;
   List<TemplateTheme> list = [
-    TemplateTheme.none,
     TemplateTheme.classic,
     TemplateTheme.modern,
     TemplateTheme.technical,
     TemplateTheme.business,
   ];
 
-  TemplateTheme getRandomItem() {
+  void getRandomItem(BuildContext context) {
     final random = Random();
-    final index = random.nextInt(5);
+    final index = random.nextInt(4);
     theme = list[index];
-    return list[index];
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          body: FlutterResumeTemplate(
-            data: data,
-            templateTheme: TemplateTheme.business,
-            mode: TemplateMode.onlyEditableMode,
-            showButtons: false,
-            imageBoxFit: BoxFit.cover,
-            height: 2500,
+      home: Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    getRandomItem(context);
+                    _scaffoldKey.currentState?.closeDrawer();
+                  });
+                },
+                child: const Text('Change Theme'),
+              )
+            ],
           ),
         ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: FlutterResumeTemplate(
+            data: data,
+            imageHeight: 100,
+            imageWidth: 100,
+            emailPlaceHolder: 'Email:',
+            telPlaceHolder: 'No:',
+            experiencePlaceHolder: 'Past',
+            educationPlaceHolder: 'School',
+            languagePlaceHolder: 'Skills',
+            aboutMePlaceholder: 'Me',
+            hobbiesPlaceholder: 'Past Times',
+            mode: TemplateMode.onlyEditableMode,
+            showButtons: true,
+            imageBoxFit: BoxFit.fitHeight,
+            enableDivider: false,
+            //backgroundColorLeftSection: Colors.amber,
+            templateTheme: theme),
       ),
     );
   }

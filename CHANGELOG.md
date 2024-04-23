@@ -1,3 +1,8 @@
+## 1.2.1
+*  update documentation
+*  minor fixes 
+*  implemented social media placeholder
+
 ## 1.2.0
 
 *  Fix issue Web throwing error
@@ -6,7 +11,7 @@
 *  Add `height` and `width` for all templates
 *  Add `maxLinesExperience` for all templates
 *  Update MIT license
-* Update readme
+*  Update readme
 
 ## 1.1.0
 

@@ -85,7 +85,7 @@ TemplateData data = TemplateData(
     experience: [
       ExperienceData(
         experienceTitle: 'Software Engineer',
-        experienceLocation: 'at Mindable Health',
+        experienceLocation: ' Mindable Health',
         experiencePeriod: 'Aug 2021 - Dec 2023',
         experiencePlace: 'Berlin',
         experienceDescription: workExperienceCompany1,
