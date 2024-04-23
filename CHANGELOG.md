@@ -1,3 +1,7 @@
+## 1.2.1
+*  update documentation
+*  minor fixes 
+
 ## 1.2.0
 
 *  Fix issue Web throwing error
